@@ -6,7 +6,7 @@
   
   body {
     letter-spacing: 1px;
-    padding: 0px;
+    padding: 10px;
   }
   
   h1 {
@@ -42,9 +42,7 @@
       }
     }
   }
-  .search-form {
-    padding: 20px;
-  }
+  
   .upload-section {
     display: flex;
     height: 200px;
@@ -91,9 +89,7 @@
   }
   
   .files-container {
-    width: 90%;
-    margin: auto;
-    margin-top: 10px;
+    width: 98%;
     overflow-x: auto;
   }
   
@@ -133,11 +129,6 @@
     .upload-section {
       height: unset;
     }
-  }
-  @media screen and (min-width: 601px) {
-    .search-form {
-        .col {width: 60%;}
-      }
   }
   
   @media screen and (max-width: 600px) {
