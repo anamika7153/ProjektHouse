@@ -1,3 +1,5 @@
+//approuter.js
+
 import React, { useEffect, useContext, createContext, useReducer } from "react";
 import { BrowserRouter, Route, Switch, useHistory } from "react-router-dom";
 
@@ -11,6 +13,10 @@ import { reducer, initialState } from "./reducers/userReducer";
 import "./App.css";
 import UserProfile from "./components/screens/UserProfile";
 import SubsPosts from "./components/screens/SubsPosts";
+// import Upload from "./components/screens/Upload";
+// import Fileupload from "./components/screens/Fileuploads";
+import FilesList from "./components/FilesList";
+import Fileuploads from "./components/screens/Fileuploads";
 
 export const UserContext = createContext();
 
@@ -33,6 +39,9 @@ const Routing = () => {
       <Route exact path="/profile">
         <Profile />
       </Route>
+      <Route path="/list">
+        <FilesList />
+      </Route>
       <Route path="/profile/:userId">
         <UserProfile />
       </Route>
@@ -47,6 +56,12 @@ const Routing = () => {
       </Route>
       <Route path="/myFollowersPosts">
         <SubsPosts />
+      </Route>
+      {/* <Route path="/upload">
+        <Upload />
+      </Route> */}
+      <Route path="/fileuploads">
+        <Fileuploads />
       </Route>
     </Switch>
   );

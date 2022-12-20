@@ -42,7 +42,16 @@ const Navbar = () => {
         <li key="5">
           <Link to="/myFollowersPosts">Feed</Link>
         </li>,
+        // <li key="6">
+        //   <Link to="/upload">Upload</Link>
+        // </li>,
         <li key="6">
+        <Link to="/fileuploads">FileUploads</Link>
+      </li>,
+      <li key="7">
+      <Link to="/list">File Lists</Link>
+    </li>,
+        <li key="8">
           <button
             type="submit"
             className="btn waves-effect hoverable #ff5252 red accent-1"
@@ -55,6 +64,7 @@ const Navbar = () => {
             LogOut
           </button>
         </li>,
+        
       ];
     } else {
       return [
