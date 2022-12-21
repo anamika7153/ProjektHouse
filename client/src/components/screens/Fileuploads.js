@@ -5,6 +5,7 @@ import { Form, Row, Col, Button } from 'react-bootstrap';
 import Dropzone from 'react-dropzone';
 import axios from 'axios';
 import { API_URL } from '../../utils/constants';
+import M from "materialize-css";
 
 const Fileuploads = (props) => {
   const [file, setFile] = useState(null); // state for storing actual image
@@ -60,12 +61,13 @@ const Fileuploads = (props) => {
           formData.append('description', description);
   
           setErrorMsg('');
-          await axios.post(`${API_URL}/upload`, formData, {
+          await axios.post(`${API_URL}/fileuploads`, formData, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }
           });
-          props.history.push('/list');
+          M.toast({ html: "Post Created Successfully", classes: " green" });
+          props.history.push("/list");
           /* this will redirect the user to the FilesList component where we will see the list of files uploaded. */
         } else {
           setErrorMsg('Please select a file to add.');

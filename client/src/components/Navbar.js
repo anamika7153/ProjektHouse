@@ -3,8 +3,12 @@ import { Link, useHistory } from "react-router-dom";
 import M from "materialize-css";
 
 import { UserContext } from "../App";
-
+// document.addEventListener('DOMContentLoaded', function() {
+//     var elems = document.querySelectorAll('.sidenav');
+//     var instances = M.Sidenav.init(elems, {});
+//   });
 const Navbar = () => {
+  // const [isMobile, setIsMobile] =useState(false);
   const searchModal = useRef(null);
   const history = useHistory();
   const { state, dispatch } = useContext(UserContext);
@@ -24,14 +28,6 @@ const Navbar = () => {
           >
             search
           </i>
-        </li>,
-        <li key="2">
-          <a
-            href="https://blooming-stream-69111.herokuapp.com/"
-            target="_balnk"
-          >
-            Video Call and Chat
-          </a>
         </li>,
         <li key="3">
           <Link to="/createpost">Create post</Link>
@@ -64,6 +60,9 @@ const Navbar = () => {
             LogOut
           </button>
         </li>,
+    //   <li key="9">
+    //     <a href="#" data-target="mobile-demo" class="sidenav-trigger show-on-med-and-down"><i class="material-icons">menu</i></a>
+    // </li>, 
         
       ];
     } else {
@@ -99,7 +98,8 @@ const Navbar = () => {
     }
   };
   return (
-    <nav>
+    <nav className="nav-extended">
+      {/* <div className={isMobile ? "nav-wrapper-mobile" : "nav-wrapper"}> */}
       <div className="nav-wrapper">
         <Link
           to={state ? "/" : "/login"}
@@ -113,9 +113,31 @@ const Navbar = () => {
           className="right hide-on-med-and-down"
           style={{ padding: "0 25px" }}
         >
+
+          
           {renderList()}
         </ul>
+
+        {/* <ul
+          id="mobile-demo"
+          className="sidenav show-on-medium-and-down"
+          style={{ padding: "0 25px" }}
+        >
+          <li><a href="#">Sass</a></li>
+          <li><a href="#">Components</a></li>
+        </ul> */}
       </div>
+      <div className="nav-content show-on-small hide-on-med-and-up">
+        
+        <ul
+          id="nav-mobile"
+          className="tabs tabs-transparent show-on-small hide-on-med-and-up"
+          // className="right show-on-small-only"
+          style={{ padding: "0 25px" }}
+        >
+          {renderList()}
+        </ul>
+        </div>
       <div id="modal1" className="modal" ref={searchModal}>
         <div className="modal-content">
           <input
