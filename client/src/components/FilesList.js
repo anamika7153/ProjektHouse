@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import download from 'downloadjs';
-import axios from 'axios';
-import { API_URL } from '../utils/constants';
+import React, { useState, useEffect } from "react";
+import download from "downloadjs";
+import axios from "axios";
+import { API_URL } from "../utils/constants";
 
 const FilesList = () => {
   const [filesList, setFilesList] = useState([]);
-  const [errorMsg, setErrorMsg] = useState('');
+  const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
     const getFilesList = async () => {
       try {
         const { data } = await axios.get(`${API_URL}/getAllFiles`);
-        setErrorMsg('');
+        setErrorMsg("");
         setFilesList(data);
       } catch (error) {
         error.response && setErrorMsg(error.response.data);
@@ -20,20 +20,20 @@ const FilesList = () => {
 
     getFilesList();
   }, []);
-//adding a download link inside the table. Ccalling the downloadFile function when we click on the download link
+  //adding a download link inside the table. Ccalling the downloadFile function when we click on the download link
   const downloadFile = async (id, path, mimetype) => {
     try {
       const result = await axios.get(`${API_URL}/download/${id}`, {
-        responseType: 'blob'
+        responseType: "blob",
         //responsetype:blob is very important otherwise will not get the file in the correct format.
       });
-      const split = path.split('/');
+      const split = path.split("/");
       const filename = split[split.length - 1];
-      setErrorMsg('');
+      setErrorMsg("");
       return download(result.data, filename, mimetype);
     } catch (error) {
       if (error.response && error.response.status === 400) {
-        setErrorMsg('Error while downloading file. Try again later');
+        setErrorMsg("Error while downloading file. Try again later");
       }
     }
   };
@@ -71,7 +71,7 @@ const FilesList = () => {
             )
           ) : (
             <tr>
-              <td colSpan={3} style={{ fontWeight: '300' }}>
+              <td colSpan={3} style={{ fontWeight: "300" }}>
                 No files found. Please add some.
               </td>
             </tr>

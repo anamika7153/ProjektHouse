@@ -13,10 +13,11 @@ import { reducer, initialState } from "./reducers/userReducer";
 import "./App.css";
 import UserProfile from "./components/screens/UserProfile";
 import SubsPosts from "./components/screens/SubsPosts";
-// import Upload from "./components/screens/Upload";
-// import Fileupload from "./components/screens/Fileuploads";
 import FilesList from "./components/FilesList";
 import Fileuploads from "./components/screens/Fileuploads";
+import Edit from "./components/screens/Edit";
+import Details from "./components/screens/Details";
+import EditPost from "./components/screens/EditPost";
 
 export const UserContext = createContext();
 
@@ -39,7 +40,7 @@ const Routing = () => {
       <Route exact path="/profile">
         <Profile />
       </Route>
-      <Route path="/list">
+      <Route exact path="/list">
         <FilesList />
       </Route>
       <Route path="/profile/:userId">
@@ -54,13 +55,19 @@ const Routing = () => {
       <Route path="/createpost">
         <CreatePost />
       </Route>
+      {/* <Route path="/editpost/:id">
+        <EditPost />
+      </Route> */}
       <Route path="/myFollowersPosts">
         <SubsPosts />
       </Route>
-      {/* <Route path="/upload">
-        <Upload />
+      {/* <Route exact path="/edit/:id">
+        <Edit />
+      </Route>
+      <Route exact path="/view/:id">
+        <Details />
       </Route> */}
-      <Route path="/fileuploads">
+      <Route exact path="/fileuploads">
         <Fileuploads />
       </Route>
     </Switch>

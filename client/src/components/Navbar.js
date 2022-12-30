@@ -30,7 +30,7 @@ const Navbar = () => {
           </i>
         </li>,
         <li key="3">
-          <Link to="/createpost">Create post</Link>
+          <Link to="/createpost">Create Team</Link>
         </li>,
         <li key="4">
           <Link to="/profile">Profile</Link>
@@ -67,10 +67,10 @@ const Navbar = () => {
       ];
     } else {
       return [
-        <li key="7">
+        <li key="9">
           <Link to="/login">Login</Link>
         </li>,
-        <li key="8">
+        <li key="10">
           <Link to="/register">Register</Link>
         </li>,
       ];

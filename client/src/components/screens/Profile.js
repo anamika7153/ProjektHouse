@@ -270,8 +270,50 @@ function Profile() {
                     <p style={{ fontSize: "21px" }}>
                       <b>{item.title}</b>
                     </p>
-
                     <p style={{ fontSize: "18px" }}>{item.description}</p>
+                    <b>
+                <h6 style={{ fontWeight: "900" }}>
+                  <u>Members</u>
+                </h6>
+              </b>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Sec</th>
+                  <th>Mob. No</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>{item.member1}</td>
+                  <td>{item.sec1}</td>
+                  <td>{item.mobile1}</td>
+                </tr>
+                <tr>
+                  <td>{item.member2}</td>
+                  <td>{item.sec2}</td>
+                  <td>{item.mobile2}</td>
+                </tr>
+                <tr>
+                  <td>{item.member3}</td>
+                  <td>{item.sec3}</td>
+                  <td>{item.mobile3}</td>
+                </tr>
+                <tr>
+                  <td>{item.member4}</td>
+                  <td>{item.sec4}</td>
+                  <td>{item.mobile4}</td>
+                </tr>
+                <tr>
+                  <td>{item.member5}</td>
+                  <td>{item.sec5}</td>
+                  <td>{item.mobile5}</td>
+                </tr>
+              </tbody>
+            </table>
                   </div>
                   <div className="card-image">
                     <img src={item.photo} />

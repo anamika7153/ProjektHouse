@@ -11,6 +11,46 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  member1: {
+    type: String,
+    required: true,
+  },
+  sec1: {
+    type: String,
+    required: true,
+  },
+  member2: {
+    type: String,
+    required: false,
+  },
+  sec2: {
+    type: String,
+    required: false,
+  },
+  member3: {
+    type: String,
+    required: false,
+  },
+  sec3: {
+    type: String,
+    required: false,
+  },
+  member4: {
+    type: String,
+    required: false,
+  },
+  sec4: {
+    type: String,
+    required: false,
+  },
+  member5: {
+    type: String,
+    required: false,
+  },
+  sec5: {
+    type: String,
+    required: false,
+  },
   photo: {
     type: String,
     default:null,

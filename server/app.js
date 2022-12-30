@@ -1,7 +1,5 @@
 //server.js
 require('dotenv').config();
-const twilio = require('twilio');
-const ngrok = require('ngrok');
 const express = require("express");
 // const bodyParser = require("body-parser");
 // const multer = require("multer");
@@ -11,9 +9,6 @@ const express = require("express");
 const cors = require('cors');
 const fileRoute = require('./routes/file');
 require('./db/db');
-
-const AccessToken = twilio.jwt.AccessToken;
-const VideoGrant = AccessToken.VideoGrant;
 
 const app = express();
 const mongoose = require("mongoose");
@@ -38,6 +33,9 @@ const PORT = process.env.PORT || 5000;
 
 require("./models/user");
 require("./models/post");
+// require("./models/register");
+
+// const teams = require("./models/register")
 
 app.use(express.json());
 app.use(cors());
@@ -46,7 +44,7 @@ app.use(fileRoute);
 app.use(require("./routes/auth"));
 app.use(require("./routes/post"));
 app.use(require("./routes/user"));
-// app.use(require("./routes/file"));
+// app.use(require("./routes/team"));
 
 // app.use(bodyParser.urlencoded({extended:true}))
 

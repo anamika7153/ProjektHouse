@@ -170,33 +170,52 @@ function SubsPosts() {
               <img src={item.photo} />
             </div>
             <div className="card-content">
-              <i
-                className="material-icons"
-                style={{ cursor: "pointer", marginRight: "15px" }}
-              >
-                favorite_border
-              </i>
-              {item.likes.includes(state._id) ? (
-                <i
-                  className="material-icons"
-                  onClick={() => unlikePost(item._id)}
-                  style={{ cursor: "pointer" }}
-                >
-                  thumb_down
-                </i>
-              ) : (
-                <i
-                  className="material-icons"
-                  onClick={() => likePost(item._id)}
-                  style={{ cursor: "pointer" }}
-                >
-                  thumb_up
-                </i>
-              )}
-
-              <h6>{item.likes.length} Likes</h6>
+              
               <h6>{item.title}</h6>
               <p>{item.description}</p>
+              <b>
+                <h6 style={{ fontWeight: "900" }}>
+                  <u>Members</u>
+                </h6>
+              </b>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Sec</th>
+                  <th>Mob. No</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>{item.member1}</td>
+                  <td>{item.sec1}</td>
+                  <td>{item.mobile1}</td>
+                </tr>
+                <tr>
+                  <td>{item.member2}</td>
+                  <td>{item.sec2}</td>
+                  <td>{item.mobile2}</td>
+                </tr>
+                <tr>
+                  <td>{item.member3}</td>
+                  <td>{item.sec3}</td>
+                  <td>{item.mobile3}</td>
+                </tr>
+                <tr>
+                  <td>{item.member4}</td>
+                  <td>{item.sec4}</td>
+                  <td>{item.mobile4}</td>
+                </tr>
+                <tr>
+                  <td>{item.member5}</td>
+                  <td>{item.sec5}</td>
+                  <td>{item.mobile5}</td>
+                </tr>
+              </tbody>
+            </table>
               <b>
                 <h6 style={{ fontWeight: "900" }}>
                   <u>Comments</u>
@@ -231,6 +250,31 @@ function SubsPosts() {
               >
                 <input type="text" placeholder="Add comment here" />
               </form>
+              <i
+                className="material-icons"
+                style={{ cursor: "pointer", marginRight: "15px" }}
+              >
+                favorite_border
+              </i>
+              {item.likes.includes(state._id) ? (
+                <i
+                  className="material-icons"
+                  onClick={() => unlikePost(item._id)}
+                  style={{ cursor: "pointer" }}
+                >
+                  thumb_down
+                </i>
+              ) : (
+                <i
+                  className="material-icons"
+                  onClick={() => likePost(item._id)}
+                  style={{ cursor: "pointer" }}
+                >
+                  thumb_up
+                </i>
+              )}
+
+              <h6>{item.likes.length} Likes</h6>
             </div>
           </div>
         );
