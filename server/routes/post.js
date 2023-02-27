@@ -1,53 +1,73 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const path = require('path');
 
 const requireLogin = require("../middlewares/requireLogin");
 const Post = mongoose.model("Post");
 
+const multer = require('multer');
+
 const router = express.Router();
 
-router.post("/createpost", requireLogin, (req, res) => {
-  const { title, description, photo, member1, sec1, member2, sec2, member3, sec3, member4, sec4, member5, sec5, } = req.body;
+const upload = multer({
+  storage: multer.diskStorage({
+    destination(req, file, cb) {
+      cb(null, './files');
+    },
+    filename(req, file, cb) {
+      cb(null, `${new Date().getTime()}_${file.originalname}`);
+    }
+  }),
+  limits: {
+    fileSize: 8000000 // max file size 1MB = 1000000 bytes
+  },
+  fileFilter(req, file, cb) {
+    if (!file.originalname.match(/\.(jpeg|jpg|png|pdf|doc|docx|xlsx|xls|ppt|pptx)$/)) {
+      return cb(
+        new Error(
+          'only upload files with jpg, jpeg, png, pdf, doc, docx, xslx, xls, ppt, pptx format.'
+        )
+      );
+    }
+    cb(undefined, true); // continue with upload
+  }
+});
+
+router.post("/createpost", requireLogin, upload.single('file'), async(req, res) => {
+  console.log("req.body:: ",req.body)
+      
+  const { title, description, members, member1, sec1, member2, sec2, member3, sec3, member4, sec4, member5, sec5, } = req.body;
+  const { path, mimetype } = req.file;
+      // console.log("req.body: ",req.body);
+      console.log("req.file: ",req.file);
   if (!title || !description) {
     return res.status(422).json({ error: "Please fill in all the fields" });
   }
   req.user.password = null;
-  var post;
-  if (photo) {
-    post = new Post({
-      title,
-      description,
-      photo,
-      member1,
-      sec1,
-      member2,
-      sec2,
-      member3,
-      sec3,
-      member4,
-      sec4,
-      member5,
-      sec5,
-      postedBy: req.user,
-    });
-  } else {
-    post = new Post({
-      title,
-      description,
-      member1,
-      sec1,
-      member2,
-      sec2,
-      member3,
-      sec3,
-      member4,
-      sec4,
-      member5,
-      sec5,
-      postedBy: req.user,
-    });
-  }
-  post
+  const post = new Post({
+          title,
+          description,
+          members,
+          member1,          
+          mobile1,
+          sec1,
+          member2,          
+          mobile2,
+          sec2,
+          member3,          
+          mobile3,
+          sec3,
+          member4,          
+          mobile4,
+          sec4,
+          member5,          
+          mobile5,
+          sec5,
+          postedBy: req.user,
+          file_path: path,
+          file_mimetype: mimetype,
+  })
+  await post
     .save()
     .then((result) => {
       res.json({ post: result });
@@ -55,7 +75,75 @@ router.post("/createpost", requireLogin, (req, res) => {
     .catch((err) => {
       console.log(err);
     });
-});
+},
+(error, req, res, next) => {
+  if (error) {
+    res.status(500).send(error.message);
+  }
+}
+);
+
+
+// router.post("/createpost", requireLogin, async(req, res) => {
+//   console.log("req.body:: ",req.body)
+      
+//   const { title, description, photo, members, member1, sec1, member2, sec2, member3, sec3, member4, sec4, member5, sec5, } = req.body;
+ 
+//   if (!title || !description) {
+//     return res.status(422).json({ error: "Please fill in all the fields" });
+//   }
+//   req.user.password = null;
+//   var post;
+//   if (photo) {
+//     post = new Post({
+//       title,
+//       description,
+//       photo,
+//       members,
+//       member1,
+//       sec1,
+//       member2,
+//       sec2,
+//       member3,
+//       sec3,
+//       member4,
+//       sec4,
+//       member5,
+//       sec5,
+//       postedBy: req.user,
+//       file_path: path,
+//       file_mimetype: mimetype,
+//     });
+//   } else {
+//     post = new Post({
+//       title,
+//       description,
+//       members,
+//       member1,
+//       sec1,
+//       member2,
+//       sec2,
+//       member3,
+//       sec3,
+//       member4,
+//       sec4,
+//       member5,
+//       sec5,
+//       postedBy: req.user,
+//       file_path: path,
+//       file_mimetype: mimetype,
+//     });
+//   }
+//   await post
+//     .save()
+//     .then((result) => {
+//       res.json({ post: result });
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// });
+
 
 router.get("/allpost", (req, res) => {
   Post.find()
@@ -70,7 +158,21 @@ router.get("/allpost", (req, res) => {
     });
 });
 
-
+router.get('/download/:id', async (req, res) => {
+  // try {
+    const file = await Post.findById(req.params.id);
+    // console.log("download file", file)
+    res.set({
+      'Content-Type': file.file_mimetype
+    });
+    // console.log("beforee")
+    // console.log("file.file_path",file.file_path)
+    res.sendFile(path.join(__dirname, '..', file.file_path));
+    // console.log("downnnnnnnnnnnnnnnnnnnnnnnn")
+  // } catch (error) {
+  //   res.status(400).send('Error while downloading file. Try again later.');
+  // }
+});
 
 router.get("/getSubPost", requireLogin, (req, res) => {
   Post.find({ postedBy: { $in: req.user.following } })
@@ -84,6 +186,28 @@ router.get("/getSubPost", requireLogin, (req, res) => {
       console.log(err);
     });
 });
+
+router.get('/student/:id', (req,res) => {
+  Post.findById(req.params.id, (error,data)=> {
+    if(error){
+      return next(error)
+    } else {
+      res.json(data)
+    }
+  })
+})
+
+router.put('/updatedata/:id', (req,res)=> {
+  Post.findByIdAndUpdate(req.params.id, {
+    $set: req.body
+  }, (error, data) => {
+    if(error){
+      return next(error)
+    } else {
+      res.json(data)
+    }
+  })
+})
 
 router.get("/mypost", requireLogin, (req, res) => {
   Post.find({ postedBy: req.user._id })
@@ -138,30 +262,30 @@ router.put("/unlike", requireLogin, (req, res) => {
     });
 });
 
-// router.put("/comment", requireLogin, (req, res) => {
-//   const comment = {
-//     text: req.body.text,
-//     postedBy: req.user._id,
-//   };
-//   Post.findByIdAndUpdate(
-//     req.body.postId,
-//     {
-//       $push: { comments: comment },
-//     },
-//     {
-//       new: true,
-//     }
-//   )
-//     .populate("comments.postedBy", "_id name")
-//     .populate("postedBy", "_id name")
-//     .exec((err, result) => {
-//       if (err) {
-//         return res.status(422).json({ error: err });
-//       } else {
-//         res.json(result);
-//       }
-//     });
-// });
+router.put("/comment", requireLogin, (req, res) => {
+  const comment = {
+    text: req.body.text,
+    postedBy: req.user._id,
+  };
+  Post.findByIdAndUpdate(
+    req.body.postId,
+    {
+      $push: { comments: comment },
+    },
+    {
+      new: true,
+    }
+  )
+    .populate("comments.postedBy", "_id name")
+    .populate("postedBy", "_id name")
+    .exec((err, result) => {
+      if (err) {
+        return res.status(422).json({ error: err });
+      } else {
+        res.json(result);
+      }
+    });
+});
 router.delete("/deletecomment/:postId/:commentId", requireLogin, (req, res) => {
   const { postId, commentId } = req.params;
   const tmpId = mongoose.Types.ObjectId(commentId);
@@ -197,6 +321,49 @@ router.get("/post/:id", (req, res) => {
       console.log(err);
     });
 });
+
+router.get("/editpost/:id", async (req,res) => {
+  // try {
+    // const postt  = await Post.findOne({_id: req.params._id})
+    await Post.findOne({_id: req.params._id})
+    .populate("postedBy", "_id name pic")
+    .populate("comments.postedBy", "_id name")
+    .sort("-createdAt") // - for descending order , createdAt for factor on whihc we need to sort
+    .then((postt) => {
+      res.json({ postt });
+      console.log("req.params.id:" ,req.params._id)
+      console.log("postt",postt)
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+    // .then((postt) => {
+      // res.json(postt)
+      // console.log("req.params.id:" ,req.params._id)
+      // console.log("postt",postt)
+    // })
+    // res.json(postt)
+  // } catch (error) {
+  //   console.log(error)
+  // }
+} )
+
+// router.put("/editpost/:id", requireLogin, (req, res) => {
+//   User.findByIdAndUpdate(
+//     req.user._id,
+//     req.body,
+//     { $set: { pic: req.body.pic } },
+//     { new: true },
+//     (err, result) => {
+//       if (err) {
+//         return res.status(422).json({ error: "Pic can not be updated" });
+//       }
+//       res.json(result);
+//     }
+//   );
+// });
+
+
 // router.put("/post/:id", (req, res) => {
 //   // const post = posts.find((post)=> post.id === req.params.id);
 //   Post.findOne({_id: req.params.id})

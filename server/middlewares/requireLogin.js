@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
   }
   const token = authorization.replace("Bearer ", ""); //since auth = "Bearer token", so extracting token from it
   jwt.verify(token, JWT_SECRET, (err, payload) => {
-    if (err) {
+    if (err) {console.log(err)
       return res.status(401).json({ error: "You must be logged in" });
     }
     const { _id } = payload;

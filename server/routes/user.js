@@ -104,9 +104,12 @@ router.put("/updatepic", requireLogin, (req, res) => {
 router.post("/search-users", (req, res) => {
   let userPattern = new RegExp("^" + req.body.query);
   User.find({ email: { $regex: userPattern } })
+  // let searched = req.body.query
+  // User.find({ name: searched })
     .select("_id name email pic")
     .then((user) => {
       res.json({ user });
+      console.log(user)
     })
     .catch((err) => {
       console.log(err);

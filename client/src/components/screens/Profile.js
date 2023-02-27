@@ -1,3 +1,5 @@
+//myprofile
+
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../App";
 import { Link } from "react-router-dom";
@@ -187,6 +189,7 @@ function Profile() {
                     height: "200px",
                     width: "200px",
                     borderRadius: "50%",
+                    marginRight: "15px"
                   }}
                   src={state ? state.pic : "loading.."}
                 />
@@ -209,7 +212,7 @@ function Profile() {
                   style={{
                     display: "flex",
                     justifyContent: "space-between",
-                    width: "110%",
+                    width: "95%",
                   }}
                 >
                   <h6>{data.length} Posts</h6>
@@ -272,10 +275,10 @@ function Profile() {
                     </p>
                     <p style={{ fontSize: "18px" }}>{item.description}</p>
                     <b>
-                <h6 style={{ fontWeight: "900" }}>
-                  <u>Members</u>
-                </h6>
-              </b>
+                      <h6 style={{ fontWeight: "900" }}>
+                        <u>Members</u>
+                      </h6>
+                    </b>
 
             <table>
               <thead>

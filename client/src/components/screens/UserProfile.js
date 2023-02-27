@@ -1,3 +1,5 @@
+//others profile
+
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { UserContext } from "../../App";
@@ -18,6 +20,7 @@ function UserProfile() {
       .then((result) => {
         setUserProfile(result);
         setData(result.posts);
+        // console.log("result.posts", result.posts)
       });
   }, []);
 
@@ -208,7 +211,7 @@ function UserProfile() {
           >
             <div>
               <img
-                style={{ height: "200px", width: "200px", borderRadius: "50%" }}
+                style={{ height: "200px", width: "200px", borderRadius: "50%", marginRight: "2px" }}
                 src={userProfile.user ? userProfile.user.pic : "loading.."}
               />
             </div>
@@ -219,7 +222,7 @@ function UserProfile() {
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
-                  width: "110%",
+                  width: "95%",
                 }}
               >
                 <h6>{userProfile.posts.length} Posts</h6>
@@ -307,6 +310,49 @@ function UserProfile() {
                     </p>
 
                     <p style={{ fontSize: "18px" }}>{item.description}</p>
+                    <b>
+                      <h6 style={{ fontWeight: "900" }}>
+                        <u>Members</u>
+                      </h6>
+                    </b>
+
+                    <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Sec</th>
+                  <th>Mob. No</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td>{item.member1}</td>
+                  <td>{item.sec1}</td>
+                  <td>{item.mobile1}</td>
+                </tr>
+                <tr>
+                  <td>{item.member2}</td>
+                  <td>{item.sec2}</td>
+                  <td>{item.mobile2}</td>
+                </tr>
+                <tr>
+                  <td>{item.member3}</td>
+                  <td>{item.sec3}</td>
+                  <td>{item.mobile3}</td>
+                </tr>
+                <tr>
+                  <td>{item.member4}</td>
+                  <td>{item.sec4}</td>
+                  <td>{item.mobile4}</td>
+                </tr>
+                <tr>
+                  <td>{item.member5}</td>
+                  <td>{item.sec5}</td>
+                  <td>{item.mobile5}</td>
+                </tr>
+              </tbody>
+            </table>
                   </div>
                   <div className="card-image">
                     <img src={item.photo} />

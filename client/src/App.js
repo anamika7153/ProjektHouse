@@ -55,9 +55,9 @@ const Routing = () => {
       <Route path="/createpost">
         <CreatePost />
       </Route>
-      {/* <Route path="/editpost/:id">
+      <Route path="/editdata/:id">
         <EditPost />
-      </Route> */}
+      </Route>
       <Route path="/myFollowersPosts">
         <SubsPosts />
       </Route>
@@ -67,7 +67,7 @@ const Routing = () => {
       <Route exact path="/view/:id">
         <Details />
       </Route> */}
-      <Route exact path="/fileuploads">
+      <Route exact path="/createteam">
         <Fileuploads />
       </Route>
     </Switch>

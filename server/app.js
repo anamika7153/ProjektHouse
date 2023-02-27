@@ -7,32 +7,18 @@ const express = require("express");
 // const path = require("path");
 // const path = require('path');
 const cors = require('cors');
-const fileRoute = require('./routes/file');
 require('./db/db');
 
 const app = express();
 const mongoose = require("mongoose");
-// const mongodb = require("mongodb");
-
 
 const PORT = process.env.PORT || 5000;
-// const { MONGO_URI } = require("./config/keys");
-
-// mongoose
-//   .connect(MONGO_URI, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//     useFindAndModify: true,
-//   })
-//   .then(() => {
-//     console.log("MongoDB Connected");
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
 
 require("./models/user");
 require("./models/post");
+require("./models/file");
+// const fileRoute = require('./routes/file');
+
 // require("./models/register");
 
 // const teams = require("./models/register")
@@ -40,12 +26,15 @@ require("./models/post");
 app.use(express.json());
 app.use(cors());
 // app.use(express.static(path.join(__dirname, '..', 'build')));
-app.use(fileRoute);
+
 app.use(require("./routes/auth"));
 app.use(require("./routes/post"));
 app.use(require("./routes/user"));
+app.use(require("./routes/file"));
+// app.use(fileRoute);
 // app.use(require("./routes/team"));
 
+app.use(express.urlencoded({extended:true}))
 // app.use(bodyParser.urlencoded({extended:true}))
 
 // var storage = multer.diskStorage({

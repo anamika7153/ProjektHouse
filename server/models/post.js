@@ -11,11 +11,21 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  members: {
+    type: Number,
+    required: true,
+    min: 1,
+    max: 8,
+  },
   member1: {
     type: String,
     required: true,
   },
   sec1: {
+    type: String,
+    required: true,
+  },
+  mobile1: {
     type: String,
     required: true,
   },
@@ -27,11 +37,19 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  mobile2: {
+    type: String,
+    required: false,
+  },
   member3: {
     type: String,
     required: false,
   },
   sec3: {
+    type: String,
+    required: false,
+  },
+  mobile3: {
     type: String,
     required: false,
   },
@@ -43,6 +61,10 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  mobile4: {
+    type: String,
+    required: false,
+  },
   member5: {
     type: String,
     required: false,
@@ -51,10 +73,10 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  photo: {
+  mobile5: {
     type: String,
-    default:null,
-    },
+    required: false,
+  },
   likes: [{ type: ObjectId, ref: "User" }],
   comments: [
     {
@@ -62,6 +84,14 @@ const postSchema = new mongoose.Schema({
       postedBy: { type: ObjectId, ref: "User" },
     },
   ],
+  file_path: {
+    type: String,
+    required: true
+},
+  file_mimetype: {
+    type: String,
+    required: true
+  },
   postedBy: {
     type: ObjectId,
     ref: "User", // relation building in mongodb

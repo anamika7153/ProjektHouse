@@ -15,6 +15,7 @@ const Navbar = () => {
   const [search, setSearch] = useState("");
   const [userDetails, setUserDetails] = useState([]);
   useEffect(() => {
+    console.log("in navbar state",state)
     M.Modal.init(searchModal.current);
   }, []);
   const renderList = () => {
@@ -30,7 +31,7 @@ const Navbar = () => {
           </i>
         </li>,
         <li key="3">
-          <Link to="/createpost">Create Team</Link>
+          <Link to="/createpost">Create Post</Link>
         </li>,
         <li key="4">
           <Link to="/profile">Profile</Link>
@@ -41,12 +42,12 @@ const Navbar = () => {
         // <li key="6">
         //   <Link to="/upload">Upload</Link>
         // </li>,
-        <li key="6">
-        <Link to="/fileuploads">FileUploads</Link>
-      </li>,
-      <li key="7">
-      <Link to="/list">File Lists</Link>
-    </li>,
+      //   <li key="6">
+      //   <Link to="/createteam">Create Team</Link>
+      // </li>,
+    //   <li key="7">
+    //   <Link to="/list">File Lists</Link>
+    // </li>,
         <li key="8">
           <button
             type="submit"
@@ -92,6 +93,9 @@ const Navbar = () => {
         .then((res) => res.json())
         .then((result) => {
           setUserDetails(result.user);
+          console.log("result",result);
+          console.log("result.user",result.user);
+          // console.log("result.user.name",result.user[0].name);
         });
     } else {
       setUserDetails([]);
@@ -100,7 +104,7 @@ const Navbar = () => {
   return (
     <nav className="nav-extended">
       {/* <div className={isMobile ? "nav-wrapper-mobile" : "nav-wrapper"}> */}
-      <div className="nav-wrapper">
+      <div className="nav-wrapper mobi-nav">
         <Link
           to={state ? "/" : "/login"}
           className="brand-logo left"
@@ -110,13 +114,14 @@ const Navbar = () => {
         </Link>
         <ul
           id="nav-mobile"
-          className="right hide-on-med-and-down"
+          className="right mob-nav"
           style={{ padding: "0 25px" }}
         >
 
           
           {renderList()}
         </ul>
+        {/* <div className="mobile-nav"> <i className="material-icons">menu</i></div> */}
 
         {/* <ul
           id="mobile-demo"
@@ -127,7 +132,15 @@ const Navbar = () => {
           <li><a href="#">Components</a></li>
         </ul> */}
       </div>
-      <div className="nav-content show-on-small hide-on-med-and-up">
+
+      {/* <Link href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></Link>
+      <ul class="sidenav" id="mobile-demo">
+    <li><a href="sass.html">Sass</a></li>
+    <li><a href="badges.html">Components</a></li>
+    <li><a href="collapsible.html">Javascript</a></li>
+    <li><a href="mobile.html">Mobile</a></li>
+  </ul> */}
+      {/* <div className="nav-content show-on-small hide-on-med-and-up">
         
         <ul
           id="nav-mobile"
@@ -137,7 +150,7 @@ const Navbar = () => {
         >
           {renderList()}
         </ul>
-        </div>
+      </div> */}
       <div id="modal1" className="modal" ref={searchModal}>
         <div className="modal-content">
           <input
