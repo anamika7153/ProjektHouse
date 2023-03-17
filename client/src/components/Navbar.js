@@ -3,19 +3,14 @@ import { Link, useHistory } from "react-router-dom";
 import M from "materialize-css";
 
 import { UserContext } from "../App";
-// document.addEventListener('DOMContentLoaded', function() {
-//     var elems = document.querySelectorAll('.sidenav');
-//     var instances = M.Sidenav.init(elems, {});
-//   });
 const Navbar = () => {
-  // const [isMobile, setIsMobile] =useState(false);
   const searchModal = useRef(null);
   const history = useHistory();
   const { state, dispatch } = useContext(UserContext);
   const [search, setSearch] = useState("");
   const [userDetails, setUserDetails] = useState([]);
   useEffect(() => {
-    console.log("in navbar state",state)
+    // console.log("in navbar state",state)
     M.Modal.init(searchModal.current);
   }, []);
   const renderList = () => {
@@ -39,15 +34,6 @@ const Navbar = () => {
         <li key="5">
           <Link to="/myFollowersPosts">Feed</Link>
         </li>,
-        // <li key="6">
-        //   <Link to="/upload">Upload</Link>
-        // </li>,
-      //   <li key="6">
-      //   <Link to="/createteam">Create Team</Link>
-      // </li>,
-    //   <li key="7">
-    //   <Link to="/list">File Lists</Link>
-    // </li>,
         <li key="8">
           <button
             type="submit"
@@ -61,9 +47,6 @@ const Navbar = () => {
             LogOut
           </button>
         </li>,
-    //   <li key="9">
-    //     <a href="#" data-target="mobile-demo" class="sidenav-trigger show-on-med-and-down"><i class="material-icons">menu</i></a>
-    // </li>, 
         
       ];
     } else {
@@ -79,6 +62,7 @@ const Navbar = () => {
   };
   const fetchUsers = (query) => {
     setSearch(query);
+    console.log("query",query)
     if (query.length > 0) {
       fetch("/search-users", {
         method: "post",
@@ -121,36 +105,7 @@ const Navbar = () => {
           
           {renderList()}
         </ul>
-        {/* <div className="mobile-nav"> <i className="material-icons">menu</i></div> */}
-
-        {/* <ul
-          id="mobile-demo"
-          className="sidenav show-on-medium-and-down"
-          style={{ padding: "0 25px" }}
-        >
-          <li><a href="#">Sass</a></li>
-          <li><a href="#">Components</a></li>
-        </ul> */}
       </div>
-
-      {/* <Link href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></Link>
-      <ul class="sidenav" id="mobile-demo">
-    <li><a href="sass.html">Sass</a></li>
-    <li><a href="badges.html">Components</a></li>
-    <li><a href="collapsible.html">Javascript</a></li>
-    <li><a href="mobile.html">Mobile</a></li>
-  </ul> */}
-      {/* <div className="nav-content show-on-small hide-on-med-and-up">
-        
-        <ul
-          id="nav-mobile"
-          className="tabs tabs-transparent show-on-small hide-on-med-and-up"
-          // className="right show-on-small-only"
-          style={{ padding: "0 25px" }}
-        >
-          {renderList()}
-        </ul>
-      </div> */}
       <div id="modal1" className="modal" ref={searchModal}>
         <div className="modal-content">
           <input

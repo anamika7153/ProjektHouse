@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Dropzone from "react-dropzone";
 import axios from "axios";
+import {API_URL} from './../../utils/constants'
 import { Form, Row, Col, Button, Container } from "react-bootstrap";
 import M from "materialize-css";
 
@@ -14,35 +15,22 @@ function CreatePost() {
     // image: "",
     description: "",
     members: "",
-    member1: "",
+    member1: "",    
     sec1: "",
-    member2: "",
+    mobile1: "",
+    member2: "",    
     sec2: "",
-    member3: "",
+    mobile2: "",
+    mobile3: "",
+    member3: "",    
     sec3: "",
-    member4: "",
+    member4: "",    
     sec4: "",
-    member5: "",
+    mobile4: "",
+    member5: "",    
     sec5: "",
+    mobile5: "",
   });
-
- 
-
-  // const [title, setTitle] = useState("");
-  // const [image, setImage] = useState("");
-  // const [url, setUrl] = useState("");
-  // const [description, setDescription] = useState("");
-  // const [members, setMembers] = useState("");
-  // const [member1, setMember1] = useState("");
-  // const [sec1, setSec1] = useState("");
-  // const [member2, setMember2] = useState("");
-  // const [sec2, setSec2] = useState("");
-  // const [member3, setMember3] = useState("");
-  // const [sec3, setSec3] = useState("");
-  // const [member4, setMember4] = useState("");
-  // const [sec4, setSec4] = useState("");
-  // const [member5, setMember5] = useState("");
-  // const [sec5, setSec5] = useState("");
 
   const [errorMsg, setErrorMsg] = useState("");
   const [isPreviewAvailable, setIsPreviewAvailable] = useState(false); // state to show preview only for images
@@ -56,7 +44,12 @@ function CreatePost() {
   };
 
   const onDrop = (files) => {
+    
+    console.log("filesss::::",files)
     const [uploadedFile] = files;
+    // var  [f1,f2] = files
+    // console.log(f1)
+    // console.log(f2)
     setFile(uploadedFile);
 
     const fileReader = new FileReader();
@@ -104,16 +97,7 @@ function CreatePost() {
             formData.append("sec5", sec5);
 
           setErrorMsg("");
-
-            // .then((response) => response.json()) // keep it in one line else use return res.json()
-            // .then((data) => {
-            //   setUrl(data.url);
-            // })
-            // .catch((err) => {
-            //   console.log(err.response);
-            // });
-
-            await axios.post(`/createpost`, formData, {
+            await axios.post(`${API_URL}/createpost`, formData, {
               headers: {
                 "Content-Type": "multipart/form-data",
                 Authorization: "Bearer " + localStorage.getItem("jwt"),
@@ -360,17 +344,19 @@ function CreatePost() {
               
             <div className="upload-section">
               <Dropzone onDrop={onDrop} onDragEnter={() => updateBorder("over")} onDragLeave={() => updateBorder("leave")} >
-              {({ getRootProps, getInputProps }) => (
-              <div {...getRootProps({ className: "drop-zone" })} ref={dropRef}>
-                <input {...getInputProps()} />
-                <p>Drag and drop a file OR click here to select a file</p>
-                {file && (
-                  <div>
-                    <strong>Selected file:</strong> {file.name}
-                  </div>
-                )}
-              </div>
-            )}
+              {({ acceptedFiles, getRootProps, getInputProps }) => (
+              // {({ getRootProps, getInputProps }) => (
+                <div {...getRootProps({ className: "drop-zone" })} ref={dropRef}>
+                  <input {...getInputProps()} />
+                  <p>Drag and drop a file OR click here to select a file</p>
+                  {file && (
+                    <div>
+                      <strong>Selected file:</strong> {acceptedFiles.map(item => (<li key={item.path}>{item.path}</li>)) }
+                    {/* <strong>Selected file:</strong> {file.name} */}
+                    </div>
+                  )}
+                </div>
+              )}
               </Dropzone>
               {previewSrc ? (
                 isPreviewAvailable ? (
@@ -411,266 +397,3 @@ function CreatePost() {
 }
 
 export default CreatePost;
-
-
-
-
-
-// no error
-
-
-// import React, { useState, useEffect } from "react";
-// import { Link, useHistory } from "react-router-dom";
-// import M from "materialize-css";
-
-// function CreatePost() {
-//   const history = useHistory();
-//   const [title, setTitle] = useState("");
-//   const [image, setImage] = useState("");
-//   const [url, setUrl] = useState("");
-//   const [description, setDescription] = useState("");
-//   const [members, setMembers] = useState("");
-//   const [member1, setMember1] = useState("");
-//   const [sec1, setSec1] = useState("");
-//   const [member2, setMember2] = useState("");
-//   const [sec2, setSec2] = useState("");
-//   const [member3, setMember3] = useState("");
-//   const [sec3, setSec3] = useState("");
-//   const [member4, setMember4] = useState("");
-//   const [sec4, setSec4] = useState("");
-//   const [member5, setMember5] = useState("");
-//   const [sec5, setSec5] = useState("");
-
-//   useEffect(() => {
-//     fetch("/createpost", {
-//       method: "post",
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization: "Bearer " + localStorage.getItem("jwt"),
-//       },
-//       body: JSON.stringify({
-//         title,
-//         description,
-//         members,
-//         member1,
-//         sec1,
-//         member2,
-//         sec2,
-//         member3,
-//         sec3,
-//         member4,
-//         sec4,
-//         member5,
-//         sec5,
-//         photo: url,
-//       }),
-//     })
-//       .then((res) => res.json())
-//       .then((data) => {
-//         if (data.error) {
-//           M.toast({ html: data.error, classes: "#c62828 red darken-3" });
-//         } else {
-//           M.toast({ html: "Post Created Successfully", classes: " green" });
-//           history.push("/");
-//         }
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   }, [url]);
-
-//   const PostDetails = (e) => {
-//     e.preventDefault();
-//     if (image) {
-//       const data = new FormData();
-//       data.append("file", image);
-//       data.append("upload_preset", "projekthouse");
-//       data.append("cloud_name", "ddzjlkiyw");
-//       fetch("https://api.cloudinary.com/v1_1/ddzjlkiyw/image/upload", {
-//         method: "POST",
-//         body: data,
-//       })
-//         .then((response) => response.json()) // keep it in one line else use return res.json()
-//         .then((data) => {
-//           setUrl(data.url);
-//         })
-//         .catch((err) => {
-//           console.log(err.response);
-//         });
-//     } else {
-//       setUrl(null);
-//     }
-//   };
-
-//   return (
-//     <div className="container post-container">
-//       <div style={{ marginTop: "4rem" }} className="row">
-//         <div className="col s10 offset-s1">
-//           <Link to="/" className="btn-flat waves-effect">
-//             <i className="material-icons left">keyboard_backspace</i>
-//             Back to home
-//           </Link>
-//           <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-//             <h4>
-//               <b>Create Team</b>
-//             </h4>
-//           </div>
-//           <form noValidate>
-//             <div className="input-field col s12">
-//               <input
-//                 id="title"
-//                 type="text"
-//                 value={title}
-//                 onChange={(e) => setTitle(e.target.value)}
-//               />
-//               <label htmlFor="title">Title</label>
-//             </div>
-//             <div className="input-field col s9">
-//               <textarea
-//                 id="description"
-//                 className="materialize-textarea"
-//                 value={description}
-//                 onChange={(e) => setDescription(e.target.value)}
-//               ></textarea>
-//               <label htmlFor="description">Description</label>
-//             </div>
-//             <div className="input-field col s3">
-//               <input
-//                 id="members"
-//                 type="number"
-//                 value={members}
-//                 onChange={(e) => setMembers(e.target.value)}
-//               />
-//               <label htmlFor="members">Total Members</label>
-//             </div>
-//             <div className="input-field col s6">
-//               <input
-//                 id="member1"
-//                 type="text"
-//                 value={member1}
-//                 onChange={(e) => setMember1(e.target.value)}
-//               />
-//               <label htmlFor="member1">Member 1</label>
-//             </div>
-//             <div className="input-field col s6">
-//               <input
-//                 id="sec1"
-//                 type="text"
-//                 value={sec1}
-//                 onChange={(e) => setSec1(e.target.value)}
-//               />
-//               <label htmlFor="sec1">Roll No, Section</label>
-//             </div>
-//             <div className="input-field col s6">
-//               <input
-//                 id="member2"
-//                 type="text"
-//                 value={member2}
-//                 onChange={(e) => setMember2(e.target.value)}
-//               />
-//               <label htmlFor="member2">Member 2</label>
-//             </div>
-//             <div className="input-field col s6">
-//               <input
-//                 id="sec2"
-//                 type="text"
-//                 value={sec2}
-//                 onChange={(e) => setSec2(e.target.value)}
-//               />
-//               <label htmlFor="sec2">Roll No, Section</label>
-//             </div>
-//             <div className="input-field col s6">
-//               <input
-//                 id="member3"
-//                 type="text"
-//                 value={member3}
-//                 onChange={(e) => setMember3(e.target.value)}
-//               />
-//               <label htmlFor="member3">Member 3</label>
-//             </div>
-//             <div className="input-field col s6">
-//               <input
-//                 id="sec3"
-//                 type="text"
-//                 value={sec3}
-//                 onChange={(e) => setSec3(e.target.value)}
-//               />
-//               <label htmlFor="sec3">Roll No, Section</label>
-//             </div>
-//             <div className="input-field col s6">
-//               <input
-//                 id="member4"
-//                 type="text"
-//                 value={member4}
-//                 onChange={(e) => setMember4(e.target.value)}
-//               />
-//               <label htmlFor="member4">Member 4</label>
-//             </div>
-//             <div className="input-field col s6">
-//               <input
-//                 id="sec4"
-//                 type="text"
-//                 value={sec4}
-//                 onChange={(e) => setSec4(e.target.value)}
-//               />
-//               <label htmlFor="sec4">Roll No, Section</label>
-//             </div>
-//             <div className="input-field col s6">
-//               <input
-//                 id="member5"
-//                 type="text"
-//                 value={member5}
-//                 onChange={(e) => setMember5(e.target.value)}
-//               />
-//               <label htmlFor="member5">Member 5</label>
-//             </div>
-//               <div className="input-field col s6">
-//               <input
-//                 id="sec5"
-//                 type="text"
-//                 value={sec5}
-//                 onChange={(e) => setSec5(e.target.value)}
-//                 /*placeholder="Roll No, Sec"*/
-//               />
-//               <label htmlFor="sec5">Roll No, Section</label>
-//             </div>
-              
-//             <div className="input-field col s12">
-//               <div className="file-field input-field">
-//                 <div className="btn">
-//                   <span>Profile</span>
-//                   <input
-//                     type="file"
-//                     onChange={(e) => setImage(e.target.files[0])}
-//                   />
-//                 </div>
-//                 <div className="file-path-wrapper">
-//                   <input className="file-path validate" type="text" />
-//                 </div>
-//               </div>
-//             </div>
-//             <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-//               <button
-//                 style={{
-//                   width: "150px",
-//                   borderRadius: "3px",
-//                   letterSpacing: "1.5px",
-//                   marginTop: "1rem",
-//                 }}
-//                 type="submit"
-//                 className="btn btn-large waves-effect hoverable #ff5252 red accent-1"
-//                 onClick={PostDetails}
-//               >
-//                 Post
-//               </button>
-//             </div>
-//           </form>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default CreatePost;
-
-
