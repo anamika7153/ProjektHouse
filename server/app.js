@@ -9,7 +9,7 @@ require('./db/db');
 const app = express();
 const mongoose = require("mongoose");
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 6010;
 
 require("./models/user");
 require("./models/post");
