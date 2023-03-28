@@ -8,6 +8,7 @@ const Navbar = () => {
   const history = useHistory();
   const { state, dispatch } = useContext(UserContext);
   const [search, setSearch] = useState("");
+  const [query, setQuery] = useState("");
   const [userDetails, setUserDetails] = useState([]);
   useEffect(() => {
     // console.log("in navbar state",state)
@@ -25,8 +26,9 @@ const Navbar = () => {
             search
           </i>
         </li>,
+        
         <li key="3">
-          <Link to="/createpost">Create Post</Link>
+          <Link to="/createteam">Create Team</Link>
         </li>,
         <li key="4">
           <Link to="/profile">Profile</Link>

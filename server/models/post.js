@@ -84,13 +84,20 @@ const postSchema = new mongoose.Schema({
       postedBy: { type: ObjectId, ref: "User" },
     },
   ],
+  filee: [
+    {
+    url: String,
+    filenamee: String,
+    term: String,
+  }
+],
   file_path: {
     type: String,
-    required: true
+    required: false
 },
   file_mimetype: {
     type: String,
-    required: true
+    required: false
   },
   postedBy: {
     type: ObjectId,

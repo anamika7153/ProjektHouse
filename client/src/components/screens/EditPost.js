@@ -10,7 +10,7 @@ import { API_URL } from "../../utils/constants";
 
 function EditPost() {
   const history = useHistory();
-  const [file, setFile] = useState(null); // state for storing actual image
+  const [file, setFile] = useState([]); // state for storing actual image
   const [previewSrc, setPreviewSrc] = useState("");
   const { id } = useParams();
 
@@ -47,8 +47,9 @@ function EditPost() {
   },[])
 
   const loaddata = async() => {
-    const result = await axios.get('http://localhost:5000/student/'+id)
+    const result = await axios.get('http://localhost:5000/edit/'+id)
     setPostdata(result.data)
+    console.log("result.data",result.data)
   }
 
   const submitForm = async(e) => {
@@ -56,38 +57,36 @@ function EditPost() {
     await axios.put(`${API_URL}/updatedata/${id}`, postdata)
     M.toast({ html: "Data updated Successfully", classes: " green" });
     history.push("/");
-
     // .then((result) => {
     //   console.log("result",result)
     // }).catch((err)=> {
     //   console.log(err)
     // })
-    
   }
   const [errorMsg, setErrorMsg] = useState("");
-  const [isPreviewAvailable, setIsPreviewAvailable] = useState(false); // state to show preview only for images
-  const dropRef = useRef();
+  // const [isPreviewAvailable, setIsPreviewAvailable] = useState(false); // state to show preview only for images
+  // const dropRef = useRef();
 
-  const onDrop = (files) => {
-    const [uploadedFile] = files;
-    setFile(uploadedFile);
+  // const onDrop = (files) => {
+  //   const [uploadedFile] = files;
+  //   setFile(files);
 
-    const fileReader = new FileReader();
-    fileReader.onload = () => {
-      setPreviewSrc(fileReader.result);
-    };
-    fileReader.readAsDataURL(uploadedFile);
-    setIsPreviewAvailable(uploadedFile.name.match(/\.(jpeg|jpg|png)$/));
-    dropRef.current.style.border = "2px dashed #e9ebeb";
-  };
+  //   const fileReader = new FileReader();
+  //   fileReader.onload = () => {
+  //     setPreviewSrc(fileReader.result);
+  //   };
+  //   fileReader.readAsDataURL(uploadedFile);
+  //   setIsPreviewAvailable(uploadedFile.name.match(/\.(jpeg|jpg|png)$/));
+  //   dropRef.current.style.border = "2px dashed #e9ebeb";
+  // };
 
-  const updateBorder = (dragState) => {
-    if (dragState === "over") {
-      dropRef.current.style.border = "2px solid #000";
-    } else if (dragState === "leave") {
-      dropRef.current.style.border = "2px dashed #e9ebeb";
-    }
-  };
+  // const updateBorder = (dragState) => {
+  //   if (dragState === "over") {
+  //     dropRef.current.style.border = "2px solid #000";
+  //   } else if (dragState === "leave") {
+  //     dropRef.current.style.border = "2px dashed #e9ebeb";
+  //   }
+  // };
 
   return (
     <div className="container post-container">
@@ -314,7 +313,7 @@ function EditPost() {
           </div>
         </Row>
               
-            <div className="upload-section">
+            {/* <div className="upload-section">
               <Dropzone onDrop={onDrop} onDragEnter={() => updateBorder("over")} onDragLeave={() => updateBorder("leave")} >
               {({ getRootProps, getInputProps }) => (
               <div {...getRootProps({ className: "drop-zone" })} ref={dropRef}>
@@ -343,7 +342,7 @@ function EditPost() {
                   <p>Image preview will be shown here after selection</p>
                 </div>
               )}
-            </div>
+            </div> */}
             <div className="col s12" style={{ paddingLeft: "11.250px" }}>
               <button
                 style={{

@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Dropzone from "react-dropzone";
+// import { useDropzone } from "react-dropzone";
 import axios from "axios";
 import {API_URL} from './../../utils/constants'
 import { Form, Row, Col, Button, Container } from "react-bootstrap";
@@ -8,7 +9,10 @@ import M from "materialize-css";
 
 function CreatePost() {
   const history = useHistory();
-  const [file, setFile] = useState(null); // state for storing actual image
+
+  const [file, setFile] = useState([]); // state for storing actual image
+  const [filesecond, setFilesecond] = useState([]); 
+  const [filethird, setFilethird] = useState([]); 
   const [previewSrc, setPreviewSrc] = useState("");
   const [state, setState] = useState({
     title: "",
@@ -44,21 +48,46 @@ function CreatePost() {
   };
 
   const onDrop = (files) => {
-    
-    console.log("filesss::::",files)
+    console.log("filesss first term",files)
     const [uploadedFile] = files;
-    // var  [f1,f2] = files
-    // console.log(f1)
-    // console.log(f2)
-    setFile(uploadedFile);
-
-    const fileReader = new FileReader();
-    fileReader.onload = () => {
-      setPreviewSrc(fileReader.result);
-    };
-    fileReader.readAsDataURL(uploadedFile);
-    setIsPreviewAvailable(uploadedFile.name.match(/\.(jpeg|jpg|png)$/));
-    dropRef.current.style.border = "2px dashed #e9ebeb";
+    setFile(files);
+    files.forEach(file => {
+      const fileReader = new FileReader();
+      fileReader.onload = () => {
+        setPreviewSrc(fileReader.result);
+      };
+      fileReader.readAsDataURL(uploadedFile);
+      setIsPreviewAvailable(uploadedFile.name.match(/\.(jpeg|jpg|png)$/));
+      dropRef.current.style.border = "2px dashed #e9ebeb";
+    })
+  };
+  const onDropSecond = (files) => {
+    console.log("filesss second term",files)
+    const [uploadedFile] = files;
+    setFilesecond(files);
+    files.forEach(file => {
+      const fileReader = new FileReader();
+      fileReader.onload = () => {
+        setPreviewSrc(fileReader.result);
+      };
+      fileReader.readAsDataURL(uploadedFile);
+      setIsPreviewAvailable(uploadedFile.name.match(/\.(jpeg|jpg|png)$/));
+      dropRef.current.style.border = "2px dashed #e9ebeb";
+    })
+  };
+  const onDropThird = (files) => {
+    console.log("filesss third term",files)
+    const [uploadedFile] = files;
+    setFilethird(files);
+    files.forEach(file => {
+      const fileReader = new FileReader();
+      fileReader.onload = () => {
+        setPreviewSrc(fileReader.result);
+      };
+      fileReader.readAsDataURL(uploadedFile);
+      setIsPreviewAvailable(uploadedFile.name.match(/\.(jpeg|jpg|png)$/));
+      dropRef.current.style.border = "2px dashed #e9ebeb";
+    })
   };
 
   const updateBorder = (dragState) => {
@@ -73,10 +102,12 @@ function CreatePost() {
     event.preventDefault();
     try {
       const { title, description, members, member1, sec1, mobile1, member2, sec2, mobile2, member3, sec3, mobile3, member4, sec4, mobile4, member5, sec5, mobile5, } = state;
-      if (title.trim() !== "" && description.trim() !== "") {
-        if (file) {
+
+        if (title && description && members && member1 && sec1 && mobile1) {
             const formData = new FormData();
-            formData.append("file", file);
+            // file.forEach(file => formData.append('file',file))
+            // filesecond.forEach(file => formData.append('filesecond',file))
+            // filethird.forEach(file => formData.append('filethird',file))
             formData.append("title", title);
             formData.append("description", description);
             formData.append("members", members);
@@ -95,19 +126,15 @@ function CreatePost() {
             formData.append("member5", member5);            
             formData.append("mobile5", mobile5);
             formData.append("sec5", sec5);
-
-          setErrorMsg("");
-            await axios.post(`${API_URL}/createpost`, formData, {
+            setErrorMsg("");
+            await axios.post(`${API_URL}/createteam`, formData, {
               headers: {
                 "Content-Type": "multipart/form-data",
                 Authorization: "Bearer " + localStorage.getItem("jwt"),
               },
             });
-            M.toast({ html: "post uploaded Successfully", classes: " green" });
+            M.toast({ html: "Team created Successfully", classes: " green" });
             history.push("/");
-        } else {
-          setErrorMsg("Please select a file to add.");
-        }
       }
       else {
         setErrorMsg("Please enter all the field values.");
@@ -117,7 +144,6 @@ function CreatePost() {
       error.response && setErrorMsg(error.response.data);
     }
   }
-
 
   return (
     <div className="container post-container">
@@ -342,23 +368,22 @@ function CreatePost() {
           </div>
         </Row>
               
-            <div className="upload-section">
+            {/* <div className="upload-section">
+              <h6 style={{marginRight: "20px"}}>First Term Files</h6>
               <Dropzone onDrop={onDrop} onDragEnter={() => updateBorder("over")} onDragLeave={() => updateBorder("leave")} >
-              {({ acceptedFiles, getRootProps, getInputProps }) => (
-              // {({ getRootProps, getInputProps }) => (
+              {({  acceptedFiles, getRootProps, getInputProps }) => (
                 <div {...getRootProps({ className: "drop-zone" })} ref={dropRef}>
-                  <input {...getInputProps()} />
-                  <p>Drag and drop a file OR click here to select a file</p>
+                  <input {...getInputProps()} multiple/>
+                  <p>Drag and drop files OR click here to select files</p>
                   {file && (
                     <div>
                       <strong>Selected file:</strong> {acceptedFiles.map(item => (<li key={item.path}>{item.path}</li>)) }
-                    {/* <strong>Selected file:</strong> {file.name} */}
                     </div>
                   )}
                 </div>
               )}
-              </Dropzone>
-              {previewSrc ? (
+              </Dropzone> */}
+              {/* {previewSrc ? (
                 isPreviewAvailable ? (
                   <div className="image-preview">
                     <img className="preview-image" src={previewSrc} alt="Preview" />
@@ -372,8 +397,9 @@ function CreatePost() {
                 <div className="preview-message">
                   <p>Image preview will be shown here after selection</p>
                 </div>
-              )}
-            </div>
+              )} */}
+            {/* </div> */}
+            
             <div className="col s12" style={{ paddingLeft: "11.250px" }}>
               <button
                 style={{
@@ -384,7 +410,6 @@ function CreatePost() {
                 }}
                 type="submit"
                 className="btn btn-large waves-effect hoverable #ff5252 red accent-1"
-                // onClick={PostDetails}
               >
                 Post
               </button>

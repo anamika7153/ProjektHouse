@@ -28,6 +28,7 @@ app.use(require("./routes/auth"));
 app.use(require("./routes/post"));
 app.use(require("./routes/user"));
 app.use(require("./routes/file"));
+// app.use(require("./routes/media"));
 // app.use(fileRoute);
 // app.use(require("./routes/team"));
 

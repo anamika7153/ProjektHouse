@@ -102,10 +102,9 @@ router.put("/updatepic", requireLogin, (req, res) => {
 });
 
 router.post("/search-users", (req, res) => {
-  let userPattern = new RegExp("^" + req.body.query);
-  User.find({ email: { $regex: userPattern } })
-  // let searched = req.body.query
-  // User.find({ name: searched })
+  const userr = req.body.query
+  User.find({ name: { $regex: new RegExp(userr, 'i') } })
+  // User.find({ name: userr })
     .select("_id name email pic")
     .then((user) => {
       res.json({ user });

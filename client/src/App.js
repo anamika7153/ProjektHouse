@@ -8,16 +8,20 @@ import Home from "./components/screens/Home";
 import Login from "./components/screens/Login";
 import Profile from "./components/screens/Profile";
 import Register from "./components/screens/Register";
-import CreatePost from "./components/screens/CreatePost";
+import CreateTeam from "./components/screens/CreatePost";
 import { reducer, initialState } from "./reducers/userReducer";
 import "./App.css";
 import UserProfile from "./components/screens/UserProfile";
 import SubsPosts from "./components/screens/SubsPosts";
 import FilesList from "./components/FilesList";
 import Fileuploads from "./components/screens/Fileuploads";
-import Edit from "./components/screens/Edit";
-import Details from "./components/screens/Details";
 import EditPost from "./components/screens/EditPost";
+import Editfiles from "./components/screens/Editfiles";
+import Newupload from "./components/screens/Newupload";
+import FirstTermFiles from "./components/screens/FirstTermFiles";
+import SecondTermFiles from "./components/screens/SecondTermFiles";
+import ThirdTermFiles from "./components/screens/ThirdTermFiles";
+// import Newupload from "./components/screens/Newupload";
 
 export const UserContext = createContext();
 
@@ -52,24 +56,36 @@ const Routing = () => {
       <Route path="/register">
         <Register />
       </Route>
-      <Route path="/createpost">
-        <CreatePost />
+      <Route path="/createteam">
+        <CreateTeam />
       </Route>
       <Route path="/editdata/:id">
         <EditPost />
       </Route>
+      <Route path="/editfiles/:postid/:id">
+        <Editfiles />
+      </Route>
+      <Route path="/upl/:id">
+        <Fileuploads />
+      </Route>
+      <Route path="/newupload/:id">
+        <Newupload />
+      </Route>
+      <Route path="/firstterm/:id">
+        <FirstTermFiles />
+      </Route>
+      <Route path="/secondterm/:id">
+        <SecondTermFiles />
+      </Route>
+      <Route path="/thirdterm/:id">
+        <ThirdTermFiles />
+      </Route>
       <Route path="/myFollowersPosts">
         <SubsPosts />
       </Route>
-      {/* <Route exact path="/edit/:id">
-        <Edit />
-      </Route>
-      <Route exact path="/view/:id">
-        <Details />
-      </Route> */}
-      <Route exact path="/createteam">
+      {/* <Route exact path="/createteam">
         <Fileuploads />
-      </Route>
+      </Route> */}
     </Switch>
   );
 };

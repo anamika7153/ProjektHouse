@@ -21,13 +21,13 @@ cloudinary.config({
 });
 
 const upload = multer({
-  storage: multer.diskStorage({
-    destination(req, file, cb) {
-      cb(null, './files');
+  storage: multer.memoryStorage({
+    destination: function(req, file, cb) {
+      cb(null, '');
     },
-    filename(req, file, cb) {
-      cb(null, `${new Date().getTime()}_${file.originalname}`);
-    }
+    // filename(req, file, cb) {
+    //   cb(null, `${new Date().getTime()}_${file.originalname}`);
+    // }
   }),
   limits: {
     fileSize: 8000000 // max file size 1MB = 1000000 bytes
@@ -42,14 +42,71 @@ const upload = multer({
     }
     cb(undefined, true); // continue with upload
   }
-});
+})
 
 Router.post(
-  '/upload',
-  upload.single('file'),
+  `/upld/:id`,
+  upload.array('file'),
   requireLogin,
    async(req, res) => {
     try {
+      console.log("req.body",req.body)
+      const uploadtos3 = async (filename, file) => {
+        return new Promise (async (resolve, reject) => {
+          const params = {
+            Key: filename,
+            Bucket : process.env.AWS_BUCKET_NAME,
+            Body: file,
+          }
+          await s3.upload(params, (err, data) => {
+            if(err) {
+              console.log("ERR", err)
+              reject(err)
+            } else {
+              console.log("Running")
+              resolve(data.Location)
+            }
+          })
+        })
+      //   const params = files.map(file => {
+      //     return {
+      //         Bucket : process.env.AWS_BUCKET_NAME,
+      //         Key: `newuploads/${file.originalname}`,
+      //         Body: file.buffer,
+      //     }
+      // })
+      // return await Promise.all(params.map(param => s3.upload(param).promise()))
+      
+    }
+    const {term} =req.body
+    // req.files.forEach(async (file) => {
+
+    //   console.log("file",file)
+    //   console.log("term",term)
+    //   if(file.mimetype.includes("image/jpeg")) folder = 'newuploads'
+    //   else folder = 'newuploads'
+    //   let filename = `newuploads/${file.originalname}`
+    //   let medialink = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${filename}`
+    //   console.log("file.originalname",file.originalname)
+    //     var linkk = await uploadtos3(filename, file.buffer)
+    //     var filnam = file.originalname
+        
+    //     const fil = {
+    //       url: linkk,
+    //       filenamee:filnam,
+    //       term: term
+    //     }
+    //     await Post.findByIdAndUpdate(
+    //       postid,
+    //       {
+    //         $push: {filee:fil }
+    //       }
+    //     )
+    // })
+
+
+
+
       // let uploadedfile = UploadApiResponse;
     // const resultt = await cloudinary.v2.uploader.upload(file, options).then(callback);
     // const resultt = await cloudinary.uploader.upload(req.file.path, {
@@ -58,36 +115,38 @@ Router.post(
     //   resource_type: "auto",
     // })
     
-      const { title, description, member1, sec1,members, member2, sec2, member3, sec3, member4, sec4, member5, sec5 } = req.body;
-      const { path, mimetype } = req.file;
+      // const { title, description, member1, sec1,members, member2, sec2, member3, sec3, member4, sec4, member5, sec5 } = req.body;
+      // const { path, mimetype } = req.file;
+
+
       // const { secure_url, bytes, format } = req.resultt;
       // console.log("req.resultt: ",req.resultt);
       // console.log("resultt",resultt)
       // console.log("resultt.secure_url: ",resultt.secure_url)
       // console.log("req.body: ",req.body);
-      const file = new File({
-        title,
-        description,
-        members,
-        member1,
-        sec1,
-        member2,
-        sec2,
-        member3,
-        sec3,
-        member4,
-        sec4,
-        member5,
-        sec5,
-        postedBy: req.user,
-        file_path: path,
-        file_mimetype: mimetype,
-        // secure_url,
-        // format
-        });
+      // const file = new File({
+      //   title,
+      //   description,
+      //   members,
+      //   member1,
+      //   sec1,
+      //   member2,
+      //   sec2,
+      //   member3,
+      //   sec3,
+      //   member4,
+      //   sec4,
+      //   member5,
+      //   sec5,
+      //   postedBy: req.user,
+      //   file_path: path,
+      //   file_mimetype: mimetype,
+      //   // secure_url,
+      //   // format
+      //   });
         // console.log(file)
       //  file.save()
-      await file.save()
+      // await file.save()
       // .then((result)=> {
       //   res.json({file:result})
       // })
@@ -96,7 +155,7 @@ Router.post(
       // });
       // console.log("req.user: ", req.user)
       // console.log("postedby: ", postedBy)
-      res.send('file uploaded successfully.');
+      // res.send('file uploaded successfully.');
     } catch (error) {
       // res.status(400).send('Error while uploading file. Try again later.');
       res.status(400).send(error);
