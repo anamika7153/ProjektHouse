@@ -9,6 +9,10 @@ function Login() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
+  const changePass = async () => {
+    history.push('/user/sendemail')
+  }
+
   const PostData = (e) => {
     e.preventDefault();
     if (
@@ -82,6 +86,7 @@ function Login() {
                 onChange={(e) => setPassword(e.target.value)}
               />
               <label htmlFor="password">Password</label>
+              <span style={{ cursor: "pointer" }} onClick={changePass}> Forget Password ?</span>
             </div>
             <div className="col s12" style={{ paddingLeft: "11.250px" }}>
               <button

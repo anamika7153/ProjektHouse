@@ -472,21 +472,6 @@ router.get("/post/:id", (req, res) => {
     });
 });
 
-// router.get("/editpost/:id", async (req,res) => {
-//     await Post.findOne({_id: req.params._id})
-//     .populate("postedBy", "_id name pic")
-//     .populate("comments.postedBy", "_id name")
-//     .sort("-createdAt") // - for descending order , createdAt for factor on whihc we need to sort
-//     .then((postt) => {
-//       res.json({ postt });
-//       console.log("req.params.id:" ,req.params._id)
-//       console.log("postt",postt)
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-// } )
-
 router.delete("/deletepost/:postId", requireLogin, (req, res) => {
   Post.findOne({ _id: req.params.postId })
     .populate("postedBy", "_id")

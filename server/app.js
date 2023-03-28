@@ -14,6 +14,7 @@ const PORT = process.env.PORT || 5000;
 require("./models/user");
 require("./models/post");
 require("./models/file");
+require("./models/otp");
 // const fileRoute = require('./routes/file');
 
 // require("./models/register");
@@ -32,8 +33,8 @@ app.use(require("./routes/file"));
 // app.use(fileRoute);
 // app.use(require("./routes/team"));
 
-app.use(express.urlencoded({extended:true}))
 // app.use(bodyParser.json())
+app.use(express.urlencoded({extended:true}))
 // app.use(bodyParser.urlencoded({extended:true}))
 
 

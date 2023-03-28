@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch, useHistory } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./components/screens/Home";
 import Login from "./components/screens/Login";
+import ChangePassword from "./components/screens/ChangePassword";
 import Profile from "./components/screens/Profile";
 import Register from "./components/screens/Register";
 import CreateTeam from "./components/screens/CreatePost";
@@ -43,6 +44,9 @@ const Routing = () => {
       </Route>
       <Route path="/login">
         <Login />
+      </Route>
+      <Route path="/user/sendemail">
+        <ChangePassword />
       </Route>
       <Route path="/register">
         <Register />

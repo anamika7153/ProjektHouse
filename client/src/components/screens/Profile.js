@@ -136,6 +136,26 @@ function Profile() {
         console.log(err);
       });
   };
+  const deleteFile = (postId, fileid) => {
+    fetch(`/deletefile/${postId}/${fileid}`, {
+      method: "delete",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        const newData = data.map((item) => {
+          if (result._id == item._id) return result;
+          else return item;
+        });
+        setData(newData);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   const deletePost = (postId) => {
     fetch(`/deletepost/${postId}`, {
       method: "delete",
@@ -520,34 +540,37 @@ function Profile() {
                       <h6 key={f._id}>
                         {(f.term == firstterm ) ? (
                           <div>
-                            <div style={{display: "flex", justifyContent: "space-between"}}>
-                              <a href={f.url} target="_blank" rel="noopener noreferrer" download>
-                                <div>
-                                    <i className="material-icons" style={{ cursor: "pointer" }} >file_download</i> 
-                                    <span>{f.filenamee}</span>
-                                </div>
-                              </a>
-                              <div>
-                                <Link to={`/editfiles/${item._id}/${f._id}`} >
-                                  <i
-                                  className="material-icons"
-                                  style={{ float: "right", cursor: "pointer",marginRight: "10px",  paddingLeft: "20px" }}
-                                  >
-                                  edit 
-                                  </i>
-                                </Link>
-                                <i
-                                  className="material-icons"
-                                  style={{ float: "right", cursor: "pointer", }}
-                                  // onClick={(e) => deleteFile(item._id, f._id)}
-                                >
-                                  delete
-                                </i>
+                          <div style={{display: "flex", justifyContent: "space-between"}}>
+                            <a href={f.url} target="_blank" rel="noopener noreferrer" download>
+                              <div style={{display: "flex"}}>
+                                  <span>{f.filenamee}</span>
+                                  <i className="material-icons" style={{ cursor: "pointer", paddingLeft: "10px"}} >file_download</i> 
                               </div>
-
+                            </a>
+                            <div>
+                              {item.postedBy._id == state._id ? (
+                                <>
+                                  <Link to={`/editfiles/${item._id}/${f._id}`} >
+                                    <i
+                                    className="material-icons"
+                                    style={{ float: "right", cursor: "pointer",marginRight: "10px",  paddingLeft: "20px" }}
+                                    >
+                                    edit 
+                                    </i>
+                                  </Link>
+                                  <i
+                                    className="material-icons"
+                                    style={{ float: "right", cursor: "pointer", }}
+                                    onClick={(e) => deleteFile(item._id, f._id)}
+                                  >
+                                    delete
+                                  </i>
+                                </>
+                              ) : 
+                              ("")}
                             </div>
-
                           </div>
+                        </div>
                         ) : (
                           <></>
                         )
@@ -583,7 +606,7 @@ function Profile() {
                                     <i
                                       className="material-icons"
                                       style={{ float: "right", cursor: "pointer", }}
-                                      // onClick={(e) => deleteFile(item._id, f._id)}
+                                      onClick={(e) => deleteFile(item._id, f._id)}
                                     >
                                       delete
                                     </i>
@@ -591,9 +614,7 @@ function Profile() {
                                 ) : 
                                 ("")}
                               </div>
-
                             </div>
-
                           </div>
                         ) : (
                           <></>
@@ -630,7 +651,7 @@ function Profile() {
                                     <i
                                       className="material-icons"
                                       style={{ float: "right", cursor: "pointer", }}
-                                      // onClick={(e) => deleteFile(item._id, f._id)}
+                                      onClick={(e) => deleteFile(item._id, f._id)}
                                     >
                                       delete
                                     </i>
