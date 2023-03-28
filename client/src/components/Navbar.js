@@ -27,16 +27,16 @@ const Navbar = () => {
           </i>
         </li>,
         
-        <li key="3">
+        <li key="2">
           <Link to="/createteam">Create Team</Link>
         </li>,
-        <li key="4">
+        <li key="3">
           <Link to="/profile">Profile</Link>
         </li>,
-        <li key="5">
+        <li key="4">
           <Link to="/myFollowersPosts">Feed</Link>
         </li>,
-        <li key="8">
+        <li key="5">
           <button
             type="submit"
             className="btn waves-effect hoverable #ff5252 red accent-1"
@@ -53,10 +53,10 @@ const Navbar = () => {
       ];
     } else {
       return [
-        <li key="9">
+        <li key="6">
           <Link to="/login">Login</Link>
         </li>,
-        <li key="10">
+        <li key="7">
           <Link to="/register">Register</Link>
         </li>,
       ];

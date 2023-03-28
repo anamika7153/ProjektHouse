@@ -46,67 +46,6 @@ function Home() {
 
   }
 
-  const downloadFilew = async (id, path, mimetype) => {
-    try {
-      const result = await axios.get(`/download/${id}`, {
-        responseType: "blob",
-        headers: {
-          // "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("jwt"),
-        },
-      });
-      console.log("downloadd")
-
-      const split = path.split("/");
-      const filename = split[split.length - 1];
-      setErrorMsg("");
-      return download(result.data, filename, mimetype);
-    } catch (error) {
-      console.log("error",error)
-      if (error.response && error.response.status === 400) {
-        setErrorMsg("Error while downloading file. Try again later");
-      }
-    }
-  };
-
-  // let downloadImage = url => {
-  //   let urlArray = url.split("/")
-  //   let bucket = urlArray[3]
-  //   let key = `${urlArray[4]}/${urlArray[5]}`
-  //   let s3 = new AWS.S3({ params: { Bucket: bucket }})
-  //   let params = {Bucket: bucket, Key: key}
-  //   s3.getObject(params, (err, data) => {
-  //     let blob=new Blob([data.Body], {type: data.ContentType});
-  //     let link=document.createElement('a');
-  //     link.href=window.URL.createObjectURL(blob);
-  //     link.download=url;
-  //     link.click();
-  //   })
-  // }
-
-  // useEffect(() => {
-  //   fetch(`${API_URL}/newupload`, {
-  //     headers: {
-  //       method: "POST",
-  //       body: FormData,
-  //     }
-  //   })
-  //   .then((res) => res.json())
-  //   .then((result) =>{
-  //     setUrl(result.Location)
-  //   })
-  // })
-
-  // useEffect(() => {
-  //   const res = fetch(`${API_URL}/newupload`,{
-  //     method: 'POST',
-  //     body: FormData,
-  //   })
-  //   const res2 = res.json()
-  //   // setUrl(res2.Location)
-  //   console.log("res2", res2)
-  // })
-
   useEffect(() => {
     fetch(`${API_URL}/allpost`, {
       headers: {
@@ -130,52 +69,7 @@ function Home() {
         setCreators(result.users);
       });
   }, []);
-  const likePost = (id) => {
-    fetch("/like", {
-      method: "put",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-      },
-      body: JSON.stringify({
-        postId: id,
-      }),
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        const newData = data.map((item) => {
-          if (result._id == item._id) return result;
-          else return item;
-        });
-        setData(newData);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-  const unlikePost = (id) => {
-    fetch("/unlike", {
-      method: "put",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-      },
-      body: JSON.stringify({
-        postId: id,
-      }),
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        const newData = data.map((item) => {
-          if (result._id == item._id) return result;
-          else return item;
-        });
-        setData(newData);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+
   const makeComment = (text, postId) => {
     fetch("/comment", {
       method: "put",
@@ -358,11 +252,6 @@ function Home() {
                       </i>
                     </Link>
                   </div>
-                  {/* <div >
-                    <Link to={`/editfiles/${item._id}`} >
-                      upload
-                    </Link>
-                  </div> */}
                 </div>
                 
               ) : (
@@ -614,9 +503,6 @@ function Home() {
                   </div>
                 </div>
                 <div>
-                  {/* <span style = {{fontSize: "18px", fontWeight: "400"}}>
-                    First Term
-                  </span> */}
                   {item.filee.map((f) => {
                     return (
                       <h6 key={f._id}>
@@ -655,9 +541,6 @@ function Home() {
                       </h6>
                     )
                   })}
-                  {/* <span style = {{fontSize: "18px", fontWeight: "400"}}>
-                    Second Term
-                  </span> */}
                   {item.filee.map((f) => {
                     return (
                       <h6 key={f._id}>
@@ -696,9 +579,6 @@ function Home() {
                       </h6>
                     )
                   })}
-                  {/* <span style = {{fontSize: "18px", fontWeight: "400"}}>
-                    Third Term
-                  </span> */}
                   {item.filee.map((f) => {
                     return (
                       <h6 key={f._id}>

@@ -1,5 +1,3 @@
-//approuter.js
-
 import React, { useEffect, useContext, createContext, useReducer } from "react";
 import { BrowserRouter, Route, Switch, useHistory } from "react-router-dom";
 
@@ -13,15 +11,11 @@ import { reducer, initialState } from "./reducers/userReducer";
 import "./App.css";
 import UserProfile from "./components/screens/UserProfile";
 import SubsPosts from "./components/screens/SubsPosts";
-import FilesList from "./components/FilesList";
-import Fileuploads from "./components/screens/Fileuploads";
-import EditPost from "./components/screens/EditPost";
+import EditData from "./components/screens/EditData";
 import Editfiles from "./components/screens/Editfiles";
-import Newupload from "./components/screens/Newupload";
 import FirstTermFiles from "./components/screens/FirstTermFiles";
 import SecondTermFiles from "./components/screens/SecondTermFiles";
 import ThirdTermFiles from "./components/screens/ThirdTermFiles";
-// import Newupload from "./components/screens/Newupload";
 
 export const UserContext = createContext();
 
@@ -44,9 +38,6 @@ const Routing = () => {
       <Route exact path="/profile">
         <Profile />
       </Route>
-      <Route exact path="/list">
-        <FilesList />
-      </Route>
       <Route path="/profile/:userId">
         <UserProfile />
       </Route>
@@ -60,16 +51,10 @@ const Routing = () => {
         <CreateTeam />
       </Route>
       <Route path="/editdata/:id">
-        <EditPost />
+        <EditData />
       </Route>
       <Route path="/editfiles/:postid/:id">
         <Editfiles />
-      </Route>
-      <Route path="/upl/:id">
-        <Fileuploads />
-      </Route>
-      <Route path="/newupload/:id">
-        <Newupload />
       </Route>
       <Route path="/firstterm/:id">
         <FirstTermFiles />
@@ -83,9 +68,6 @@ const Routing = () => {
       <Route path="/myFollowersPosts">
         <SubsPosts />
       </Route>
-      {/* <Route exact path="/createteam">
-        <Fileuploads />
-      </Route> */}
     </Switch>
   );
 };

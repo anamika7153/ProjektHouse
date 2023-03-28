@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Dropzone from "react-dropzone";
-// import { useDropzone } from "react-dropzone";
 import axios from "axios";
 import {API_URL} from './../../utils/constants'
 import { Form, Row, Col, Button, Container } from "react-bootstrap";
@@ -106,17 +105,13 @@ const Newupload = () => {
                             }}
                             type="submit"
                             className="btn btn-large waves-effect hoverable #ff5252 red accent-1"
-                            // onClick={PostDetails}
                         >
                             Post
                         </button>
                     </div>
                 </Form>
-
             </div>
-
           </div>
-
         </div>
     </div>
   )

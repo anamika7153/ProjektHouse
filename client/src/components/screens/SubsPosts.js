@@ -340,30 +340,6 @@ function SubsPosts() {
               >
                 <input type="text" placeholder="Add comment here" />
               </form>
-              {/* <i
-                className="material-icons"
-                style={{ cursor: "pointer", marginRight: "15px" }}
-              >
-                favorite_border
-              </i>
-              {item.likes.includes(state._id) ? (
-                <i
-                  className="material-icons"
-                  onClick={() => unlikePost(item._id)}
-                  style={{ cursor: "pointer" }}
-                >
-                  thumb_down
-                </i>
-              ) : (
-                <i
-                  className="material-icons"
-                  onClick={() => likePost(item._id)}
-                  style={{ cursor: "pointer" }}
-                >
-                  thumb_up
-                </i>
-              )}
-              <h6>{item.likes.length} Likes</h6> */}
 
               <h6><span>First Term Files</span></h6>
               {item.filee.map((f) => {

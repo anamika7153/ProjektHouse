@@ -27,9 +27,6 @@ const upload = multer({
     destination: function(req, file, cb) {
       cb(null, '');
     },
-    // filename(req, file, cb) {
-    //   cb(null, `${new Date().getTime()}_${file.originalname}`);
-    // }
   }),
   limits: {
     fileSize: 8000000 // max file size 1MB = 1000000 bytes
@@ -47,8 +44,7 @@ const upload = multer({
 })
 
 router.post(`/createteam`, requireLogin, upload.array('file'), async(req, res) => {
-console.log("req.files",req.files)
-  
+  console.log("req.files",req.files)
   const uploadtos3 = async (filename, file) => {
     return new Promise (async (resolve, reject) => {
       const params = {
@@ -66,19 +62,7 @@ console.log("req.files",req.files)
         }
       })
     })
-  //   const params = files.map(file => {
-  //     return {
-  //         Bucket : process.env.AWS_BUCKET_NAME,
-  //         Key: `newuploads/${file.originalname}`,
-  //         Body: file.buffer,
-  //     }
-  // })
-  // return await Promise.all(params.map(param => s3.upload(param).promise()))
-  
 }
-// console.log("req.body:: ",req.body)
-const medias = req.files
-
 const { title, description, members, member1, sec1,mobile1, member2, sec2,mobile2, member3, sec3,mobile3, member4, sec4,mobile4, member5, sec5,mobile5,  } = req.body;
   try {
     if (!title || !description) {
@@ -109,7 +93,6 @@ const { title, description, members, member1, sec1,mobile1, member2, sec2,mobile
   try {
     const savepost = await post.save()
     const postid = savepost._id
-    // console.log("medias",medias)
     console.log("req.files",req.files)
     req.files.forEach(async (file) => {
       console.log("file",file)
@@ -147,7 +130,6 @@ const { title, description, members, member1, sec1,mobile1, member2, sec2,mobile
   }
 }
 );
-
 
 router.get("/allpost", (req, res) => {
   Post.find()
@@ -187,6 +169,7 @@ router.get("/getSubPost", requireLogin, (req, res) => {
     });
 });
 
+//load data to editpost route
 router.get('/edit/:id', (req,res) => {
   Post.findById(req.params.id, (error,data)=> {
     if(error){
@@ -204,7 +187,6 @@ const strg = multer.memoryStorage({
 })
 
 const fileFilter = (req,file, cb) => {
-  // if(file.mimetype.split("/")[0] == "image") {
     if (!file.originalname.match(/\.(jpeg|jpg|png|pdf|doc|docx|xlsx|xls|ppt|pptx)$/)) {
       return cb(
         new Error(
@@ -213,47 +195,7 @@ const fileFilter = (req,file, cb) => {
       );
     }
     cb(undefined, true); // continue with upload
-  //   if(file.mimetype.split("/")[0] == "image") {
-  //   cb(null, true)
-  // }
-  // else {
-  //   cb(new multer.MulterError("unexp file"), false)
-  // }
 }
-
-// const s3 = new S3({
-//   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-//   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-//   region: process.env.AWS_REGION
-// })
-
-// const uploadd = multer({
-//   storage: multerS3({
-//     s3,
-//     Bucket : process.env.AWS_BUCKET_NAME,
-//     metadata: (req,file,cb) => {
-//       cb(null, {fieldname: file.fieldname})
-//     },
-//     // Key: `newuploads/${file.originalname}`,
-//     Key: function(req,file,cb) {
-//       cb(null, 'file')
-//     }
-
-
-//   })
-// })
-
-// const uploadd = multer({
-//   storage: multerS3({
-//     s3,
-//     Bucket : process.env.AWS_BUCKET_NAME,
-//     metadata: (req,file,cb) => {
-//       cb(null, {fieldname: file.fieldname})
-//     },
-//     Key: `newuploads/${file.originalname}`,
-
-//   })
-// })
 
 const upl = multer({
   strg,
@@ -262,20 +204,6 @@ const upl = multer({
 })
 
 
-// // const newupload = multer({dest: "newuploads/"})
-// // const multi = newupload.array("file")
-// // const multi = newupload.fields([{name: "file1", maxCount: 1}, {name: "file2", maxCount:1}])
-// // router.post("/newupload",newupload.array("file"), (req,res)=> {
-// //   router.post("/newupload",upl.array("file"), async (req,res)=> {
-// //     try {
-// //       const ress = await s3Uploadv2(req.files)
-// //       console.log("ress::",ress)
-// //       res.json({status: "success"} )
-// //     } catch (error) {
-// //       console.log(error)
-// //     }
-    
-// // })
 router.put("/newupload/:id",requireLogin ,upl.array("file"), async (req,res)=> {
   postid=req.params.id
   console.log("postid", postid)
@@ -301,7 +229,6 @@ router.put("/newupload/:id",requireLogin ,upl.array("file"), async (req,res)=> {
   }
   try {
     console.log("req.files",req.files)
-    // const ress = await s3Uploadv2(req.files)
     req.files.forEach(async (file) => {
       console.log("file",file)
       if(file.mimetype.includes("image/jpeg")) folder = 'newuploads'
@@ -324,111 +251,7 @@ router.put("/newupload/:id",requireLogin ,upl.array("file"), async (req,res)=> {
         )
     })
     console.log("save to post")
-
-    // console.log("ress::",ress)
-    // console.log("ress::",ress.Location)
     res.json({status: "success"})
-
-    // const { title, description, members, member1, sec1,mobile1, member2, sec2,mobile2, member3, sec3,mobile3, member4, sec4,mobile4, member5, sec5,mobile5,  } = req.body;
-    // req.user.password = null;
-    // const post = new Post({
-    //   title,
-    //   description,
-    //   members,
-    //   member1,          
-    //   mobile1,
-    //   sec1,
-    //   member2,          
-    //   mobile2,
-    //   sec2,
-    //   member3,          
-    //   mobile3,
-    //   sec3,
-    //   member4,          
-    //   mobile4,
-    //   sec4,
-    //   member5,          
-    //   mobile5,
-    //   sec5,
-    //   // filee,
-    //   postedBy: req.user,
-    //   file_path: "",
-    //   file_mimetype: "",
-    // })
-
-    // const uplmedia = (medias, postid) => {
-    //   let folder;
-    //   medias.forEach(async (file) => {
-    //     if(file.mimetype.includes("image/jpeg")) folder = 'newuploads'
-    //     else folder = 'newuploads'
-
-    //     let filename = `newuploads/${file.originalname}`
-    //     let medialink = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${filename}`
-    //     // Post.filee.push(medialink)
-    //     console.log("medialink",medialink)
-    //     // try {
-    //       const linkk = await uploadmedia(filename, file.buffer)
-    //       console.log("linkk",linkk)
-    //       const fil = {
-    //         url: linkk
-    //       }
-    //       await Post.findByIdAndUpdate(
-    //         postid,
-    //         {
-    //           $push: {filee:fil }
-    //         }
-    //       )
-    //     // } catch (error) {
-    //       // console.log("err in upl", error)
-    //     // }
-    //   })
-    // }
-
-    // // try {
-      
-    //   // req.files.forEach(async (file) => {
-    //   //   if(file.mimetype.includes("image/jpeg")) folder = 'newuploads'
-    //   //   else folder = 'newuploads'
-
-    //   //   let filename = `newuploads/${file.originalname}`
-    //   //   let medialink = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${filename}`
-    //   //   // Post.filee.push(medialink)
-    //   //   console.log("medialink",medialink)
-    //   //   // try {
-    //   //     const linkk = await uploadmedia(filename, file.buffer)
-    //   //     console.log("linkk",linkk)
-    //   //   // } catch (error) {
-    //   //     // console.log("err in upl", error)
-    //   //   // }
-    //   // })
-    //   try {
-    //     const savepost = await post.save()
-    //     const postid = savepost._id
-    //     const medias = req.files
-    //     const uplmed = uplmedia(medias, postid)
-    //     // Post.findByIdAndUpdate(
-    //     //   fileurll,
-    //     //   {
-    //     //     $push: {filee:fileurll }
-    //     //   }
-    //     // )
-    //     console.log("save to post")
-    //     res.status(200).json("added")
-    //   } catch (error) {
-    //     console.log("err in saving to db",error)
-    //     res.status(500).json(error)
-    //   }
-    // // } catch (error) {
-    // //   console.log(error)
-    // //   res.send("errrrrr")
-    // // }
-
-
-
-    // // const ress = await s3Uploadv2(req.files)
-    // // console.log("ress::",ress)
-    // // res.json({status: "success"} )
-    // // res.json({ress})
   } catch (error) {
     console.log(error)
   }
@@ -438,11 +261,6 @@ router.put("/newupload/:id",requireLogin ,upl.array("file"), async (req,res)=> {
 router.get('/downloadfile/:id', async (req, res) => {
   try {
     const fileurl = getUrlFromBucket (AWS_BUCKET_NAME, )
-    // const file = await Post.findById(req.params.id);
-    // res.set({
-    //   'Content-Type': file.file_mimetype
-    // });
-    // res.sendFile(path.join(__dirname, '..', file.file_path));
   } catch (error) {
     res.status(400).send('Error while downloading file. Try again later.');
   }
@@ -465,22 +283,8 @@ router.get('/getfiles/:postid/:id',upl.array("file"), async (req,res) => {
   const postid = req.params.postid
   const id = req.params.id
   try {
-    // const data = await Post.findOne({_id: postid, 'filee._id': id}, 
-    // {
-    //   $set: {
-    //     'filee.url': "jgjg"
-    //   }
-    // })
-    // const data = await Post.findById({_id: postid, filee: {_id:id}})
     const data = await Post.findById({'filee._id' : id})
-    // const data = await Post.find({_id: postid}).toArray(function(err,docs) {
-    //   if (err) throw err;
-    //   console.log(docs)
-    // })
-    // const file = data.filee
-    // console.log("data",data)
-        // res.send({status:"ok"})
-        res.json(data)
+      res.json(data)
   } catch (error) {
     console.log(error)
   }
@@ -510,8 +314,6 @@ router.put("/editfiles/:postid/:id",requireLogin ,upl.single("file"), async (req
   try {
       const file = req.file
       console.log("file in route",file)
-      // if(file.mimetype.includes("image/jpeg")) folder = 'newuploads'
-      // else folder = 'newuploads'
       let filename = `newuploads/${file.originalname}`
       const orgname = file.originalname
       // let medialink = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${filename}`
@@ -670,22 +472,20 @@ router.get("/post/:id", (req, res) => {
     });
 });
 
-router.get("/editpost/:id", async (req,res) => {
-  // try {
-    // const postt  = await Post.findOne({_id: req.params._id})
-    await Post.findOne({_id: req.params._id})
-    .populate("postedBy", "_id name pic")
-    .populate("comments.postedBy", "_id name")
-    .sort("-createdAt") // - for descending order , createdAt for factor on whihc we need to sort
-    .then((postt) => {
-      res.json({ postt });
-      console.log("req.params.id:" ,req.params._id)
-      console.log("postt",postt)
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-} )
+// router.get("/editpost/:id", async (req,res) => {
+//     await Post.findOne({_id: req.params._id})
+//     .populate("postedBy", "_id name pic")
+//     .populate("comments.postedBy", "_id name")
+//     .sort("-createdAt") // - for descending order , createdAt for factor on whihc we need to sort
+//     .then((postt) => {
+//       res.json({ postt });
+//       console.log("req.params.id:" ,req.params._id)
+//       console.log("postt",postt)
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// } )
 
 router.delete("/deletepost/:postId", requireLogin, (req, res) => {
   Post.findOne({ _id: req.params.postId })
