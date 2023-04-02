@@ -34,26 +34,22 @@ router.get("/user/:id", requireLogin, (req, res) => {
 router.post("/user/sendemail", async(req, res) => {
   const { email } = req.body
   const data = await User.findOne({ email: email })
-  // console.log(data)
   const responseType = {}
 
   if(!data) {
     responseType.statusText = 'error'
     responseType.message = 'Email Id does not exist'
-    // console.log("data")
-    
   }
   else {
     let otpcode = Math.floor((Math.random()*10000)+1)
     let otpData = new Otp ({
       email: req.body.email,
       code: otpcode,
-      expireIn: new Date().getTime()+ 600*1000
+      expireIn: new Date().getTime()+ 300*1000
     })
     let otpResponse = await otpData.save()
-    // mailer(otpData.email,otpData.code)
-    mailer('yanamika419@gmail.com',otpData.code)
-    console.log("otp", otpData.code)
+    mailer(otpData.email,otpData.code)
+    // console.log("otp n email", otpData.code, otpData.email)
     responseType.statusText = 'success'
     responseType.message = 'Please check your email id'
     // console.log("no data")
@@ -64,7 +60,6 @@ router.post("/user/sendemail", async(req, res) => {
 });
 
 router.put("/user/changepassword", async (req, res) => {
-  console.log("body in route",req.body.email, req.body.otpCode)
   const data = await Otp.findOne({ email: req.body.email, code: req.body.otpCode })
   console.log("data",data)
   const setpass =async(userid,hashed) => {
@@ -78,7 +73,6 @@ router.put("/user/changepassword", async (req, res) => {
   const response = {}
   if(data) {
     const { password } =req.body
-    // const newpass = req.body.password
     var newpass;
     let currentTime = new Date().getTime()
     let diff = data.expireIn - currentTime
@@ -90,16 +84,7 @@ router.put("/user/changepassword", async (req, res) => {
       bcrypt.hash(password, 12).then((hashedPass) => {
         newpass  = hashedPass
         setpass(user._id,hashedPass)
-        // user.password = hashedPass
-        //  User.findByIdAndUpdate(
-        //   user._id, 
-        //   {
-        //     $set: {password:hashedPass}
-        //   }
-        // )
       })
-      // user.password = req.body.password
-      // user.save()
       response.message = 'Password Changed Successfully'
       response.statusText = 'success'
     }
@@ -189,11 +174,10 @@ router.put("/updatepic", requireLogin, (req, res) => {
 router.post("/search-users", (req, res) => {
   const userr = req.body.query
   User.find({ name: { $regex: new RegExp(userr, 'i') } })
-  // User.find({ name: userr })
     .select("_id name email pic")
     .then((user) => {
       res.json({ user });
-      console.log(user)
+      // console.log(user)
     })
     .catch((err) => {
       console.log(err);

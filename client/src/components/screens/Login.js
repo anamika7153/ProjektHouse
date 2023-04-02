@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import M from "materialize-css";
 import { UserContext } from "../../App";
+import { API_URL } from "../../utils/constants";
 
 function Login() {
   const { state, dispatch } = useContext(UserContext);
@@ -26,7 +27,7 @@ function Login() {
       });
       return;
     }
-    fetch("/signin", {
+    fetch(`${API_URL}/signin`, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
@@ -56,10 +57,10 @@ function Login() {
     <div className="container">
       <div style={{ marginTop: "4rem" }} className="row">
         <div className="col s8 offset-s2">
-          <Link to="/" className="btn-flat waves-effect">
+          {/* <Link to="/" className="btn-flat waves-effect">
             <i className="material-icons left">keyboard_backspace</i>
             Back to home
-          </Link>
+          </Link> */}
           <div className="col s12" style={{ paddingLeft: "11.250px" }}>
             <h4>
               <b>Login</b> below
@@ -86,7 +87,8 @@ function Login() {
                 onChange={(e) => setPassword(e.target.value)}
               />
               <label htmlFor="password">Password</label>
-              <span style={{ cursor: "pointer" }} onClick={changePass}> Forget Password ?</span>
+              <Link to='/user/sendemail'>Forgot Password ?</Link>
+              {/* <span style={{ cursor: "pointer" }} onClick={changePass}> Forgot Password ?</span> */}
             </div>
             <div className="col s12" style={{ paddingLeft: "11.250px" }}>
               <button

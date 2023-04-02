@@ -67,7 +67,7 @@ function Home() {
   }, []);
 
   const makeComment = (text, postId) => {
-    fetch("/comment", {
+    fetch(`${API_URL}/comment`, {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -196,8 +196,6 @@ function Home() {
 
       <h4>Feed</h4>
       {data?.map((item) => {
-        // console.log("item",item)
-        // console.log("data::::",data)
         return (
           <div
             className="card home-card"
@@ -432,93 +430,96 @@ function Home() {
               >
                 <input type="text" placeholder="Add comment here" />
               </form>
-
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  padding: "15px 0",
-                }}
-              >
-                <h6>
-                  <b>Upload Files</b>
-                </h6>
-                <div style={{ display: "flex" }}>
-                  {item.postedBy._id == state._id ? (
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        marginRight: "50px",
-                      }}
-                    >
-                      <Link
-                        to={`/firstterm/${item._id}`}
+              {item.postedBy._id == state._id ? (
+                <>
+                  <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    padding: "15px 0",
+                  }}
+                  >
+                  <h6>
+                    <b>Upload Files</b>
+                  </h6>
+                  <div style={{ display: "flex" }}>
+                    {item.postedBy._id == state._id ? (
+                      <div
                         style={{
                           display: "flex",
-                          alignItems: "center",
-                          paddingRight: "22px",
+                          justifyContent: "space-between",
+                          marginRight: "50px",
                         }}
                       >
-                        <i
-                          className="material-icons"
+                        <Link
+                          to={`/firstterm/${item._id}`}
                           style={{
-                            float: "right",
-                            cursor: "pointer",
-                            marginRight: "10px",
+                            display: "flex",
+                            alignItems: "center",
+                            paddingRight: "22px",
                           }}
                         >
-                          upload_file
-                        </i>
-                        <span>First Term</span>
-                      </Link>
-                      <Link
-                        to={`/secondterm/${item._id}`}
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          paddingRight: "22px",
-                        }}
-                      >
-                        <i
-                          className="material-icons"
+                          <i
+                            className="material-icons"
+                            style={{
+                              float: "right",
+                              cursor: "pointer",
+                              marginRight: "10px",
+                            }}
+                          >
+                            upload_file
+                          </i>
+                          <span>First Term</span>
+                        </Link>
+                        <Link
+                          to={`/secondterm/${item._id}`}
                           style={{
-                            float: "right",
-                            cursor: "pointer",
-                            marginRight: "10px",
+                            display: "flex",
+                            alignItems: "center",
+                            paddingRight: "22px",
                           }}
                         >
-                          upload_file
-                        </i>
-                        <span>Second Term</span>
-                      </Link>
-                      <Link
-                        to={`/thirdterm/${item._id}`}
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          paddingRight: "22px",
-                        }}
-                      >
-                        <i
-                          className="material-icons"
+                          <i
+                            className="material-icons"
+                            style={{
+                              float: "right",
+                              cursor: "pointer",
+                              marginRight: "10px",
+                            }}
+                          >
+                            upload_file
+                          </i>
+                          <span>Second Term</span>
+                        </Link>
+                        <Link
+                          to={`/thirdterm/${item._id}`}
                           style={{
-                            float: "right",
-                            cursor: "pointer",
-                            marginRight: "10px",
+                            display: "flex",
+                            alignItems: "center",
+                            paddingRight: "22px",
                           }}
                         >
-                          upload_file
-                        </i>
-                        <span>Third Term</span>
-                      </Link>
-                    </div>
-                  ) : (
-                    ""
-                  )}
+                          <i
+                            className="material-icons"
+                            style={{
+                              float: "right",
+                              cursor: "pointer",
+                              marginRight: "10px",
+                            }}
+                          >
+                            upload_file
+                          </i>
+                          <span>Third Term</span>
+                        </Link>
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                  </div>
                 </div>
-              </div>
-              <hr></hr>
+                <hr></hr>
+                </>
+              ):("")}
               <div>
                 <div
                   style={{
@@ -727,9 +728,8 @@ function Home() {
                   {item.filee.map((f) => {
                     return (
                       <h6 key={f._id}>
-                        {f.term == thirdterm &&
-                        showthird &&
-                        card == item._id ? (
+                        {f.term == thirdterm && showthird && card == item._id ? (
+                          <>
                           <div>
                             <div
                               style={{
@@ -794,6 +794,7 @@ function Home() {
                               </div>
                             </div>
                           </div>
+                          </>
                         ) : (
                           <></>
                         )}

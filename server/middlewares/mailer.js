@@ -22,10 +22,10 @@ exports.mailer = async (mail,otp) => {
         })
         
         var mailOptions ={
-            from: 'PROJEKT HOUSE ✉️ aanyayadav419@gmail.com',
+            from: 'PROJEKT HOUSE ✉️ projekt.house.ph@gmail.com',
             to: mail,
             subject: 'One Time Password (OTP) to reset your password',
-            text: `OTP to reset your password is ${otp}. This will expire in 10 minutes.\n\nThank You.`
+            text: `OTP to reset your password is ${otp}. It will expire in 5 minutes.\n\nThank You.`
         }
         
         transporter.sendMail(mailOptions, function(error, data) {

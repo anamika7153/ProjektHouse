@@ -3,6 +3,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../App";
 import { Link } from "react-router-dom";
+import { API_URL } from "../../utils/constants";
 
 function Profile() {
   const [data, setData] = useState([]);
@@ -17,7 +18,7 @@ function Profile() {
   const [secondterm, setSecondterm] = useState("second");
   const [thirdterm, setThirdterm] = useState("third");
   useEffect(() => {
-    fetch("/mypost", {
+    fetch(`${API_URL}/mypost`, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
@@ -39,7 +40,7 @@ function Profile() {
       })
         .then((response) => response.json()) // keep it in one line else use return res.json()
         .then((data) => {
-          fetch("/updatepic", {
+          fetch(`${API_URL}/updatepic`, {
             method: "put",
             headers: {
               "Content-Type": "application/json",
@@ -67,7 +68,7 @@ function Profile() {
     setImage(file);
   };
   const likePost = (id) => {
-    fetch("/like", {
+    fetch(`${API_URL}/like`, {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -90,7 +91,7 @@ function Profile() {
       });
   };
   const unlikePost = (id) => {
-    fetch("/unlike", {
+    fetch(`${API_URL}/unlike`, {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -113,7 +114,7 @@ function Profile() {
       });
   };
   const makeComment = (text, postId) => {
-    fetch("/comment", {
+    fetch(`${API_URL}/comment`, {
       method: "put",
       headers: {
         "Content-Type": "application/json",

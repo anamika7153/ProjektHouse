@@ -58,9 +58,6 @@ function PasswordForm(props) {
     return formIsValid
   }
 
-  const changePass = async () => {
-    history.push('/user/sendemail')
-  }
 
   const inputHandler = (e) => {
     setInputField({...inputField, [e.target.name]: e.target.value})
@@ -76,7 +73,6 @@ function PasswordForm(props) {
             let options = {
                 method: 'PUT',
                 url:url,
-                // data: {email: emailRef.current.value}
                 data: inputField
             }
             let response = await axios(options)
@@ -84,58 +80,18 @@ function PasswordForm(props) {
             console.log(record)
             if(record.statusText == 'success') {
               M.toast({ html: "Password Changed Successfully", classes: " green" });
+              history.push('/login')
             }
             else {
                 console.log(record.message)
               M.toast({ html: record.message, classes: "#c62828 red darken-3" });
-    
             }
         } catch (error) {
             console.log(error)
-            
         }
-
     } else {
         M.toast({ html: 'Form is Invalid', classes: "#c62828 red darken-3" });
     }
-
-
-    // if (
-    //   !/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-    //     email
-    //   )
-    // ) {
-    //   M.toast({
-    //     html: "Invalid Email address",
-    //     classes: "c62828 red darken-3",
-    //   });
-    //   return;
-    // }
-    // fetch("/signin", {
-    //   method: "post",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     email,
-    //     password,
-    //   }),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     if (data.error) {
-    //       M.toast({ html: data.error, classes: "#c62828 red darken-3" });
-    //     } else {
-    //       localStorage.setItem("jwt", data.token);
-    //       localStorage.setItem("user", JSON.stringify(data.user));
-    //       dispatch({ type: "USER", payload: data.user });
-    //       M.toast({ html: "Signed In Successfully", classes: " green" });
-    //       history.push("/");
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
   };
   return (
     // <div className="container">
@@ -153,7 +109,6 @@ function PasswordForm(props) {
                 name = "otpCode"
               />
               <label htmlFor="otpCode">Enter OTP</label>
-              {/* {errField.otpCodeErr.length>0 && <span>{errField.otpCode}</span>} */}
             </div>
             <div className="input-field col s12">
               <input
@@ -164,7 +119,6 @@ function PasswordForm(props) {
                 name = "password"
               />
               <label htmlFor="password">New Password</label>
-              {/* {errField.passwordErr.length>0 && <span>{errField.passwordErr}</span>} */}
 
             </div>
             <div className="input-field col s12">
@@ -176,7 +130,6 @@ function PasswordForm(props) {
                 name = "cpassword"
               />
               <label htmlFor="cpassword">Confirm Password</label>
-              {/* {errField.cpasswordErr.length>0 && <span>{errField.cpasswordErr}</span>} */}
 
             </div>
             <div className="col s12" style={{ paddingLeft: "11.250px" }}>

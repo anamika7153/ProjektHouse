@@ -15,7 +15,6 @@ import { UserContext } from "../../App";
 import { API_URL } from "../../utils/constants";
 import axios from "axios";
 import PasswordForm from "./PasswordForm";
-// import {  toast } from 'react-toastify'
 
 function Login() {
 const emailRef = useRef()
@@ -24,11 +23,6 @@ const [otpForm, showForm] = useState(true)
   const history = useHistory();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-//   const [otpform, setOtpform] = useState(true);
-
-  const changePass = async () => {
-    history.push('/user/changepassword')
-  }
 
   const sendotp = async () => {
     try {
@@ -86,7 +80,6 @@ const [otpForm, showForm] = useState(true)
                 id="email"
                 type="email"
                 name="email"
-                // value={email}
                 ref={emailRef}
                 // onChange={(e) => setEmail(e.target.value)}
               />

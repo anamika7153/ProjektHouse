@@ -5,21 +5,16 @@ const express = require("express");
 // const bodyParser = require("body-parser");
 const cors = require('cors');
 require('./db/db');
-
+const path = require("path")
 const app = express();
 const mongoose = require("mongoose");
 
-const PORT = process.env.PORT || 6010;
+const PORT = process.env.PORT || 5000;
 
 require("./models/user");
 require("./models/post");
 require("./models/file");
 require("./models/otp");
-// const fileRoute = require('./routes/file');
-
-// require("./models/register");
-
-// const teams = require("./models/register")
 
 app.use(express.json());
 app.use(cors());
@@ -29,15 +24,18 @@ app.use(require("./routes/auth"));
 app.use(require("./routes/post"));
 app.use(require("./routes/user"));
 app.use(require("./routes/file"));
-// app.use(require("./routes/media"));
-// app.use(fileRoute);
-// app.use(require("./routes/team"));
 
 // app.use(bodyParser.json())
 app.use(express.urlencoded({extended:true}))
 // app.use(bodyParser.urlencoded({extended:true}))
 
+// if(process.env.NODE_ENV === 'production') {
+//   app.use(express.static("client/build"))
 
+//   app.get("*", (req,res) => {
+//     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
+//   })
+// }
 
 
 // if (process.env.NODE_ENV == "production") {

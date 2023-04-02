@@ -69,7 +69,7 @@ const Routing = () => {
       <Route path="/thirdterm/:id">
         <ThirdTermFiles />
       </Route>
-      <Route path="/myFollowersPosts">
+      <Route path="/myTeams">
         <SubsPosts />
       </Route>
     </Switch>

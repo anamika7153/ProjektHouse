@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import M from "materialize-css";
 
 import { UserContext } from "../App";
+import { API_URL } from "../utils/constants";
 const Navbar = () => {
   const searchModal = useRef(null);
   const history = useHistory();
@@ -34,7 +35,7 @@ const Navbar = () => {
           <Link to="/profile">Profile</Link>
         </li>,
         <li key="4">
-          <Link to="/myFollowersPosts">Feed</Link>
+          <Link to="/myTeams">My Teams</Link>
         </li>,
         <li key="5">
           <button
@@ -66,7 +67,7 @@ const Navbar = () => {
     setSearch(query);
     console.log("query",query)
     if (query.length > 0) {
-      fetch("/search-users", {
+      fetch(`${API_URL}/search-users`, {
         method: "post",
         headers: {
           "Content-Type": "application/json",

@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { UserContext } from "../../App";
 import { Link } from "react-router-dom";
+import { API_URL } from "../../utils/constants";
 
 function UserProfile() {
   const [userProfile, setUserProfile] = useState(null);
@@ -25,7 +26,7 @@ function UserProfile() {
   }, []);
 
   const followUser = () => {
-    fetch("/follow", {
+    fetch(`${API_URL}/follow`, {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -56,7 +57,7 @@ function UserProfile() {
   };
 
   const unfollowUser = () => {
-    fetch("/unfollow", {
+    fetch(`${API_URL}/unfollow`, {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -89,7 +90,7 @@ function UserProfile() {
       });
   };
   const likePost = (id) => {
-    fetch("/like", {
+    fetch(`${API_URL}/like`, {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -112,7 +113,7 @@ function UserProfile() {
       });
   };
   const unlikePost = (id) => {
-    fetch("/unlike", {
+    fetch(`${API_URL}/unlike`, {
       method: "put",
       headers: {
         "Content-Type": "application/json",
