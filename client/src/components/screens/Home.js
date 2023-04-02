@@ -92,7 +92,7 @@ function Home() {
   };
 
   const deletePost = (postId) => {
-    fetch(`/deletepost/${postId}`, {
+    fetch(`${API_URL}/deletepost/${postId}`, {
       method: "delete",
       headers: {
         "Content-Type": "application/json",
@@ -111,7 +111,7 @@ function Home() {
       });
   };
   const deleteComment = (postId, commentId) => {
-    fetch(`/deletecomment/${postId}/${commentId}`, {
+    fetch(`${API_URL}/deletecomment/${postId}/${commentId}`, {
       method: "delete",
       headers: {
         "Content-Type": "application/json",
@@ -132,7 +132,7 @@ function Home() {
   };
 
   const deleteFile = (postId, fileid) => {
-    fetch(`/deletefile/${postId}/${fileid}`, {
+    fetch(`${API_URL}/deletefile/${postId}/${fileid}`, {
       method: "delete",
       headers: {
         "Content-Type": "application/json",

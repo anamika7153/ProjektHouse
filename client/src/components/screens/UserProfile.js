@@ -12,7 +12,7 @@ function UserProfile() {
   const { state, dispatch } = useContext(UserContext);
   const { userId } = useParams();
   useEffect(() => {
-    fetch(`/user/${userId}`, {
+    fetch(`${API_URL}/user/${userId}`, {
       headers: {
         Authorization: "Bearer " + localStorage.getItem("jwt"),
       },
@@ -136,7 +136,7 @@ function UserProfile() {
       });
   };
   const makeComment = (text, postId) => {
-    fetch("/comment", {
+    fetch(`${API_URL}/comment`, {
       method: "put",
       headers: {
         "Content-Type": "application/json",
@@ -160,7 +160,7 @@ function UserProfile() {
       });
   };
   const deletePost = (postId) => {
-    fetch(`/deletepost/${postId}`, {
+    fetch(`${API_URL}/deletepost/${postId}`, {
       method: "delete",
       headers: {
         "Content-Type": "application/json",
@@ -179,7 +179,7 @@ function UserProfile() {
       });
   };
   const deleteComment = (postId, commentId) => {
-    fetch(`/deletecomment/${postId}/${commentId}`, {
+    fetch(`${API_URL}/deletecomment/${postId}/${commentId}`, {
       method: "delete",
       headers: {
         "Content-Type": "application/json",

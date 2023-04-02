@@ -63,7 +63,7 @@ function SubsPosts() {
   };
 
   const deleteComment = (postId, commentId) => {
-    fetch(`/deletecomment/${postId}/${commentId}`, {
+    fetch(`${API_URL}/deletecomment/${postId}/${commentId}`, {
       method: "delete",
       headers: {
         "Content-Type": "application/json",

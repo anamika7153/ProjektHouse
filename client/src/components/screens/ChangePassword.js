@@ -26,7 +26,7 @@ const [otpForm, showForm] = useState(true)
 
   const sendotp = async () => {
     try {
-        let url = 'http://localhost:5000/user/sendemail'
+        let url = 'https://projekt-house-backend.vercel.app/user/sendemail'
         let options = {
             method: 'POST',
             url:url,
