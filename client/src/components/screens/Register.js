@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Axios from "axios";
 import M from "materialize-css";
+import { API_URL } from "../../utils/constants";
 
 function Register() {
   const history = useHistory();
@@ -44,7 +45,7 @@ function Register() {
       });
       return;
     }
-    Axios.post("/signup", {
+    Axios.post(`${API_URL}/signup`, {
       name,
       email,
       password,
