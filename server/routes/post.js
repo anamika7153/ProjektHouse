@@ -63,11 +63,13 @@ router.post(`/createteam`, requireLogin, upload.array('file'), async(req, res) =
       })
     })
 }
-const { title, description, members, member1, sec1,mobile1, member2, sec2,mobile2, member3, sec3,mobile3, member4, sec4,mobile4, member5, sec5,mobile5,  } = req.body;
+const { title, description, members, member1, sec1,mobile1, member2, sec2,mobile2, member3, sec3,mobile3, member4, sec4,mobile4, member5, sec5,mobile5, projectlink  } = req.body;
+
   try {
     if (!title || !description) {
     return res.status(422).json({ error: "Please fill in all the fields" });
   }
+  // console.log("req.body",req.body)
   req.user.password = null;
   const post = new Post({
           title,
@@ -88,8 +90,13 @@ const { title, description, members, member1, sec1,mobile1, member2, sec2,mobile
           member5,          
           mobile5,
           sec5,
+          projectlink,
           postedBy: req.user,
   })
+  // post.save()
+  //   res.status(200).json("Saved to db")
+
+  // console.log("post",post)
   try {
     const savepost = await post.save()
     const postid = savepost._id

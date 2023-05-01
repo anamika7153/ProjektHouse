@@ -10,10 +10,6 @@ function Login() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
 
-  const changePass = async () => {
-    history.push('/user/sendemail')
-  }
-
   const PostData = (e) => {
     e.preventDefault();
     if (

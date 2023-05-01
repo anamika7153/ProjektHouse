@@ -23,19 +23,18 @@ function SubsPosts() {
     })
       .then((res) => res.json())
       .then((result) => {
-        setIsempty(result.posts)
+        setIsempty(result.posts);
         setData(result.posts);
-        setOne("1")
-        setTwo("2")
-        setThree("3")
-        setFour("4")
-        setFive("5")
-        setFirstterm("first")
-        setSecondterm("second")
-        setThirdterm("third")
+        setOne("1");
+        setTwo("2");
+        setThree("3");
+        setFour("4");
+        setFive("5");
+        setFirstterm("first");
+        setSecondterm("second");
+        setThirdterm("third");
       });
   }, []);
-
 
   const makeComment = (text, postId) => {
     fetch(`${API_URL}/comment`, {
@@ -84,9 +83,13 @@ function SubsPosts() {
   };
   return (
     <div className="home container">
-      <div style={{ marginTop: "4rem",  }} className="row">
-      <div className="col s10 " style={{paddingLeft: "0"}}>
-          <Link to="/" className="btn-flat waves-effect" style={{paddingLeft: "0"}}>
+      <div style={{ marginTop: "4rem" }} className="row">
+        <div className="col s10 " style={{ paddingLeft: "0" }}>
+          <Link
+            to="/"
+            className="btn-flat waves-effect"
+            style={{ paddingLeft: "0" }}
+          >
             <i className="material-icons left">keyboard_backspace</i>
             Back to home
           </Link>
@@ -148,17 +151,16 @@ function SubsPosts() {
 
                     {item.members == one ? (
                       <>
-                      <tbody>
-                        <tr key={item._id}>
-                          <td>{item.member1}</td>
-                          <td>{item.sec1}</td>
-                          <td>{item.mobile1}</td>
-                        </tr>
-                      </tbody>
+                        <tbody>
+                          <tr key={item._id}>
+                            <td>{item.member1}</td>
+                            <td>{item.sec1}</td>
+                            <td>{item.mobile1}</td>
+                          </tr>
+                        </tbody>
                       </>
-                    ) : (
-                      item.members == two ? (
-                        <>
+                    ) : item.members == two ? (
+                      <>
                         <tbody>
                           <tr key={item._id}>
                             <td>{item.member1}</td>
@@ -171,91 +173,107 @@ function SubsPosts() {
                             <td>{item.mobile2}</td>
                           </tr>
                         </tbody>
-                        </>
-                      ) : (
-                        item.members == three ? (
-                          <>
-                              <tbody>
-                                <tr key={item._id}>
-                                  <td>{item.member1}</td>
-                                  <td>{item.sec1}</td>
-                                  <td>{item.mobile1}</td>
-                                </tr>
-                                <tr key={item._id}>
-                                  <td>{item.member2}</td>
-                                  <td>{item.sec2}</td>
-                                  <td>{item.mobile2}</td>
-                                </tr>
-                                <tr key={item._id}>
-                                    <td>{item.member3}</td>
-                                    <td>{item.sec3}</td>
-                                    <td>{item.mobile3}</td>
-                                  </tr>
-                              </tbody>
-                            </>
-                        ) : (
-                          item.members == four ? (
-                            <>
-                                <tbody>
-                                  <tr key={item._id}>
-                                    <td>{item.member1}</td>
-                                    <td>{item.sec1}</td>
-                                    <td>{item.mobile1}</td>
-                                  </tr>
-                                  <tr key={item._id}>
-                                    <td>{item.member2}</td>
-                                    <td>{item.sec2}</td>
-                                    <td>{item.mobile2}</td>
-                                  </tr>
-                                  <tr key={item._id}>
-                                    <td>{item.member2}</td>
-                                    <td>{item.sec2}</td>
-                                    <td>{item.mobile2}</td>
-                                  </tr>
-                                  <tr key={item._id}>
-                                    <td>{item.member4}</td>
-                                    <td>{item.sec4}</td>
-                                    <td>{item.mobile4}</td>
-                                  </tr>
-                                </tbody>
-                              </>
-                          ) : (
-                            item.members == five ? (
-                              <>
-                                  <tbody>
-                                    <tr key={item._id}>
-                                      <td>{item.member1}</td>
-                                      <td>{item.sec1}</td>
-                                      <td>{item.mobile1}</td>
-                                    </tr>
-                                    <tr key={item._id}>
-                                      <td>{item.member2}</td>
-                                      <td>{item.sec2}</td>
-                                      <td>{item.mobile2}</td>
-                                    </tr>
-                                    <tr key={item._id}>
-                                      <td>{item.member3}</td>
-                                      <td>{item.sec3}</td>
-                                      <td>{item.mobile3}</td>
-                                    </tr>
-                                    <tr key={item._id}>
-                                      <td>{item.member4}</td>
-                                      <td>{item.sec4}</td>
-                                      <td>{item.mobile4}</td>
-                                    </tr>
-                                    <tr key={item._id}>
-                                      <td>{item.member5}</td>
-                                      <td>{item.sec5}</td>
-                                      <td>{item.mobile5}</td>
-                                    </tr>
-                                  </tbody>
-                                  </>
-                            ) : (<></>)
-                          )
-                        )
-                      )
+                      </>
+                    ) : item.members == three ? (
+                      <>
+                        <tbody>
+                          <tr key={item._id}>
+                            <td>{item.member1}</td>
+                            <td>{item.sec1}</td>
+                            <td>{item.mobile1}</td>
+                          </tr>
+                          <tr key={item._id}>
+                            <td>{item.member2}</td>
+                            <td>{item.sec2}</td>
+                            <td>{item.mobile2}</td>
+                          </tr>
+                          <tr key={item._id}>
+                            <td>{item.member3}</td>
+                            <td>{item.sec3}</td>
+                            <td>{item.mobile3}</td>
+                          </tr>
+                        </tbody>
+                      </>
+                    ) : item.members == four ? (
+                      <>
+                        <tbody>
+                          <tr key={item._id}>
+                            <td>{item.member1}</td>
+                            <td>{item.sec1}</td>
+                            <td>{item.mobile1}</td>
+                          </tr>
+                          <tr key={item._id}>
+                            <td>{item.member2}</td>
+                            <td>{item.sec2}</td>
+                            <td>{item.mobile2}</td>
+                          </tr>
+                          <tr key={item._id}>
+                            <td>{item.member2}</td>
+                            <td>{item.sec2}</td>
+                            <td>{item.mobile2}</td>
+                          </tr>
+                          <tr key={item._id}>
+                            <td>{item.member4}</td>
+                            <td>{item.sec4}</td>
+                            <td>{item.mobile4}</td>
+                          </tr>
+                        </tbody>
+                      </>
+                    ) : item.members == five ? (
+                      <>
+                        <tbody>
+                          <tr key={item._id}>
+                            <td>{item.member1}</td>
+                            <td>{item.sec1}</td>
+                            <td>{item.mobile1}</td>
+                          </tr>
+                          <tr key={item._id}>
+                            <td>{item.member2}</td>
+                            <td>{item.sec2}</td>
+                            <td>{item.mobile2}</td>
+                          </tr>
+                          <tr key={item._id}>
+                            <td>{item.member3}</td>
+                            <td>{item.sec3}</td>
+                            <td>{item.mobile3}</td>
+                          </tr>
+                          <tr key={item._id}>
+                            <td>{item.member4}</td>
+                            <td>{item.sec4}</td>
+                            <td>{item.mobile4}</td>
+                          </tr>
+                          <tr key={item._id}>
+                            <td>{item.member5}</td>
+                            <td>{item.sec5}</td>
+                            <td>{item.mobile5}</td>
+                          </tr>
+                        </tbody>
+                      </>
+                    ) : (
+                      <></>
                     )}
                   </table>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      justifyContent: "space-between",
+                      padding: "20px 0",
+                    }}
+                  >
+                    <b>Project Link</b>
+                    <a
+                      style={{ width: "90%" }}
+                      href={item.projectlink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <span>
+                        {item.projectlink ? <>{item.projectlink}</> : <></>}
+                      </span>
+                    </a>
+                  </div>
+                  <hr />
                   <b>
                     <h6 style={{ fontWeight: "900" }}>
                       <u>Comments</u>
@@ -274,7 +292,9 @@ function SubsPosts() {
                           <i
                             className="material-icons"
                             style={{ float: "right", cursor: "pointer" }}
-                            onClick={(e) => deleteComment(item._id, comment._id)}
+                            onClick={(e) =>
+                              deleteComment(item._id, comment._id)
+                            }
                           >
                             delete
                           </i>
@@ -291,154 +311,239 @@ function SubsPosts() {
                     <input type="text" placeholder="Add comment here" />
                   </form>
 
-                  <h6><span>First Term Files</span></h6>
+                  <h6>
+                    <span>First Term Files</span>
+                  </h6>
                   {item.filee.map((f) => {
-                        return (
-                          <h6 key={f._id}>
-                            {(f.term == firstterm ) ? (
-                              <div>
-                                <div style={{display: "flex", justifyContent: "space-between"}}>
-                                  <a href={f.url} target="_blank" rel="noopener noreferrer" download>
-                                  <div style={{display: "flex"}}>
-                                        <span>{f.filenamee}</span>
-                                        <i className="material-icons" style={{ cursor: "pointer", paddingLeft: "10px"}} >file_download</i> 
-                                    </div>
-                                  </a>
-                                  <div>
-                                  {item.postedBy._id == state._id ? (
-                                      <>
-                                        <Link to={`/editfiles/${item._id}/${f._id}`} >
-                                          <i
-                                          className="material-icons"
-                                          style={{ float: "right", cursor: "pointer",marginRight: "10px",  paddingLeft: "20px" }}
-                                          >
-                                          edit 
-                                          </i>
-                                        </Link>
-                                        <i
-                                          className="material-icons"
-                                          style={{ float: "right", cursor: "pointer", }}
-                                          // onClick={(e) => deleteFile(item._id, f._id)}
-                                        >
-                                          delete
-                                        </i>
-                                      </>
-                                    ) : 
-                                    ("")}
-                                  </div>
-
+                    return (
+                      <h6 key={f._id}>
+                        {f.term == firstterm ? (
+                          <div>
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                              <a
+                                href={f.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                download
+                              >
+                                <div style={{ display: "flex" }}>
+                                  <span>{f.filenamee}</span>
+                                  <i
+                                    className="material-icons"
+                                    style={{
+                                      cursor: "pointer",
+                                      paddingLeft: "10px",
+                                    }}
+                                  >
+                                    file_download
+                                  </i>
                                 </div>
-
-                              </div>
-                            ) : (
-                              <></>
-                            )
-                          }
-                          </h6>
-                        )
-                      })}
-
-                      <h6><span>Second Term Files</span></h6>
-                      {item.filee.map((f) => {
-                        return (
-                          <h6 key={f._id}>
-                            {(f.term == secondterm ) ? (
+                              </a>
                               <div>
-                                <div style={{display: "flex", justifyContent: "space-between"}}>
-                                  <a href={f.url} target="_blank" rel="noopener noreferrer" download>
-                                    <div style={{display: "flex"}}>
-                                        <span>{f.filenamee}</span>
-                                        <i className="material-icons" style={{ cursor: "pointer", paddingLeft: "10px"}} >file_download</i> 
-                                    </div>
-                                  </a>
-                                  <div>
-                                    {item.postedBy._id == state._id ? (
-                                      <>
-                                        <Link to={`/editfiles/${item._id}/${f._id}`} >
-                                          <i
-                                          className="material-icons"
-                                          style={{ float: "right", cursor: "pointer",marginRight: "10px",  paddingLeft: "20px" }}
-                                          >
-                                          edit 
-                                          </i>
-                                        </Link>
-                                        <i
-                                          className="material-icons"
-                                          style={{ float: "right", cursor: "pointer", }}
-                                        >
-                                          delete
-                                        </i>
-                                      </>
-                                    ) : 
-                                    ("")}
-                                  </div>
-
-                                </div>
-
+                                {item.postedBy._id == state._id ? (
+                                  <>
+                                    <Link
+                                      to={`/editfiles/${item._id}/${f._id}`}
+                                    >
+                                      <i
+                                        className="material-icons"
+                                        style={{
+                                          float: "right",
+                                          cursor: "pointer",
+                                          marginRight: "10px",
+                                          paddingLeft: "20px",
+                                        }}
+                                      >
+                                        edit
+                                      </i>
+                                    </Link>
+                                    <i
+                                      className="material-icons"
+                                      style={{
+                                        float: "right",
+                                        cursor: "pointer",
+                                      }}
+                                      // onClick={(e) => deleteFile(item._id, f._id)}
+                                    >
+                                      delete
+                                    </i>
+                                  </>
+                                ) : (
+                                  ""
+                                )}
                               </div>
-                            ) : (
-                              <></>
-                            )
-                          }
-                          </h6>
-                        )
-                      })}
-                      
-                      <h6><span>Third Term Files</span></h6>
-                      {item.filee.map((f) => {
-                        return (
-                          <h6 key={f._id}>
-                            {(f.term == thirdterm ) ? (
+                            </div>
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                      </h6>
+                    );
+                  })}
+
+                  <h6>
+                    <span>Second Term Files</span>
+                  </h6>
+                  {item.filee.map((f) => {
+                    return (
+                      <h6 key={f._id}>
+                        {f.term == secondterm ? (
+                          <div>
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                              <a
+                                href={f.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                download
+                              >
+                                <div style={{ display: "flex" }}>
+                                  <span>{f.filenamee}</span>
+                                  <i
+                                    className="material-icons"
+                                    style={{
+                                      cursor: "pointer",
+                                      paddingLeft: "10px",
+                                    }}
+                                  >
+                                    file_download
+                                  </i>
+                                </div>
+                              </a>
                               <div>
-                                <div style={{display: "flex", justifyContent: "space-between"}}>
-                                  <a href={f.url} target="_blank" rel="noopener noreferrer" download>
-                                    <div style={{display: "flex"}}>
-                                        <span>{f.filenamee}</span>
-                                        <i className="material-icons" style={{ cursor: "pointer", paddingLeft: "10px"}} >file_download</i> 
-                                    </div>
-                                  </a>
-                                  <div>
-                                  {item.postedBy._id == state._id ? (
-                                      <>
-                                        <Link to={`/editfiles/${item._id}/${f._id}`} >
-                                          <i
-                                          className="material-icons"
-                                          style={{ float: "right", cursor: "pointer",marginRight: "10px",  paddingLeft: "20px" }}
-                                          >
-                                          edit 
-                                          </i>
-                                        </Link>
-                                        <i
-                                          className="material-icons"
-                                          style={{ float: "right", cursor: "pointer", }}
-                                          // onClick={(e) => deleteFile(item._id, f._id)}
-                                        >
-                                          delete
-                                        </i>
-                                      </>
-                                    ) : 
-                                    ("")}
-                                  </div>
-
-                                </div>
-
+                                {item.postedBy._id == state._id ? (
+                                  <>
+                                    <Link
+                                      to={`/editfiles/${item._id}/${f._id}`}
+                                    >
+                                      <i
+                                        className="material-icons"
+                                        style={{
+                                          float: "right",
+                                          cursor: "pointer",
+                                          marginRight: "10px",
+                                          paddingLeft: "20px",
+                                        }}
+                                      >
+                                        edit
+                                      </i>
+                                    </Link>
+                                    <i
+                                      className="material-icons"
+                                      style={{
+                                        float: "right",
+                                        cursor: "pointer",
+                                      }}
+                                    >
+                                      delete
+                                    </i>
+                                  </>
+                                ) : (
+                                  ""
+                                )}
                               </div>
-                            ) : (
-                              <></>
-                            )
-                          }
-                          </h6>
-                        )
-                      })}
+                            </div>
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                      </h6>
+                    );
+                  })}
+
+                  <h6>
+                    <span>Third Term Files</span>
+                  </h6>
+                  {item.filee.map((f) => {
+                    return (
+                      <h6 key={f._id}>
+                        {f.term == thirdterm ? (
+                          <div>
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                              }}
+                            >
+                              <a
+                                href={f.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                download
+                              >
+                                <div style={{ display: "flex" }}>
+                                  <span>{f.filenamee}</span>
+                                  <i
+                                    className="material-icons"
+                                    style={{
+                                      cursor: "pointer",
+                                      paddingLeft: "10px",
+                                    }}
+                                  >
+                                    file_download
+                                  </i>
+                                </div>
+                              </a>
+                              <div>
+                                {item.postedBy._id == state._id ? (
+                                  <>
+                                    <Link
+                                      to={`/editfiles/${item._id}/${f._id}`}
+                                    >
+                                      <i
+                                        className="material-icons"
+                                        style={{
+                                          float: "right",
+                                          cursor: "pointer",
+                                          marginRight: "10px",
+                                          paddingLeft: "20px",
+                                        }}
+                                      >
+                                        edit
+                                      </i>
+                                    </Link>
+                                    <i
+                                      className="material-icons"
+                                      style={{
+                                        float: "right",
+                                        cursor: "pointer",
+                                      }}
+                                      // onClick={(e) => deleteFile(item._id, f._id)}
+                                    >
+                                      delete
+                                    </i>
+                                  </>
+                                ) : (
+                                  ""
+                                )}
+                              </div>
+                            </div>
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                      </h6>
+                    );
+                  })}
                 </div>
               </div>
             );
           })}
         </>
       ) : (
-        <><h1>No teams' data? Follow a team to display data.</h1></>
+        <>
+          <h1>No teams' data? Follow a team to display data.</h1>
+        </>
       )}
-      
     </div>
   );
 }
