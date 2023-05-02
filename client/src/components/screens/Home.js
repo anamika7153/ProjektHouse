@@ -1,9 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import download from "downloadjs";
 import { API_URL } from "../../utils/constants";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { UserContext } from "../../App";
-import axios from "axios";
 
 function Home() {
   const [data, setData] = useState([]);
@@ -61,7 +59,6 @@ function Home() {
     })
       .then((res) => res.json())
       .then((result) => {
-        // console.log(result.users);
         setCreators(result.users);
       });
   }, []);
@@ -194,6 +191,8 @@ function Home() {
                     className="card-title"
                     style={{
                       textAlign: "center",
+                      display: "flex",
+                      justifyContent: "center",
                       paddingTop: "10px",
                       color: "black",
                       fontSize: "18px",
@@ -410,27 +409,75 @@ function Home() {
               </table>
             </div>
             <div className="card-content">
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  padding: "15px 0",
-                }}
-              >
-                <b>Project Link</b>
-                <a
-                  style={{ width: "90%" }}
-                  href={item.projectlink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span>
-                    {item.projectlink ? <>{item.projectlink}</> : <></>}
-                  </span>
-                </a>
-              </div>
-              <hr />
+              {item.projectlink ? (
+                <>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                      padding: "15px 0",
+                    }}
+                  >
+                    {/* <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        paddingBottom: "10px",
+                      }}
+                    > */}
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "space-between",
+                            paddingBottom: "10px",
+                          }}
+                        >
+                          <b>Project Link</b>
+                          <a
+                            style={{ width: "70%" }}
+                            href={item.projectlink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <span>
+                              {item.projectlink}
+                            </span>
+                          </a>
+                        </div>
+                    {/* </div> */}
+                    {/* <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        paddingBottom: "10px",
+                      }}
+                    > */}
+                      {/* {item.githublink ? (
+                        <>
+                          <b>Github Link</b>
+                          <a
+                            style={{ width: "90%" }}
+                            href={item.githublink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <span>{item.githublink}</span>
+                          </a>
+                        </>
+                      ) : (
+                        <></>
+                      )} */}
+                    {/* </div> */}
+                  </div>
+                  <hr />
+                </>
+              ):(
+                <></>
+              )}
               <b>
                 <h6 style={{ fontWeight: "900" }}>
                   <u>Comments</u>

@@ -1,7 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import Dropzone from "react-dropzone";
-// import { useDropzone } from "react-dropzone";
 import axios from "axios";
 import { API_URL } from "./../../utils/constants";
 import { Form, Row, Col, Button, Container } from "react-bootstrap";
@@ -10,13 +8,8 @@ import M from "materialize-css";
 function CreatePost() {
   const history = useHistory();
 
-  const [file, setFile] = useState([]); // state for storing actual image
-  const [filesecond, setFilesecond] = useState([]);
-  const [filethird, setFilethird] = useState([]);
-  const [previewSrc, setPreviewSrc] = useState("");
   const [state, setState] = useState({
     title: "",
-    // image: "",
     description: "",
     members: "",
     member1: "",
@@ -35,68 +28,16 @@ function CreatePost() {
     sec5: "",
     mobile5: "",
     projectlink: "",
+    // githublink: "",
   });
 
   const [errorMsg, setErrorMsg] = useState("");
-  const [isPreviewAvailable, setIsPreviewAvailable] = useState(false); // state to show preview only for images
-  const dropRef = useRef();
 
   const handleInputChange = (event) => {
     setState({
       ...state,
       [event.target.name]: event.target.value,
     });
-  };
-
-  const onDrop = (files) => {
-    console.log("filesss first term", files);
-    const [uploadedFile] = files;
-    setFile(files);
-    files.forEach((file) => {
-      const fileReader = new FileReader();
-      fileReader.onload = () => {
-        setPreviewSrc(fileReader.result);
-      };
-      fileReader.readAsDataURL(uploadedFile);
-      setIsPreviewAvailable(uploadedFile.name.match(/\.(jpeg|jpg|png)$/));
-      dropRef.current.style.border = "2px dashed #e9ebeb";
-    });
-  };
-  const onDropSecond = (files) => {
-    console.log("filesss second term", files);
-    const [uploadedFile] = files;
-    setFilesecond(files);
-    files.forEach((file) => {
-      const fileReader = new FileReader();
-      fileReader.onload = () => {
-        setPreviewSrc(fileReader.result);
-      };
-      fileReader.readAsDataURL(uploadedFile);
-      setIsPreviewAvailable(uploadedFile.name.match(/\.(jpeg|jpg|png)$/));
-      dropRef.current.style.border = "2px dashed #e9ebeb";
-    });
-  };
-  const onDropThird = (files) => {
-    console.log("filesss third term", files);
-    const [uploadedFile] = files;
-    setFilethird(files);
-    files.forEach((file) => {
-      const fileReader = new FileReader();
-      fileReader.onload = () => {
-        setPreviewSrc(fileReader.result);
-      };
-      fileReader.readAsDataURL(uploadedFile);
-      setIsPreviewAvailable(uploadedFile.name.match(/\.(jpeg|jpg|png)$/));
-      dropRef.current.style.border = "2px dashed #e9ebeb";
-    });
-  };
-
-  const updateBorder = (dragState) => {
-    if (dragState === "over") {
-      dropRef.current.style.border = "2px solid #000";
-    } else if (dragState === "leave") {
-      dropRef.current.style.border = "2px dashed #e9ebeb";
-    }
   };
 
   const handleOnSubmit = async (event) => {
@@ -122,13 +63,11 @@ function CreatePost() {
         sec5,
         mobile5,
         projectlink,
+        // githublink,
       } = state;
 
       if (title && description && members && member1 && sec1) {
         const formData = new FormData();
-        // file.forEach(file => formData.append('file',file))
-        // filesecond.forEach(file => formData.append('filesecond',file))
-        // filethird.forEach(file => formData.append('filethird',file))
         formData.append("title", title);
         formData.append("description", description);
         formData.append("members", members);
@@ -148,6 +87,7 @@ function CreatePost() {
         formData.append("mobile5", mobile5);
         formData.append("sec5", sec5);
         formData.append("projectlink", projectlink);
+        // formData.append("githublink", githublink);
         setErrorMsg("");
         await axios.post(`${API_URL}/createteam`, formData, {
           headers: {
@@ -156,6 +96,7 @@ function CreatePost() {
           },
         });
         M.toast({ html: "Team created Successfully", classes: " green" });
+        // console.log("formdata",githublink)
         history.push("/");
       } else {
         setErrorMsg("Please enter all the field values.");
@@ -406,6 +347,17 @@ function CreatePost() {
                   />
                 </Form.Group>
               </Col>
+              {/* <Col style={{ width: "50%" }}>
+                <Form.Group controlId="githublink">
+                  <Form.Control
+                    type="url"
+                    name="githublink"
+                    value={state.githublink || ""}
+                    placeholder="Enter github link"
+                    onChange={handleInputChange}
+                  />
+                </Form.Group>
+              </Col> */}
             </Row>
             <div className="col s12" style={{ paddingLeft: "11.250px" }}>
               <button

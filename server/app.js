@@ -27,31 +27,6 @@ app.use(require("./routes/file"));
 
 // app.use(bodyParser.json())
 app.use(express.urlencoded({extended:true}))
-// app.use(bodyParser.urlencoded({extended:true}))
-
-// if(process.env.NODE_ENV === 'production') {
-//   app.use(express.static("client/build"))
-
-//   app.get("*", (req,res) => {
-//     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
-//   })
-// }
-
-
-// if (process.env.NODE_ENV == "production") {
-//   //for heroku deployment
-//   app.use(express.static("client/build"));
-//   const path = require("path");
-//   app.get("*", (req, res) => {
-//     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-//   });
-// }
-// ,
-//     "heroku-postbuild":"NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
-
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
-// });
 
 app.listen(PORT, () => {
   console.log(`Server Running on ${PORT}`);

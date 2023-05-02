@@ -96,6 +96,10 @@ const postSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
+    // githublink: {
+    //   type: String,
+    //   required: false,
+    // },
     file_path: {
       type: String,
       required: false,
