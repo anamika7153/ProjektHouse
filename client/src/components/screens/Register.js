@@ -114,7 +114,7 @@ function Register() {
               />
               <label htmlFor="password">Password</label>
             </div>
-            <div className="input-field col s12">
+            {/* <div className="input-field col s12">
               <div className="file-field input-field">
                 <div className="btn">
                   <span>Upload Profile Image</span>
@@ -127,7 +127,7 @@ function Register() {
                   <input className="file-path validate" type="text" />
                 </div>
               </div>
-            </div>
+            </div> */}
 
             <div className="col s12" style={{ paddingLeft: "11.250px" }}>
               <button
