@@ -2,6 +2,7 @@ import React, { useEffect, useContext, createContext, useReducer } from "react";
 import { BrowserRouter, Route, Switch, useHistory } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import Home from "./components/screens/Home";
 import Login from "./components/screens/Login";
 import ChangePassword from "./components/screens/ChangePassword";
@@ -83,6 +84,7 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routing />
+        <Footer />
       </BrowserRouter>
     </UserContext.Provider>
   );
