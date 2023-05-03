@@ -95,20 +95,20 @@ const Navbar = () => {
   };
   return (
     <>
-      <nav className="nav-extended">
+      <nav style={{height: "10vh"}} className="nav-extended">
         {/* <div className={isMobile ? "nav-wrapper-mobile" : "nav-wrapper"}> */}
-        <div className="nav-wrapper mobi-nav">
+        <div  className="nav-wrapper mobi-nav">
           <Link
             to={state ? "/" : "/login"}
             className="brand-logo left"
-            style={{ padding: "0 25px" }}
+            style={{ padding: "10px 25px" }}
           >
             ProjektHouse
           </Link>
           <ul
             id="nav-mobile"
             className="right mob-nav"
-            style={{ padding: "0 25px" }}
+            style={{ padding: "10px 25px" }}
           >
             {renderList()}
           </ul>

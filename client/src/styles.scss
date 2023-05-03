@@ -141,7 +141,7 @@
   //     }
   //   }
   // }
-
+ 
   @media screen and (min-width: 1000px) {
     .mobile-nav {
       display: none;
@@ -150,6 +150,7 @@
       display: block;
     }
     .container {width: 90% ;}
+    
   }
   @media screen and (max-width: 999px) {
     .mobile-nav {

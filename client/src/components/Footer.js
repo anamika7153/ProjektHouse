@@ -3,7 +3,7 @@ import React from 'react'
 const Footer = () => {
   return (
     <div>
-      <footer className="page-footer">
+      <footer style={{height: "25vh", bottom: "0 !important"}} className="page-footer">
           <div className="container">
             <div className="row">
               <div className="col l6 s12">
@@ -27,12 +27,12 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div className="footer-copyright">
-            {/* <div className="container">
+          {/* <div style={{bottom: "0"}} className="footer-copyright">
+            <div className="container">
             © 2014 Copyright Text
             <a className="grey-text text-lighten-4 right" href="#!">More Links</a>
-            </div> */}
-          </div>
+            </div>
+          </div> */}
         </footer>
     </div>
   )
