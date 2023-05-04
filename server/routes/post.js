@@ -138,9 +138,9 @@ router.post(
         console.log("req.files", req.files);
         req.files.forEach(async (file) => {
           console.log("file", file);
-          if (file.mimetype.includes("image/jpeg")) folder = "newuploads";
-          else folder = "newuploads";
-          let filename = `newuploads/${file.originalname}`;
+          if (file.mimetype.includes("image/jpeg")) folder = "files";
+          else folder = "files";
+          let filename = `files/${file.originalname}`;
           let medialink = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${filename}`;
           console.log("file.originalname", file.originalname);
           var linkk = await uploadtos3(filename, file.buffer);
@@ -275,9 +275,9 @@ router.put(
       console.log("req.files", req.files);
       req.files.forEach(async (file) => {
         console.log("file", file);
-        if (file.mimetype.includes("image/jpeg")) folder = "newuploads";
-        else folder = "newuploads";
-        let filename = `newuploads/${file.originalname}`;
+        if (file.mimetype.includes("image/jpeg")) folder = "files";
+        else folder = "files";
+        let filename = `files/${file.originalname}`;
         let medialink = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${filename}`;
         console.log("file.originalname", file.originalname);
         var linkk = await uploadtos3(filename, file.buffer);
@@ -362,7 +362,7 @@ router.put(
     try {
       const file = req.file;
       console.log("file in route", file);
-      let filename = `newuploads/${file.originalname}`;
+      let filename = `files/${file.originalname}`;
       const orgname = file.originalname;
       // let medialink = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${filename}`
       let medialink =
@@ -371,7 +371,7 @@ router.put(
         ".s3." +
         reg +
         ".amazonaws.com/" +
-        "newuploads/" +
+        "files/" +
         orgname;
       // `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${filename}`
       console.log("file.originalname", file.originalname);
