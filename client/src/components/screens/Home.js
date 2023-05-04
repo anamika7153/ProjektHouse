@@ -292,7 +292,7 @@ function Home() {
               <p style={{ fontSize: "18px" }}>{item.description}</p>
               <b>
                 <h6 style={{ fontWeight: "900" }}>
-                  <u>Members</u>
+                  Members
                 </h6>
               </b>
               <table>
@@ -419,68 +419,33 @@ function Home() {
                       padding: "15px 0",
                     }}
                   >
-                    {/* <div
+                    <div
                       style={{
                         display: "flex",
                         flexDirection: "row",
                         justifyContent: "space-between",
                         paddingBottom: "10px",
                       }}
-                    > */}
-                        <div
-                          style={{
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "space-between",
-                            paddingBottom: "10px",
-                          }}
-                        >
-                          <b>Project Link</b>
-                          <a
-                            style={{ width: "70%" }}
-                            href={item.projectlink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            <span>
-                              {item.projectlink}
-                            </span>
-                          </a>
-                        </div>
-                    {/* </div> */}
-                    {/* <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        paddingBottom: "10px",
-                      }}
-                    > */}
-                      {/* {item.githublink ? (
-                        <>
-                          <b>Github Link</b>
-                          <a
-                            style={{ width: "90%" }}
-                            href={item.githublink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            <span>{item.githublink}</span>
-                          </a>
-                        </>
-                      ) : (
-                        <></>
-                      )} */}
-                    {/* </div> */}
+                    >
+                      <b>Project Link</b>
+                      <a
+                        style={{ width: "70%" }}
+                        href={item.projectlink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <span>{item.projectlink}</span>
+                      </a>
+                    </div>
                   </div>
                   <hr />
                 </>
-              ):(
+              ) : (
                 <></>
               )}
               <b>
                 <h6 style={{ fontWeight: "900" }}>
-                  <u>Comments</u>
+                  Comments
                 </h6>
               </b>
               {item.comments.map((comment) => {
@@ -521,17 +486,18 @@ function Home() {
                       padding: "15px 0",
                     }}
                   >
-                    <h6>
-                      <b>Upload Files</b>
-                    </h6>
-                    <div style={{ display: "flex" }}>
+                    <h6 style={{ fontWeight: "900", margin: "0", paddingRight: "10px" }}>
+                    Upload Files
+                  </h6>
+                    {/* <divv style={{ display: "flex" }}> */}
                       {item.postedBy._id == state._id ? (
                         <div
                           style={{
                             display: "flex",
                             justifyContent: "space-between",
-                            marginRight: "50px",
+                            marginRight: "30px",
                           }}
+                          className="upload-files"
                         >
                           <Link
                             to={`/firstterm/${item._id}`}
@@ -578,7 +544,7 @@ function Home() {
                             style={{
                               display: "flex",
                               alignItems: "center",
-                              paddingRight: "22px",
+                              // paddingRight: "22px",
                             }}
                           >
                             <i
@@ -597,63 +563,70 @@ function Home() {
                       ) : (
                         ""
                       )}
-                    </div>
                   </div>
                   <hr></hr>
                 </>
               ) : (
                 ""
               )}
-              <div>
                 <div
                   style={{
                     display: "flex",
                     justifyContent: "space-between",
-                    fontSize: "18px",
+                    fontSize: "14px",
                     fontWeight: "500",
-                    padding: "15px",
+                    padding: "15px 0",
+                    paddingLeft: "0",
+                    alignItems: "center",
                   }}
                 >
-                  <h6 style={{ fontWeight: "900", marginBottom: "20px" }}>
-                    <u>Files</u>
+                  <h6 style={{ fontWeight: "900", margin: "0", paddingRight: "10px" }}>
+                    Files
                   </h6>
-                  <div>
-                    <button
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      marginRight: "30px",
+                    }}
+                    className="files"
+                  >
+                    <span
                       style={{
-                        marginRight: "20px",
-                        width: "150px",
-                        borderRadius: "3px",
-                        letterSpacing: "1.5px",
+                        paddingRight: "20px",
+                        cursor: "pointer",
+                        color: "#039be5",
+                        fontWeight: "normal",
+                        letterSpacing: "1px",
                       }}
-                      className="btn btn-large waves-effect hoverable #ff5252 red accent-1"
                       onClick={(e) => ShowFirstTermFiles(item._id)}
                     >
                       First Term
-                    </button>
-                    <button
+                    </span>
+                    <span
                       style={{
-                        marginRight: "20px",
-                        width: "150px",
-                        borderRadius: "3px",
-                        letterSpacing: "1.5px",
+                        paddingRight: "20px",
+                        cursor: "pointer",
+                        color: "#039be5",
+                        fontWeight: "normal",
+                        letterSpacing: "1px",
                       }}
-                      className="btn btn-large waves-effect hoverable #ff5252 red accent-1"
                       onClick={(e) => ShowSecondTermFiles(item._id)}
                     >
                       Second Term
-                    </button>
-                    <button
+                    </span>
+                    <span
                       style={{
-                        marginRight: "20px",
-                        width: "150px",
-                        borderRadius: "3px",
-                        letterSpacing: "1.5px",
+                        paddingRight: "20px",
+                        cursor: "pointer",
+                        color: "#039be5",
+                        fontWeight: "normal",
+                        letterSpacing: "1px",
                       }}
-                      className="btn btn-large waves-effect hoverable #ff5252 red accent-1"
                       onClick={(e) => ShowThirdTermFiles(item._id)}
                     >
                       Third Term
-                    </button>
+                    </span>
                   </div>
                 </div>
                 <div>
@@ -690,41 +663,40 @@ function Home() {
                                   </i>
                                 </div>
                               </a>
-                              <div>
-                                {item.postedBy._id == state._id ? (
-                                  <div>
-                                    <Link
-                                      to={`/editfiles/${item._id}/${f._id}`}
-                                    >
-                                      <i
-                                        className="material-icons"
-                                        style={{
-                                          float: "right",
-                                          cursor: "pointer",
-                                          marginRight: "10px",
-                                          paddingLeft: "20px",
-                                        }}
-                                      >
-                                        edit
-                                      </i>
-                                    </Link>
+                              {item.postedBy._id == state._id ? (
+                                <div
+                                  style={{
+                                    display: "flex",
+                                    justifyContent: "space-between",
+                                  }}
+                                >
+                                  <Link to={`/editfiles/${item._id}/${f._id}`}>
                                     <i
                                       className="material-icons"
                                       style={{
                                         float: "right",
                                         cursor: "pointer",
+                                        marginRight: "10px",
+                                        paddingLeft: "20px",
                                       }}
-                                      onClick={(e) =>
-                                        deleteFile(item._id, f._id)
-                                      }
                                     >
-                                      delete
+                                      edit
                                     </i>
-                                  </div>
-                                ) : (
-                                  <></>
-                                )}
-                              </div>
+                                  </Link>
+                                  <i
+                                    className="material-icons"
+                                    style={{
+                                      float: "right",
+                                      cursor: "pointer",
+                                    }}
+                                    onClick={(e) => deleteFile(item._id, f._id)}
+                                  >
+                                    delete
+                                  </i>
+                                </div>
+                              ) : (
+                                <></>
+                              )}
                             </div>
                           </div>
                         ) : (
@@ -768,7 +740,12 @@ function Home() {
                               </a>
                               <div>
                                 {item.postedBy._id == state._id ? (
-                                  <div>
+                                  <div
+                                    style={{
+                                      display: "flex",
+                                      justifyContent: "space-between",
+                                    }}
+                                  >
                                     <Link
                                       to={`/editfiles/${item._id}/${f._id}`}
                                     >
@@ -845,7 +822,12 @@ function Home() {
                                 </a>
                                 <div>
                                   {item.postedBy._id == state._id ? (
-                                    <div>
+                                    <div
+                                      style={{
+                                        display: "flex",
+                                        justifyContent: "space-between",
+                                      }}
+                                    >
                                       <Link
                                         to={`/editfiles/${item._id}/${f._id}`}
                                       >
@@ -888,7 +870,6 @@ function Home() {
                     );
                   })}
                 </div>
-              </div>
             </div>
           </div>
         );

@@ -13,7 +13,6 @@ const Navbar = () => {
   const [userDetails, setUserDetails] = useState([]);
   useEffect(() => {
     M.Modal.init(searchModal.current);
-    // M.Sidenav.init(sideNav.current);
     M.Sidenav.init(document.querySelectorAll(".sidenav"));
   }, []);
 
@@ -30,16 +29,6 @@ const Navbar = () => {
             search
           </i>
         </li>,
-      //   <li key="2">
-      //   <a
-      //     href="#"
-      //     data-target="mobile-nav"
-      //     className="sidenav-trigger"
-      //     style={{ color: "black" }}
-      //   >
-      //     <i className="material-icons">menu</i>
-      //   </a>
-      // </li>,
         <li key="2">
           <Link to="/createteam">Create Team</Link>
         </li>,
@@ -52,7 +41,8 @@ const Navbar = () => {
         <li key="5">
           <button
             type="submit"
-            className="btn waves-effect hoverable #ff5252 red accent-1"
+            style={{}}
+            className="logout-btn btn waves-effect hoverable #ff5252 red accent-1"
             onClick={() => {
               localStorage.clear();
               dispatch({ type: "CLEAR" });
@@ -111,13 +101,6 @@ const Navbar = () => {
           <ul style={{ padding: "0 15px", display: "flex", alignItems: "center" }} className="right hide-on-med-and-down">
             {renderList()}
           </ul>
-          {/* <ul
-            id="mobile-demo"
-            className="sidenav "
-            style={{ padding: "10px 25px" }}
-          >
-            {renderList()}
-          </ul> */}
         </div>
         <ul className="sidenav" id="mobile-demo">
         {renderList()}
