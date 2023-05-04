@@ -3,7 +3,7 @@ import React from 'react'
 const Footer = () => {
   return (
     <div>
-      <footer style={{height: "25vh", bottom: "0 !important"}} className="page-footer">
+      <footer style={{height: "25%", bottom: "0 !important"}} className="page-footer">
           <div className="container">
             <div className="row">
               <div className="col l6 s12 footer-left">

@@ -50,7 +50,7 @@ function Login() {
       });
   };
   return (
-    <div style={{height: "65vh"}} className="container">
+    <div style={{height: "65%"}} className="container">
       <div style={{ paddingTop: "4rem" }} className="row">
         <div className="col s8 offset-s2">
           {/* <Link to="/" className="btn-flat waves-effect">

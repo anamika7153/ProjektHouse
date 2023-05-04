@@ -95,7 +95,7 @@ const Navbar = () => {
   };
   return (
     <>
-      <nav style={{height: "10vh"}} className="nav-extended">
+      <nav style={{height: "10%"}} className="nav-extended">
         {/* <div className={isMobile ? "nav-wrapper-mobile" : "nav-wrapper"}> */}
         <div  className="nav-wrapper mobi-nav">
           <Link
