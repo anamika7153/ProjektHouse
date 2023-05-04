@@ -580,7 +580,7 @@ function Home() {
                     alignItems: "center",
                   }}
                 >
-                  <h6 style={{ fontWeight: "900", margin: "0", paddingRight: "10px" }}>
+                  <h6 style={{ fontWeight: "900", margin: "0", paddingRight: "30px" }}>
                     Files
                   </h6>
                   <div
@@ -632,19 +632,19 @@ function Home() {
                 <div>
                   {item.filee.map((f) => {
                     return (
-                      <h6 key={f._id}>
+                      <h6 key={f._id} style={{width: "95%"}}>
                         {f.term == firstterm &&
                         showfirst == item._id &&
                         card == item._id ? (
-                          <div>
                             <div
                               style={{
                                 display: "flex",
                                 justifyContent: "space-between",
+                                flexWrap: "wrap",
                               }}
                             >
                               <a
-                                style={{ width: "90%" }}
+                                // style={{ width: "90%" }}
                                 href={f.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
@@ -698,7 +698,6 @@ function Home() {
                                 <></>
                               )}
                             </div>
-                          </div>
                         ) : (
                           <></>
                         )}
@@ -716,10 +715,11 @@ function Home() {
                               style={{
                                 display: "flex",
                                 justifyContent: "space-between",
+                                flexWrap: "wrap",
                               }}
                             >
                               <a
-                                style={{ width: "90%" }}
+                                // style={{ width: "90%" }}
                                 href={f.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
@@ -798,10 +798,11 @@ function Home() {
                                 style={{
                                   display: "flex",
                                   justifyContent: "space-between",
+                                  flexWrap: "wrap",
                                 }}
                               >
                                 <a
-                                  style={{ width: "90%" }}
+                                  // style={{ width: "90%" }}
                                   href={f.url}
                                   target="_blank"
                                   rel="noopener noreferrer"
