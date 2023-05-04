@@ -6,21 +6,18 @@ import { UserContext } from "../App";
 import { API_URL } from "../utils/constants";
 const Navbar = () => {
   const searchModal = useRef(null);
+  const sideNav = useRef(null);
   const history = useHistory();
   const { state, dispatch } = useContext(UserContext);
   const [search, setSearch] = useState("");
-  const [query, setQuery] = useState("");
   const [userDetails, setUserDetails] = useState([]);
   useEffect(() => {
-    // console.log("in navbar state",state)
     M.Modal.init(searchModal.current);
+    // M.Sidenav.init(sideNav.current);
+    M.Sidenav.init(document.querySelectorAll(".sidenav"));
   }, []);
-  const mobnav = () => {
-    document.addEventListener('DOMContentLoaded', function() {
-      var elems = document.querySelectorAll('.sidenav');
-      var instances = M.Sidenav.init(elems);
-    });
-  }
+
+
   const renderList = () => {
     if (state) {
       return [
@@ -33,7 +30,16 @@ const Navbar = () => {
             search
           </i>
         </li>,
-
+      //   <li key="2">
+      //   <a
+      //     href="#"
+      //     data-target="mobile-nav"
+      //     className="sidenav-trigger"
+      //     style={{ color: "black" }}
+      //   >
+      //     <i className="material-icons">menu</i>
+      //   </a>
+      // </li>,
         <li key="2">
           <Link to="/createteam">Create Team</Link>
         </li>,
@@ -43,7 +49,7 @@ const Navbar = () => {
         <li key="4">
           <Link to="/myTeams">My Teams</Link>
         </li>,
-        <li key="5">
+        <li style={{display: "flex"}} key="5">
           <button
             type="submit"
             className="btn waves-effect hoverable #ff5252 red accent-1"
@@ -85,9 +91,6 @@ const Navbar = () => {
         .then((res) => res.json())
         .then((result) => {
           setUserDetails(result.user);
-          // console.log("result",result);
-          // console.log("result.user",result.user);
-          // console.log("result.user.name",result.user[0].name);
         });
     } else {
       setUserDetails([]);
@@ -96,23 +99,29 @@ const Navbar = () => {
   return (
     <>
       <nav style={{height: "60px"}} className="nav-extended">
-        {/* <div className={isMobile ? "nav-wrapper-mobile" : "nav-wrapper"}> */}
-        <div  className="nav-wrapper mobi-nav">
+        <div  className="nav-wrapper">
           <Link
             to={state ? "/" : "/login"}
             className="brand-logo left"
-            style={{ padding: "10px 25px" }}
+            style={{ padding: "0 15px" }}
           >
             ProjektHouse
           </Link>
-          <ul
-            id="nav-mobile"
-            className="right mob-nav"
+          <a style={{float: "right"}} href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+          <ul style={{ padding: "0 15px", display: "flex", alignItems: "center" }} className="right hide-on-med-and-down">
+            {renderList()}
+          </ul>
+          {/* <ul
+            id="mobile-demo"
+            className="sidenav "
             style={{ padding: "10px 25px" }}
           >
             {renderList()}
-          </ul>
+          </ul> */}
         </div>
+        <ul className="sidenav" id="mobile-demo">
+        {renderList()}
+      </ul>
         <div id="modal1" className="modal" ref={searchModal}>
           <div className="modal-content">
             <input
@@ -159,46 +168,6 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-      {/* <ul id="slide-out" className="sidenav">
-        <li>
-          <div className="user-view">
-            <div className="background">
-              <img src="images/office.jpg" />
-            </div>
-            <a href="#user">
-              <img className="circle" src="images/yuna.jpg" />
-            </a>
-            <a href="#name">
-              <span className="white-text name">John Doe</span>
-            </a>
-            <a href="#email">
-              <span className="white-text email">jdandturk@gmail.com</span>
-            </a>
-          </div>
-        </li>
-        <li>
-          <a href="#!">
-            <i className="material-icons">cloud</i>First Link With Icon
-          </a>
-        </li>
-        <li>
-          <a href="#!">Second Link</a>
-        </li>
-        <li>
-          <div className="divider"></div>
-        </li>
-        <li>
-          <a className="subheader">Subheader</a>
-        </li>
-        <li>
-          <a className="waves-effect" href="#!">
-            Third Link With Waves
-          </a>
-        </li>
-      </ul>
-      <a href="#" data-target="slide-out" className="sidenav-trigger">
-        <i className="material-icons" onClick={mobnav}>menu</i>
-      </a> */}
     </>
   );
 };
