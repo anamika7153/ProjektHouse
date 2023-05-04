@@ -125,6 +125,13 @@
       width: 70%;
     }
   }
+  .sidenav {
+    background-color: #F5ABAE;
+  }
+  .sidenav li {
+    display: block;
+    text-align: center;
+  }
 
   // @media screen and (min-width: 500px) and (max-width: 700px) {
   //   .mobi-nav {

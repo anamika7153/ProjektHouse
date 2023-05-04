@@ -49,7 +49,7 @@ const Navbar = () => {
         <li key="4">
           <Link to="/myTeams">My Teams</Link>
         </li>,
-        <li style={{display: "flex"}} key="5">
+        <li key="5">
           <button
             type="submit"
             className="btn waves-effect hoverable #ff5252 red accent-1"
