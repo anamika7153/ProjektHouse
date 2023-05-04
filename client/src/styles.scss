@@ -159,22 +159,9 @@
       float: right;
       padding: 0px 25px;
     }
-  }
-  
-  @media screen and (max-width: 1000px) {
-    .upload-section {
-      flex-direction: column;
-  
-      & > div {
-        width: 100%;
-      }
-    }
-    .image-preview {
-      margin-left: 0;
-      height: 300px;
-    }
-    .upload-section {
-      height: unset;
+    .footer-left,
+    .footer-right {
+      width: 50% !important;
     }
   }
   
@@ -184,5 +171,9 @@
     }
     .drop-zone {
       width: 100%;
+    }
+    .footer-left,
+    .footer-right {
+      width: 50% !important;
     }
   }
