@@ -67,7 +67,7 @@ function PasswordForm(props) {
     e.preventDefault();
     if(validForm()) {
         Object.assign(inputField, props)
-        console.log('props',inputField,props)
+        // console.log('props',inputField,props)
         try {
             let url = 'https://projekt-house-backend.vercel.app/user/changepassword'
             let options = {
@@ -77,13 +77,13 @@ function PasswordForm(props) {
             }
             let response = await axios(options)
             let record = response.data
-            console.log(record)
+            // console.log(record)
             if(record.statusText == 'success') {
               M.toast({ html: "Password Changed Successfully", classes: " green" });
               history.push('/login')
             }
             else {
-                console.log(record.message)
+                // console.log(record.message)
               M.toast({ html: record.message, classes: "#c62828 red darken-3" });
             }
         } catch (error) {

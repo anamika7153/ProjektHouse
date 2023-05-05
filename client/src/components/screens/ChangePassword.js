@@ -42,14 +42,14 @@ const [otpForm, showForm] = useState(true)
 
         //     }
         // })
-        console.log("response in changepass", response)
-        console.log(record)
+        // console.log("response in changepass", response)
+        // console.log(record)
         if(record.statusText == 'success') {
           M.toast({ html: "OTP Sent Successfully", classes: " green" });
           showForm(false)
         }
         else {
-            console.log(record.message)
+            // console.log(record.message)
           M.toast({ html: record.message, classes: "#c62828 red darken-3" });
 
         }
