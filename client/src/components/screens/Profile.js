@@ -545,6 +545,7 @@ function Profile() {
                                 }}
                               >
                                 <a
+                                className="files-left"
                                   href={f.url}
                                   target="_blank"
                                   rel="noopener noreferrer"
@@ -563,7 +564,7 @@ function Profile() {
                                     </i>
                                   </div>
                                 </a>
-                                <div>
+                                <div className="files-right">
                                   {item.postedBy._id == state._id ? (
                                     <div
                                       className="profile-files"
@@ -625,6 +626,7 @@ function Profile() {
                                 }}
                               >
                                 <a
+                                className="files-left"
                                   href={f.url}
                                   target="_blank"
                                   rel="noopener noreferrer"
@@ -643,7 +645,7 @@ function Profile() {
                                     </i>
                                   </div>
                                 </a>
-                                <div>
+                                <div className="files-right">
                                   {item.postedBy._id == state._id ? (
                                     <div className="profile-files">
                                       <Link
@@ -703,6 +705,7 @@ function Profile() {
                                 }}
                               >
                                 <a
+                                className="files-left"
                                   href={f.url}
                                   target="_blank"
                                   rel="noopener noreferrer"
@@ -721,7 +724,7 @@ function Profile() {
                                     </i>
                                   </div>
                                 </a>
-                                <div>
+                                <div className="files-right">
                                   {item.postedBy._id == state._id ? (
                                     <div className="profile-files">
                                       <Link
