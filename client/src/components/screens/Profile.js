@@ -153,7 +153,7 @@ function Profile() {
   return (
     <>
       {state ? (
-        <div className="container" style={{ maxWidth: "900px" }}>
+        <div className="container" style={{ maxWidth: "1280px" }}>
           <div
             style={{
               margin: "30px 10px",
@@ -614,13 +614,14 @@ function Profile() {
                     </h6>
                     {item.filee.map((f) => {
                       return (
-                        <h6 key={f._id}>
+                        <h6 key={f._id} style={{width: "95%"}}>
                           {f.term == secondterm ? (
                             <div>
                               <div
                                 style={{
                                   display: "flex",
                                   justifyContent: "space-between",
+                                  flexWrap: "wrap",
                                 }}
                               >
                                 <a
@@ -691,13 +692,14 @@ function Profile() {
                     </h6>
                     {item.filee.map((f) => {
                       return (
-                        <h6 key={f._id}>
+                        <h6 key={f._id} style={{width: "95%"}}>
                           {f.term == thirdterm ? (
                             <div>
                               <div
                                 style={{
                                   display: "flex",
                                   justifyContent: "space-between",
+                                  flexWrap: "wrap",
                                 }}
                               >
                                 <a
