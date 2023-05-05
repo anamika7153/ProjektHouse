@@ -8,7 +8,7 @@ exports.mailer = async (mail,otp) => {
         const accessToken = await oAuth2Client.getAccessToken()
         const transporter = nodemailer.createTransport({
             service: 'gmail',
-            // port: 465,
+            port: 465,
             // secure: true,
             auth: {
                 type: 'OAuth2',
