@@ -8,13 +8,16 @@ exports.mailer = async (mail,otp) => {
         const accessToken = await oAuth2Client.getAccessToken()
         const transporter = nodemailer.createTransport({
             // service: 'gmail',
-            host: "smtp.gmail.com",
+            // host: "smtp.gmail.com",
             port: 465,
             secure: true,
+            host: 'smtp.mailgun.org',
             auth: {
                 type: 'OAuth2',
-                user: process.env.MAIL_USERNAME,
-                pass: process.env.MAIL_PASSWORD,
+                user: process.env.MAILGUN_SMTP_LOGIN,
+                pass: process.env.MAILGUN_SMTP_PASSWORD,
+                // user: process.env.MAIL_USERNAME,
+                // pass: process.env.MAIL_PASSWORD,
                 // clientId: process.env.OAUTH_CLIENTID,
                 // clientSecret: process.env.OAUTH_CLIENT_SECRET,
                 // refreshToken: process.env.OAUTH_REFRESH_TOKEN,
