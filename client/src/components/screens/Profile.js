@@ -211,7 +211,7 @@ function Profile() {
               return <img className="item" src={item.photo} key={item._id} />;
             })}
           </div> */}
-          <div className="home container">
+          <div className="home container" style={{width: "95%"}}>
             {data.map((item) => {
               return (
                 <div className="card home-card" key={item._id}>
