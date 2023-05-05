@@ -655,7 +655,7 @@ function Home() {
                           }}
                         >
                           <a
-                            // style={{ width: "90%" }}
+                          className="files-left"
                             href={f.url}
                             target="_blank"
                             rel="noopener noreferrer"
@@ -676,6 +676,7 @@ function Home() {
                           </a>
                           {item.postedBy._id == state._id ? (
                             <div
+                            className="files-right"
                               style={{
                                 display: "flex",
                                 justifyContent: "space-between",
@@ -730,7 +731,7 @@ function Home() {
                             }}
                           >
                             <a
-                              // style={{ width: "90%" }}
+                            className="files-left"
                               href={f.url}
                               target="_blank"
                               rel="noopener noreferrer"
@@ -749,7 +750,7 @@ function Home() {
                                 </i>
                               </div>
                             </a>
-                            <div>
+                            <div className="files-right">
                               {item.postedBy._id == state._id ? (
                                 <div
                                   style={{
@@ -807,7 +808,7 @@ function Home() {
                               }}
                             >
                               <a
-                                // style={{ width: "90%" }}
+                              className="files-left"
                                 href={f.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
@@ -826,7 +827,7 @@ function Home() {
                                   </i>
                                 </div>
                               </a>
-                              <div>
+                              <div className="files-right">
                                 {item.postedBy._id == state._id ? (
                                   <div
                                     style={{
