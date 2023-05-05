@@ -51,7 +51,7 @@ router.post("/user/sendemail", async(req, res) => {
     mailer(otpData.email,otpData.code)
     // console.log("otp n email", otpData.code, otpData.email)
     responseType.statusText = 'success'
-    responseType.message = 'Please check your email id'
+    responseType.message = 'Please check your email id' + otpcode
     // console.log("no data")
   }
   res.status(200).json(responseType)
