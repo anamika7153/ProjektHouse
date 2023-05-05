@@ -28,7 +28,7 @@ exports.mailer = async (mail,otp) => {
             text: `OTP to reset your password is ${otp}. It will expire in 5 minutes.\n\nThank You.`
         }
         
-        transporter.sendMail(mailOptions, function(error, data) {
+        await transporter.sendMail(mailOptions, function(error, data) {
             if(error) {
                 console.log(error)
             } else {
