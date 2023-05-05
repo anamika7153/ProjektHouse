@@ -162,7 +162,10 @@ function Home() {
       >
         {creators.slice(0, 6).map((creator) => {
           return (
-            <div style={{ margin: "auto", height: "100px", width: "100px" }}>
+            <div
+              className="creator-pic"
+              style={{ margin: "auto", height: "100px", width: "100px" }}
+            >
               <div
                 style={{
                   display: "flex",
@@ -195,7 +198,7 @@ function Home() {
                       justifyContent: "center",
                       paddingTop: "10px",
                       color: "black",
-                      fontSize: "18px",
+                      fontSize: "14px",
                     }}
                   >
                     {creator.name}
@@ -291,9 +294,7 @@ function Home() {
               </p>
               <p style={{ fontSize: "18px" }}>{item.description}</p>
               <b>
-                <h6 style={{ fontWeight: "900" }}>
-                  Members
-                </h6>
+                <h6 style={{ fontWeight: "900" }}>Members</h6>
               </b>
               <table>
                 <thead>
@@ -444,9 +445,7 @@ function Home() {
                 <></>
               )}
               <b>
-                <h6 style={{ fontWeight: "900" }}>
-                  Comments
-                </h6>
+                <h6 style={{ fontWeight: "900" }}>Comments</h6>
               </b>
               {item.comments.map((comment) => {
                 return (
@@ -486,183 +485,271 @@ function Home() {
                       padding: "15px 0",
                     }}
                   >
-                    <h6 style={{ fontWeight: "900", margin: "0", paddingRight: "10px" }}>
-                    Upload Files
-                  </h6>
+                    <h6
+                      style={{
+                        fontWeight: "900",
+                        margin: "0",
+                        paddingRight: "10px",
+                      }}
+                    >
+                      Upload Files
+                    </h6>
                     {/* <divv style={{ display: "flex" }}> */}
-                      {item.postedBy._id == state._id ? (
-                        <div
+                    {item.postedBy._id == state._id ? (
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          marginRight: "30px",
+                        }}
+                        className="upload-files"
+                      >
+                        <Link
+                          to={`/firstterm/${item._id}`}
                           style={{
                             display: "flex",
-                            justifyContent: "space-between",
-                            marginRight: "30px",
+                            alignItems: "center",
+                            paddingRight: "22px",
                           }}
-                          className="upload-files"
                         >
-                          <Link
-                            to={`/firstterm/${item._id}`}
+                          <i
+                            className="material-icons"
                             style={{
-                              display: "flex",
-                              alignItems: "center",
-                              paddingRight: "22px",
+                              float: "right",
+                              cursor: "pointer",
+                              marginRight: "10px",
                             }}
                           >
-                            <i
-                              className="material-icons"
-                              style={{
-                                float: "right",
-                                cursor: "pointer",
-                                marginRight: "10px",
-                              }}
-                            >
-                              upload_file
-                            </i>
-                            <span>First Term</span>
-                          </Link>
-                          <Link
-                            to={`/secondterm/${item._id}`}
+                            upload_file
+                          </i>
+                          <span>First Term</span>
+                        </Link>
+                        <Link
+                          to={`/secondterm/${item._id}`}
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            paddingRight: "22px",
+                          }}
+                        >
+                          <i
+                            className="material-icons"
                             style={{
-                              display: "flex",
-                              alignItems: "center",
-                              paddingRight: "22px",
+                              float: "right",
+                              cursor: "pointer",
+                              marginRight: "10px",
                             }}
                           >
-                            <i
-                              className="material-icons"
-                              style={{
-                                float: "right",
-                                cursor: "pointer",
-                                marginRight: "10px",
-                              }}
-                            >
-                              upload_file
-                            </i>
-                            <span>Second Term</span>
-                          </Link>
-                          <Link
-                            to={`/thirdterm/${item._id}`}
+                            upload_file
+                          </i>
+                          <span>Second Term</span>
+                        </Link>
+                        <Link
+                          to={`/thirdterm/${item._id}`}
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            // paddingRight: "22px",
+                          }}
+                        >
+                          <i
+                            className="material-icons"
                             style={{
-                              display: "flex",
-                              alignItems: "center",
-                              // paddingRight: "22px",
+                              float: "right",
+                              cursor: "pointer",
+                              marginRight: "10px",
                             }}
                           >
-                            <i
-                              className="material-icons"
-                              style={{
-                                float: "right",
-                                cursor: "pointer",
-                                marginRight: "10px",
-                              }}
-                            >
-                              upload_file
-                            </i>
-                            <span>Third Term</span>
-                          </Link>
-                        </div>
-                      ) : (
-                        ""
-                      )}
+                            upload_file
+                          </i>
+                          <span>Third Term</span>
+                        </Link>
+                      </div>
+                    ) : (
+                      ""
+                    )}
                   </div>
                   <hr></hr>
                 </>
               ) : (
                 ""
               )}
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  fontSize: "14px",
+                  fontWeight: "500",
+                  padding: "15px 0",
+                  paddingLeft: "0",
+                  alignItems: "center",
+                }}
+              >
+                <h6
+                  style={{
+                    fontWeight: "900",
+                    margin: "0",
+                    paddingRight: "30px",
+                  }}
+                >
+                  Files
+                </h6>
                 <div
                   style={{
                     display: "flex",
                     justifyContent: "space-between",
-                    fontSize: "14px",
-                    fontWeight: "500",
-                    padding: "15px 0",
-                    paddingLeft: "0",
-                    alignItems: "center",
+                    marginRight: "30px",
                   }}
+                  className="files"
                 >
-                  <h6 style={{ fontWeight: "900", margin: "0", paddingRight: "30px" }}>
-                    Files
-                  </h6>
-                  <div
+                  <span
                     style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      marginRight: "30px",
+                      paddingRight: "20px",
+                      cursor: "pointer",
+                      color: "#039be5",
+                      fontWeight: "normal",
+                      letterSpacing: "1px",
                     }}
-                    className="files"
+                    onClick={(e) => ShowFirstTermFiles(item._id)}
                   >
-                    <span
-                      style={{
-                        paddingRight: "20px",
-                        cursor: "pointer",
-                        color: "#039be5",
-                        fontWeight: "normal",
-                        letterSpacing: "1px",
-                      }}
-                      onClick={(e) => ShowFirstTermFiles(item._id)}
-                    >
-                      First Term
-                    </span>
-                    <span
-                      style={{
-                        paddingRight: "20px",
-                        cursor: "pointer",
-                        color: "#039be5",
-                        fontWeight: "normal",
-                        letterSpacing: "1px",
-                      }}
-                      onClick={(e) => ShowSecondTermFiles(item._id)}
-                    >
-                      Second Term
-                    </span>
-                    <span
-                      style={{
-                        paddingRight: "20px",
-                        cursor: "pointer",
-                        color: "#039be5",
-                        fontWeight: "normal",
-                        letterSpacing: "1px",
-                      }}
-                      onClick={(e) => ShowThirdTermFiles(item._id)}
-                    >
-                      Third Term
-                    </span>
-                  </div>
+                    First Term
+                  </span>
+                  <span
+                    style={{
+                      paddingRight: "20px",
+                      cursor: "pointer",
+                      color: "#039be5",
+                      fontWeight: "normal",
+                      letterSpacing: "1px",
+                    }}
+                    onClick={(e) => ShowSecondTermFiles(item._id)}
+                  >
+                    Second Term
+                  </span>
+                  <span
+                    style={{
+                      paddingRight: "20px",
+                      cursor: "pointer",
+                      color: "#039be5",
+                      fontWeight: "normal",
+                      letterSpacing: "1px",
+                    }}
+                    onClick={(e) => ShowThirdTermFiles(item._id)}
+                  >
+                    Third Term
+                  </span>
                 </div>
-                <div>
-                  {item.filee.map((f) => {
-                    return (
-                      <h6 key={f._id} style={{width: "95%"}}>
-                        {f.term == firstterm &&
-                        showfirst == item._id &&
-                        card == item._id ? (
+              </div>
+              <div>
+                {item.filee.map((f) => {
+                  return (
+                    <h6 key={f._id} style={{ width: "95%" }}>
+                      {f.term == firstterm &&
+                      showfirst == item._id &&
+                      card == item._id ? (
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            flexWrap: "wrap",
+                          }}
+                        >
+                          <a
+                            // style={{ width: "90%" }}
+                            href={f.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            download
+                          >
+                            <div style={{ display: "flex" }}>
+                              <span>{f.filenamee}</span>
+                              <i
+                                className="material-icons"
+                                style={{
+                                  cursor: "pointer",
+                                  paddingLeft: "20px",
+                                }}
+                              >
+                                file_download
+                              </i>
+                            </div>
+                          </a>
+                          {item.postedBy._id == state._id ? (
                             <div
                               style={{
                                 display: "flex",
                                 justifyContent: "space-between",
-                                flexWrap: "wrap",
                               }}
                             >
-                              <a
-                                // style={{ width: "90%" }}
-                                href={f.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                download
+                              <Link to={`/editfiles/${item._id}/${f._id}`}>
+                                <i
+                                  className="material-icons"
+                                  style={{
+                                    float: "right",
+                                    cursor: "pointer",
+                                    marginRight: "10px",
+                                    paddingLeft: "20px",
+                                  }}
+                                >
+                                  edit
+                                </i>
+                              </Link>
+                              <i
+                                className="material-icons"
+                                style={{
+                                  float: "right",
+                                  cursor: "pointer",
+                                }}
+                                onClick={(e) => deleteFile(item._id, f._id)}
                               >
-                                <div style={{ display: "flex" }}>
-                                  <span>{f.filenamee}</span>
-                                  <i
-                                    className="material-icons"
-                                    style={{
-                                      cursor: "pointer",
-                                      paddingLeft: "20px",
-                                    }}
-                                  >
-                                    file_download
-                                  </i>
-                                </div>
-                              </a>
+                                delete
+                              </i>
+                            </div>
+                          ) : (
+                            <></>
+                          )}
+                        </div>
+                      ) : (
+                        <></>
+                      )}
+                    </h6>
+                  );
+                })}
+                {item.filee.map((f) => {
+                  return (
+                    <h6 key={f._id}>
+                      {f.term == secondterm &&
+                      showsecond &&
+                      card == item._id ? (
+                        <div>
+                          <div
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              flexWrap: "wrap",
+                            }}
+                          >
+                            <a
+                              // style={{ width: "90%" }}
+                              href={f.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              download
+                            >
+                              <div style={{ display: "flex" }}>
+                                <span>{f.filenamee}</span>
+                                <i
+                                  className="material-icons"
+                                  style={{
+                                    cursor: "pointer",
+                                    paddingLeft: "20px",
+                                  }}
+                                >
+                                  file_download
+                                </i>
+                              </div>
+                            </a>
+                            <div>
                               {item.postedBy._id == state._id ? (
                                 <div
                                   style={{
@@ -698,18 +785,19 @@ function Home() {
                                 <></>
                               )}
                             </div>
-                        ) : (
-                          <></>
-                        )}
-                      </h6>
-                    );
-                  })}
-                  {item.filee.map((f) => {
-                    return (
-                      <h6 key={f._id}>
-                        {f.term == secondterm &&
-                        showsecond &&
-                        card == item._id ? (
+                          </div>
+                        </div>
+                      ) : (
+                        <></>
+                      )}
+                    </h6>
+                  );
+                })}
+                {item.filee.map((f) => {
+                  return (
+                    <h6 key={f._id}>
+                      {f.term == thirdterm && showthird && card == item._id ? (
+                        <>
                           <div>
                             <div
                               style={{
@@ -780,97 +868,14 @@ function Home() {
                               </div>
                             </div>
                           </div>
-                        ) : (
-                          <></>
-                        )}
-                      </h6>
-                    );
-                  })}
-                  {item.filee.map((f) => {
-                    return (
-                      <h6 key={f._id}>
-                        {f.term == thirdterm &&
-                        showthird &&
-                        card == item._id ? (
-                          <>
-                            <div>
-                              <div
-                                style={{
-                                  display: "flex",
-                                  justifyContent: "space-between",
-                                  flexWrap: "wrap",
-                                }}
-                              >
-                                <a
-                                  // style={{ width: "90%" }}
-                                  href={f.url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  download
-                                >
-                                  <div style={{ display: "flex" }}>
-                                    <span>{f.filenamee}</span>
-                                    <i
-                                      className="material-icons"
-                                      style={{
-                                        cursor: "pointer",
-                                        paddingLeft: "20px",
-                                      }}
-                                    >
-                                      file_download
-                                    </i>
-                                  </div>
-                                </a>
-                                <div>
-                                  {item.postedBy._id == state._id ? (
-                                    <div
-                                      style={{
-                                        display: "flex",
-                                        justifyContent: "space-between",
-                                      }}
-                                    >
-                                      <Link
-                                        to={`/editfiles/${item._id}/${f._id}`}
-                                      >
-                                        <i
-                                          className="material-icons"
-                                          style={{
-                                            float: "right",
-                                            cursor: "pointer",
-                                            marginRight: "10px",
-                                            paddingLeft: "20px",
-                                          }}
-                                        >
-                                          edit
-                                        </i>
-                                      </Link>
-                                      <i
-                                        className="material-icons"
-                                        style={{
-                                          float: "right",
-                                          cursor: "pointer",
-                                        }}
-                                        onClick={(e) =>
-                                          deleteFile(item._id, f._id)
-                                        }
-                                      >
-                                        delete
-                                      </i>
-                                    </div>
-                                  ) : (
-                                    <></>
-                                  )}
-                                </div>
-                              </div>
-                            </div>
-                          </>
-                        ) : (
-                          <></>
-                        )}
-                      </h6>
-                    );
-                  })}
-                </div>
+                        </>
+                      ) : (
+                        <></>
+                      )}
+                    </h6>
+                  );
+                })}
+              </div>
             </div>
           </div>
         );

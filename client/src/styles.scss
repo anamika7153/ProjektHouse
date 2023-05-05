@@ -176,4 +176,25 @@
     .files span {
       font-size: 12px ;
     }
+    span.card-title {
+      padding-top: 5px !important;
+    }
+    .creator-pic {
+      height: 80px !important;
+      width: 80px !important;
+    }
+    .profile-left {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+    }
+    .profile-img {
+      height: 120px !important;
+      width: 120px !important;
+    }
+    .profile-name{font-size: 2rem;}
+    .profile-files {
+      display: flex !important;
+      justify-content: space-between !important;
+    }
   }

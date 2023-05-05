@@ -166,8 +166,9 @@ function Profile() {
                 justifyContent: "space-around",
               }}
             >
-              <div>
+              <div className="profile-left">
                 <img
+                className="profile-img"
                   style={{
                     height: "200px",
                     width: "200px",
@@ -178,7 +179,7 @@ function Profile() {
                 />
                 <div className="file-field input-field">
                   <div className="btn" style={{ marginBottom: "1rem" }}>
-                    <span>Update Profile Image</span>
+                    <span>Update Image</span>
                     <input
                       type="file"
                       onChange={(e) => updatePhoto(e.target.files[0])}
@@ -190,7 +191,7 @@ function Profile() {
                 </div>
               </div>
               <div>
-                <h4>{state ? state.name : ""}</h4>
+                <h4 className="profile-name">{state ? state.name : ""}</h4>
                 <div
                   style={{
                     display: "flex",
@@ -259,7 +260,7 @@ function Profile() {
                     <p style={{ fontSize: "18px" }}>{item.description}</p>
                     <b>
                       <h6 style={{ fontWeight: "900" }}>
-                        <u>Members</u>
+                        Members
                       </h6>
                     </b>
 
@@ -401,7 +402,7 @@ function Profile() {
                     <hr />
                     <b>
                       <h6 style={{ fontWeight: "900" }}>
-                        <u>Comments</u>
+                        Comments
                       </h6>
                     </b>
                     {item.comments.map((comment) => {
@@ -442,17 +443,24 @@ function Profile() {
                         padding: "15px 0",
                       }}
                     >
-                      <h6>
-                        <b>Upload Files</b>
-                      </h6>
-                      <div style={{ display: "flex" }}>
+                      <b><h6
+                      style={{
+                        fontWeight: "900",
+                        margin: "0",
+                        paddingRight: "10px",
+                      }}
+                      >
+                        Upload Files
+                      </h6></b>
+                      {/* <divv style={{ display: "flex" }}> */}
                         {item.postedBy._id == state._id ? (
                           <div
                             style={{
                               display: "flex",
                               justifyContent: "space-between",
-                              marginRight: "50px",
+                              marginRight: "30px",
                             }}
+                            className="upload-files"
                           >
                             <Link
                               to={`/firstterm/${item._id}`}
@@ -499,7 +507,7 @@ function Profile() {
                               style={{
                                 display: "flex",
                                 alignItems: "center",
-                                paddingRight: "22px",
+                                // paddingRight: "22px",
                               }}
                             >
                               <i
@@ -518,7 +526,7 @@ function Profile() {
                         ) : (
                           ""
                         )}
-                      </div>
+                      {/* </divv> */}
                     </div>
                     <hr></hr>
                     <h6>
@@ -526,13 +534,14 @@ function Profile() {
                     </h6>
                     {item.filee.map((f) => {
                       return (
-                        <h6 key={f._id}>
+                        <h6 key={f._id} style={{width: "95%"}}>
                           {f.term == firstterm ? (
                             <div>
                               <div
                                 style={{
                                   display: "flex",
                                   justifyContent: "space-between",
+                                  flexWrap: "wrap",
                                 }}
                               >
                                 <a
@@ -556,7 +565,9 @@ function Profile() {
                                 </a>
                                 <div>
                                   {item.postedBy._id == state._id ? (
-                                    <>
+                                    <div
+                                      className="profile-files"
+                                    >
                                       <Link
                                         to={`/editfiles/${item._id}/${f._id}`}
                                       >
@@ -584,7 +595,7 @@ function Profile() {
                                       >
                                         delete
                                       </i>
-                                    </>
+                                    </div>
                                   ) : (
                                     ""
                                   )}
@@ -633,7 +644,7 @@ function Profile() {
                                 </a>
                                 <div>
                                   {item.postedBy._id == state._id ? (
-                                    <>
+                                    <div className="profile-files">
                                       <Link
                                         to={`/editfiles/${item._id}/${f._id}`}
                                       >
@@ -661,7 +672,7 @@ function Profile() {
                                       >
                                         delete
                                       </i>
-                                    </>
+                                    </div>
                                   ) : (
                                     ""
                                   )}
@@ -710,7 +721,7 @@ function Profile() {
                                 </a>
                                 <div>
                                   {item.postedBy._id == state._id ? (
-                                    <>
+                                    <div className="profile-files">
                                       <Link
                                         to={`/editfiles/${item._id}/${f._id}`}
                                       >
@@ -738,7 +749,7 @@ function Profile() {
                                       >
                                         delete
                                       </i>
-                                    </>
+                                    </div>
                                   ) : (
                                     ""
                                   )}
