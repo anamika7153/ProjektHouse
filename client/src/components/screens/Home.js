@@ -310,7 +310,7 @@ function Home() {
                 <thead>
                   <tr>
                     <th>Name</th>
-                    <th>Sec</th>
+                    <th>Sec / Roll No.</th>
                     <th>Mob. No</th>
                   </tr>
                 </thead>
