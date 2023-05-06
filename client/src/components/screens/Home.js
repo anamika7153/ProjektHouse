@@ -164,7 +164,12 @@ function Home() {
           return (
             <div
               className="creator-pic"
-              style={{ margin: "auto", height: "100px", width: "100px", paddingRight: "12px" }}
+              style={{
+                margin: "auto",
+                height: "100px",
+                width: "100px",
+                paddingRight: "12px",
+              }}
             >
               <div
                 style={{
@@ -187,7 +192,7 @@ function Home() {
                       height: "60%",
                       borderRadius: "50%",
                       backgroundSize: "contain",
-                      border: "1px solid #8a7c81"
+                      border: "1px solid #8a7c81",
                     }}
                     src={creator.pic}
                   />
@@ -211,7 +216,7 @@ function Home() {
         })}
       </div>
 
-      <h4 style={{marginBottom: "1.52rem"}}>Feed</h4>
+      <h4 style={{ marginBottom: "1.52rem" }}>Feed</h4>
       {data?.map((item) => {
         return (
           <div
@@ -248,7 +253,7 @@ function Home() {
                       padding: "0",
                       marginBottom: "-15px",
                       marginTop: "-4px",
-                      border: "1px solid #8a7c81"
+                      border: "1px solid #8a7c81",
                     }}
                   />
                   <div>{item.postedBy.name}</div>
@@ -291,9 +296,12 @@ function Home() {
             <hr></hr>
 
             <div style={{ padding: "25px 25px 0 25px" }}>
-              <p style={{ fontSize: "21px" }}>
+              {/* <p className="project-title" style={{ fontSize: "21px" }}>
                 <b>{item.title}</b>
-              </p>
+              </p> */}
+              <b>
+                <h6 style={{ fontWeight: "900" }}>{item.title}</h6>
+              </b>
               <p style={{ fontSize: "18px" }}>{item.description}</p>
               <b>
                 <h6 style={{ fontWeight: "900" }}>Members</h6>
@@ -476,7 +484,11 @@ function Home() {
                   makeComment(e.target[0].value, item._id);
                 }}
               >
-                <input type="text" style={{color: "rgba(0,0,0,0.87)"}} placeholder="Add comment here" />
+                <input
+                  type="text"
+                  style={{ color: "rgba(0,0,0,0.87)" }}
+                  placeholder="Add comment here"
+                />
               </form>
               {item.postedBy._id == state._id ? (
                 <>
@@ -605,7 +617,7 @@ function Home() {
                   className="files"
                 >
                   <span
-                  className="link-col"
+                    className="link-col"
                     style={{
                       paddingRight: "20px",
                       cursor: "pointer",
@@ -617,7 +629,7 @@ function Home() {
                     First Term
                   </span>
                   <span
-                  className="link-col"
+                    className="link-col"
                     style={{
                       paddingRight: "20px",
                       cursor: "pointer",
@@ -629,7 +641,7 @@ function Home() {
                     Second Term
                   </span>
                   <span
-                  className="link-col"
+                    className="link-col"
                     style={{
                       paddingRight: "20px",
                       cursor: "pointer",

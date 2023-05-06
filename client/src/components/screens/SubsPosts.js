@@ -106,7 +106,11 @@ function SubsPosts() {
         <>
           {data.map((item) => {
             return (
-              <div style={{ borderRadius: "12px ", backgroundColor: "#BBC2D7" }} className="card home-card" key={item._id}>
+              <div
+                style={{ borderRadius: "12px ", backgroundColor: "#BBC2D7" }}
+                className="card home-card"
+                key={item._id}
+              >
                 <h5 style={{ padding: "10px 15px" }}>
                   <Link
                     to={
@@ -133,7 +137,9 @@ function SubsPosts() {
                 </h5>
                 <hr></hr>
                 <div className="card-content">
-                  <h6>{item.title}</h6>
+                  <b>
+                    <h6 style={{ fontWeight: "900" }}>{item.title}</h6>
+                  </b>
                   <p>{item.description}</p>
                   <b>
                     <h6 style={{ fontWeight: "900" }}>

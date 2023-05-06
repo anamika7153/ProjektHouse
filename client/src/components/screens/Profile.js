@@ -34,10 +34,13 @@ function Profile() {
       data.append("file", image);
       data.append("upload_preset", "projekthouse");
       data.append("cloud_name", "dpoeooxra");
-      fetch("https://res.cloudinary.com/dpoeooxra/image/upload/v1683117175/profile%20pic/default_ljqs1s.png", {
-        method: "POST",
-        body: data,
-      })
+      fetch(
+        "https://res.cloudinary.com/dpoeooxra/image/upload/v1683117175/profile%20pic/default_ljqs1s.png",
+        {
+          method: "POST",
+          body: data,
+        }
+      )
         .then((response) => response.json()) // keep it in one line else use return res.json()
         .then((data) => {
           fetch(`${API_URL}/updatepic`, {
@@ -156,8 +159,8 @@ function Profile() {
         <div className="container" style={{ maxWidth: "1280px" }}>
           <div
             style={{
-              margin: "30px 10px",
-              borderBottom: "1px solid",
+              margin: "25px 10px",
+              borderBottom: "2px solid #909CBE",
             }}
           >
             <div
@@ -168,7 +171,7 @@ function Profile() {
             >
               <div className="profile-left">
                 <img
-                className="profile-img"
+                  className="profile-img"
                   style={{
                     height: "200px",
                     width: "200px",
@@ -210,10 +213,14 @@ function Profile() {
               return <img className="item" src={item.photo} key={item._id} />;
             })}
           </div> */}
-          <div className="home container" style={{width: "95%"}}>
+          <div className="home container" style={{ width: "95%" }}>
             {data.map((item) => {
               return (
-                <div style={{ borderRadius: "12px ", backgroundColor: "#BBC2D7" }} className="card home-card" key={item._id}>
+                <div
+                  style={{ borderRadius: "12px ", backgroundColor: "#BBC2D7" }}
+                  className="card home-card"
+                  key={item._id}
+                >
                   <h5 style={{ padding: "10px 15px" }}>
                     <Link
                       to={
@@ -253,14 +260,12 @@ function Profile() {
                   </h5>
                   <hr></hr>
                   <div style={{ paddingLeft: "25px" }}>
-                    <p style={{ fontSize: "21px" }}>
-                      <b>{item.title}</b>
-                    </p>
+                    <b>
+                      <h6 style={{ fontWeight: "900" }}>{item.title}</h6>
+                    </b>
                     <p style={{ fontSize: "18px" }}>{item.description}</p>
                     <b>
-                      <h6 style={{ fontWeight: "900" }}>
-                        Members
-                      </h6>
+                      <h6 style={{ fontWeight: "900" }}>Members</h6>
                     </b>
 
                     <table>
@@ -400,9 +405,7 @@ function Profile() {
                     </div>
                     <hr />
                     <b>
-                      <h6 style={{ fontWeight: "900" }}>
-                        Comments
-                      </h6>
+                      <h6 style={{ fontWeight: "900" }}>Comments</h6>
                     </b>
                     {item.comments.map((comment) => {
                       return (
@@ -442,90 +445,89 @@ function Profile() {
                         padding: "15px 0",
                       }}
                     >
-                      <b><h6
-                      style={{
-                        fontWeight: "900",
-                        margin: "0",
-                        paddingRight: "10px",
-                      }}
-                      >
-                        Upload Files
-                      </h6></b>
-                      {/* <divv style={{ display: "flex" }}> */}
-                        {item.postedBy._id == state._id ? (
-                          <div
+                      <b>
+                        <h6
+                          style={{
+                            fontWeight: "900",
+                            margin: "0",
+                            paddingRight: "10px",
+                          }}
+                        >
+                          Upload Files
+                        </h6>
+                      </b>
+                      {item.postedBy._id == state._id ? (
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            marginRight: "30px",
+                          }}
+                          className="upload-files"
+                        >
+                          <Link
+                            to={`/firstterm/${item._id}`}
                             style={{
                               display: "flex",
-                              justifyContent: "space-between",
-                              marginRight: "30px",
+                              alignItems: "center",
+                              paddingRight: "22px",
                             }}
-                            className="upload-files"
                           >
-                            <Link
-                              to={`/firstterm/${item._id}`}
+                            <i
+                              className="material-icons"
                               style={{
-                                display: "flex",
-                                alignItems: "center",
-                                paddingRight: "22px",
+                                float: "right",
+                                cursor: "pointer",
+                                marginRight: "10px",
                               }}
                             >
-                              <i
-                                className="material-icons"
-                                style={{
-                                  float: "right",
-                                  cursor: "pointer",
-                                  marginRight: "10px",
-                                }}
-                              >
-                                upload_file
-                              </i>
-                              <span>First Term</span>
-                            </Link>
-                            <Link
-                              to={`/secondterm/${item._id}`}
+                              upload_file
+                            </i>
+                            <span>First Term</span>
+                          </Link>
+                          <Link
+                            to={`/secondterm/${item._id}`}
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              paddingRight: "22px",
+                            }}
+                          >
+                            <i
+                              className="material-icons"
                               style={{
-                                display: "flex",
-                                alignItems: "center",
-                                paddingRight: "22px",
+                                float: "right",
+                                cursor: "pointer",
+                                marginRight: "10px",
                               }}
                             >
-                              <i
-                                className="material-icons"
-                                style={{
-                                  float: "right",
-                                  cursor: "pointer",
-                                  marginRight: "10px",
-                                }}
-                              >
-                                upload_file
-                              </i>
-                              <span>Second Term</span>
-                            </Link>
-                            <Link
-                              to={`/thirdterm/${item._id}`}
+                              upload_file
+                            </i>
+                            <span>Second Term</span>
+                          </Link>
+                          <Link
+                            to={`/thirdterm/${item._id}`}
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                            }}
+                          >
+                            <i
+                              className="material-icons"
                               style={{
-                                display: "flex",
-                                alignItems: "center",
-                                // paddingRight: "22px",
+                                float: "right",
+                                cursor: "pointer",
+                                marginRight: "10px",
                               }}
                             >
-                              <i
-                                className="material-icons"
-                                style={{
-                                  float: "right",
-                                  cursor: "pointer",
-                                  marginRight: "10px",
-                                }}
-                              >
-                                upload_file
-                              </i>
-                              <span>Third Term</span>
-                            </Link>
-                          </div>
-                        ) : (
-                          ""
-                        )}
-                      {/* </divv> */}
+                              upload_file
+                            </i>
+                            <span>Third Term</span>
+                          </Link>
+                        </div>
+                      ) : (
+                        ""
+                      )}
                     </div>
                     <hr></hr>
                     <h6>
@@ -533,7 +535,7 @@ function Profile() {
                     </h6>
                     {item.filee.map((f) => {
                       return (
-                        <h6 key={f._id} style={{width: "95%"}}>
+                        <h6 key={f._id} style={{ width: "95%" }}>
                           {f.term == firstterm ? (
                             <div>
                               <div
@@ -564,9 +566,7 @@ function Profile() {
                                 </a>
                                 <div>
                                   {item.postedBy._id == state._id ? (
-                                    <div
-                                      className="profile-files"
-                                    >
+                                    <div className="profile-files">
                                       <Link
                                         to={`/editfiles/${item._id}/${f._id}`}
                                       >
@@ -613,7 +613,7 @@ function Profile() {
                     </h6>
                     {item.filee.map((f) => {
                       return (
-                        <h6 key={f._id} style={{width: "95%"}}>
+                        <h6 key={f._id} style={{ width: "95%" }}>
                           {f.term == secondterm ? (
                             <div>
                               <div
@@ -691,7 +691,7 @@ function Profile() {
                     </h6>
                     {item.filee.map((f) => {
                       return (
-                        <h6 key={f._id} style={{width: "95%"}}>
+                        <h6 key={f._id} style={{ width: "95%" }}>
                           {f.term == thirdterm ? (
                             <div>
                               <div

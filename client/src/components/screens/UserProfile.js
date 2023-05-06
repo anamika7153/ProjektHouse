@@ -97,52 +97,7 @@ function UserProfile() {
         // setFollowed(true);
       });
   };
-  const likePost = (id) => {
-    fetch(`${API_URL}/like`, {
-      method: "put",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-      },
-      body: JSON.stringify({
-        postId: id,
-      }),
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        const newData = data.map((item) => {
-          if (result._id == item._id) return result;
-          else return item;
-        });
-        setData(newData);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-  const unlikePost = (id) => {
-    fetch(`${API_URL}/unlike`, {
-      method: "put",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-      },
-      body: JSON.stringify({
-        postId: id,
-      }),
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        const newData = data.map((item) => {
-          if (result._id == item._id) return result;
-          else return item;
-        });
-        setData(newData);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+
   const makeComment = (text, postId) => {
     fetch(`${API_URL}/comment`, {
       method: "put",
@@ -229,17 +184,19 @@ function UserProfile() {
   return (
     <>
       {userProfile ? (
-        <div className="container" style={{ maxWidth: "900px" }}>
+        <div className="container" style={{ maxWidth: "1280px" }}>
           <div
             style={{
               display: "flex",
               justifyContent: "space-around",
-              margin: "30px 10px",
-              borderBottom: "1px solid",
+              alignItems: "center",
+              margin: "25px 10px",
+              borderBottom: "2px solid #909CBE",
             }}
           >
             <div>
               <img
+                className="profile-img"
                 style={{
                   height: "200px",
                   width: "200px",
@@ -299,7 +256,11 @@ function UserProfile() {
           <div className="home container">
             {data.map((item) => {
               return (
-                <div className="card home-card" key={item._id}>
+                <div
+                  style={{ borderRadius: "12px ", backgroundColor: "#BBC2D7" }}
+                  className="card home-card"
+                  key={item._id}
+                >
                   <h5 style={{ padding: "10px 15px" }}>
                     <Link
                       to={
@@ -339,17 +300,15 @@ function UserProfile() {
                   </h5>
                   <hr></hr>
                   <div style={{ paddingLeft: "25px" }}>
-                    <p style={{ fontSize: "21px" }}>
-                      <b>{item.title}</b>
-                    </p>
-
+                    <b>
+                      <h6 style={{ fontWeight: "900" }}>{item.title}</h6>
+                    </b>
                     <p style={{ fontSize: "18px" }}>{item.description}</p>
                     <b>
                       <h6 style={{ fontWeight: "900" }}>
                         <u>Members</u>
                       </h6>
                     </b>
-
                     <table>
                       <thead>
                         <tr>
@@ -487,7 +446,6 @@ function UserProfile() {
                     </div>
                     <hr></hr>
 
-
                     <b>
                       <h6 style={{ fontWeight: "900" }}>
                         <u>Comments</u>
@@ -529,13 +487,14 @@ function UserProfile() {
                     </h6>
                     {item.filee.map((f) => {
                       return (
-                        <h6 key={f._id}>
+                        <h6 key={f._id} style={{ width: "95%" }}>
                           {f.term == firstterm ? (
                             <div>
                               <div
                                 style={{
                                   display: "flex",
                                   justifyContent: "space-between",
+                                  flexWrap: "wrap",
                                 }}
                               >
                                 <a
@@ -606,13 +565,14 @@ function UserProfile() {
                     </h6>
                     {item.filee.map((f) => {
                       return (
-                        <h6 key={f._id}>
+                        <h6 key={f._id} style={{ width: "95%" }}>
                           {f.term == secondterm ? (
                             <div>
                               <div
                                 style={{
                                   display: "flex",
                                   justifyContent: "space-between",
+                                  flexWrap: "wrap",
                                 }}
                               >
                                 <a
@@ -683,13 +643,14 @@ function UserProfile() {
                     </h6>
                     {item.filee.map((f) => {
                       return (
-                        <h6 key={f._id}>
+                        <h6 key={f._id} style={{ width: "95%" }}>
                           {f.term == thirdterm ? (
                             <div>
                               <div
                                 style={{
                                   display: "flex",
                                   justifyContent: "space-between",
+                                  flexWrap: "wrap",
                                 }}
                               >
                                 <a
