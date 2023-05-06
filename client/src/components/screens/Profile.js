@@ -181,7 +181,7 @@ function Profile() {
                 />
                 <div className="file-field input-field">
                   <div className="btn" style={{ marginBottom: "1rem" }}>
-                    <span>Update Image</span>
+                    <span className="profile-image">Update Image</span>
                     <input
                       type="file"
                       onChange={(e) => updatePhoto(e.target.files[0])}
