@@ -214,9 +214,9 @@ function SubsPosts() {
                             <td>{item.mobile2}</td>
                           </tr>
                           <tr key={item._id}>
-                            <td>{item.member2}</td>
-                            <td>{item.sec2}</td>
-                            <td>{item.mobile2}</td>
+                            <td>{item.member3}</td>
+                            <td>{item.sec3}</td>
+                            <td>{item.mobile3}</td>
                           </tr>
                           <tr key={item._id}>
                             <td>{item.member4}</td>
