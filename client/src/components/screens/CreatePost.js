@@ -368,7 +368,7 @@ function CreatePost() {
                   marginTop: "1rem",
                 }}
                 type="submit"
-                className="btn btn-large waves-effect hoverable #ff5252 red accent-1"
+                className="btn btn-large waves-effect hoverable"
               >
                 Post
               </button>

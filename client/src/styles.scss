@@ -36,6 +36,7 @@
     nav {
       display: flex;
       justify-content: flex-start;
+      background-color: #AC3B61 !important;
   
       a {
         margin: 10px;
@@ -126,8 +127,23 @@
       width: 70%;
     }
   }
+  a,
+  .link-col {color: #3D78BA;}
+  hr {border-color: #909CBE;}
+  input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea,
+  tr {border-bottom: 1px solid #9BA5C4;}
+  .profile-left {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  .btn {background-color: #768ABF !important;}
+  nav ul li {padding-left: 10px;}
+  input::placeholder {
+    color: rgba(0,0,0,0.5);
+  }
   .sidenav {
-    background-color: #F5ABAE;
+    background-color: #DBDFEA;
   }
   .sidenav li {
     display: block;
@@ -185,11 +201,6 @@
     .creator-pic {
       height: 80px !important;
       width: 80px !important;
-    }
-    .profile-left {
-      display: flex !important;
-      flex-direction: column !important;
-      align-items: center !important;
     }
     .profile-img {
       height: 120px !important;

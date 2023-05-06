@@ -273,7 +273,7 @@ function UserProfile() {
                     marginBottom: "1rem",
                   }}
                   type="submit"
-                  className="btn btn-medium waves-effect hoverable #ff5252 red accent-1"
+                  className="btn btn-medium waves-effect hoverable"
                   onClick={() => unfollowUser()}
                 >
                   UnFollow
@@ -288,7 +288,7 @@ function UserProfile() {
                     marginBottom: "1rem",
                   }}
                   type="submit"
-                  className="btn btn-medium waves-effect hoverable #ff5252 red accent-1"
+                  className="btn btn-medium waves-effect hoverable"
                   onClick={() => followUser()}
                 >
                   Follow

@@ -157,14 +157,14 @@ function Home() {
           display: "flex",
           minHeight: "150px",
           flexDirection: "row",
-          marginBottom: "1.52rem",
+          marginBottom: "3.52rem",
         }}
       >
         {creators.slice(0, 6).map((creator) => {
           return (
             <div
               className="creator-pic"
-              style={{ margin: "auto", height: "100px", width: "100px" }}
+              style={{ margin: "auto", height: "100px", width: "100px", paddingRight: "12px" }}
             >
               <div
                 style={{
@@ -187,6 +187,7 @@ function Home() {
                       height: "60%",
                       borderRadius: "50%",
                       backgroundSize: "contain",
+                      border: "1px solid #8a7c81"
                     }}
                     src={creator.pic}
                   />
@@ -210,13 +211,13 @@ function Home() {
         })}
       </div>
 
-      <h4>Feed</h4>
+      <h4 style={{marginBottom: "1.52rem"}}>Feed</h4>
       {data?.map((item) => {
         return (
           <div
             className="card home-card"
             key={item._id}
-            style={{ borderRadius: "12px " }}
+            style={{ borderRadius: "12px ", backgroundColor: "#BBC2D7" }}
           >
             <h5
               style={{
@@ -247,6 +248,7 @@ function Home() {
                       padding: "0",
                       marginBottom: "-15px",
                       marginTop: "-4px",
+                      border: "1px solid #8a7c81"
                     }}
                   />
                   <div>{item.postedBy.name}</div>
@@ -474,7 +476,7 @@ function Home() {
                   makeComment(e.target[0].value, item._id);
                 }}
               >
-                <input type="text" placeholder="Add comment here" />
+                <input type="text" style={{color: "rgba(0,0,0,0.87)"}} placeholder="Add comment here" />
               </form>
               {item.postedBy._id == state._id ? (
                 <>
@@ -603,10 +605,10 @@ function Home() {
                   className="files"
                 >
                   <span
+                  className="link-col"
                     style={{
                       paddingRight: "20px",
                       cursor: "pointer",
-                      color: "#039be5",
                       fontWeight: "normal",
                       letterSpacing: "1px",
                     }}
@@ -615,10 +617,10 @@ function Home() {
                     First Term
                   </span>
                   <span
+                  className="link-col"
                     style={{
                       paddingRight: "20px",
                       cursor: "pointer",
-                      color: "#039be5",
                       fontWeight: "normal",
                       letterSpacing: "1px",
                     }}
@@ -627,10 +629,10 @@ function Home() {
                     Second Term
                   </span>
                   <span
+                  className="link-col"
                     style={{
                       paddingRight: "20px",
                       cursor: "pointer",
-                      color: "#039be5",
                       fontWeight: "normal",
                       letterSpacing: "1px",
                     }}
@@ -655,7 +657,6 @@ function Home() {
                           }}
                         >
                           <a
-                          className="files-left"
                             href={f.url}
                             target="_blank"
                             rel="noopener noreferrer"
@@ -676,7 +677,6 @@ function Home() {
                           </a>
                           {item.postedBy._id == state._id ? (
                             <div
-                            className="files-right"
                               style={{
                                 display: "flex",
                                 justifyContent: "space-between",
@@ -731,7 +731,6 @@ function Home() {
                             }}
                           >
                             <a
-                            className="files-left"
                               href={f.url}
                               target="_blank"
                               rel="noopener noreferrer"
@@ -750,7 +749,7 @@ function Home() {
                                 </i>
                               </div>
                             </a>
-                            <div className="files-right">
+                            <div>
                               {item.postedBy._id == state._id ? (
                                 <div
                                   style={{
@@ -808,7 +807,6 @@ function Home() {
                               }}
                             >
                               <a
-                              className="files-left"
                                 href={f.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
@@ -827,7 +825,7 @@ function Home() {
                                   </i>
                                 </div>
                               </a>
-                              <div className="files-right">
+                              <div>
                                 {item.postedBy._id == state._id ? (
                                   <div
                                     style={{

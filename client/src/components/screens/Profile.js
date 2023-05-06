@@ -173,7 +173,6 @@ function Profile() {
                     height: "200px",
                     width: "200px",
                     borderRadius: "50%",
-                    marginRight: "15px",
                   }}
                   src={state ? state.pic : "loading.."}
                 />
@@ -214,7 +213,7 @@ function Profile() {
           <div className="home container" style={{width: "95%"}}>
             {data.map((item) => {
               return (
-                <div className="card home-card" key={item._id}>
+                <div style={{ borderRadius: "12px ", backgroundColor: "#BBC2D7" }} className="card home-card" key={item._id}>
                   <h5 style={{ padding: "10px 15px" }}>
                     <Link
                       to={
@@ -545,7 +544,6 @@ function Profile() {
                                 }}
                               >
                                 <a
-                                className="files-left"
                                   href={f.url}
                                   target="_blank"
                                   rel="noopener noreferrer"
@@ -564,7 +562,7 @@ function Profile() {
                                     </i>
                                   </div>
                                 </a>
-                                <div className="files-right">
+                                <div>
                                   {item.postedBy._id == state._id ? (
                                     <div
                                       className="profile-files"
@@ -626,7 +624,6 @@ function Profile() {
                                 }}
                               >
                                 <a
-                                className="files-left"
                                   href={f.url}
                                   target="_blank"
                                   rel="noopener noreferrer"
@@ -645,7 +642,7 @@ function Profile() {
                                     </i>
                                   </div>
                                 </a>
-                                <div className="files-right">
+                                <div>
                                   {item.postedBy._id == state._id ? (
                                     <div className="profile-files">
                                       <Link
@@ -705,7 +702,6 @@ function Profile() {
                                 }}
                               >
                                 <a
-                                className="files-left"
                                   href={f.url}
                                   target="_blank"
                                   rel="noopener noreferrer"
@@ -724,7 +720,7 @@ function Profile() {
                                     </i>
                                   </div>
                                 </a>
-                                <div className="files-right">
+                                <div>
                                   {item.postedBy._id == state._id ? (
                                     <div className="profile-files">
                                       <Link

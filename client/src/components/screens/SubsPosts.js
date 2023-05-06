@@ -106,7 +106,7 @@ function SubsPosts() {
         <>
           {data.map((item) => {
             return (
-              <div className="card home-card" key={item._id}>
+              <div style={{ borderRadius: "12px ", backgroundColor: "#BBC2D7" }} className="card home-card" key={item._id}>
                 <h5 style={{ padding: "10px 15px" }}>
                   <Link
                     to={

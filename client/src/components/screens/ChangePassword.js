@@ -95,7 +95,7 @@ const [otpForm, showForm] = useState(true)
                   marginTop: "1rem",
                 }}
                 type="button"
-                className="btn btn-large waves-effect hoverable #ff5252 red accent-1"
+                className="btn btn-large waves-effect hoverable"
                 onClick={sendotp}
               >
                 Send OTP

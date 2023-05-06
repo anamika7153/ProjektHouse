@@ -41,8 +41,7 @@ const Navbar = () => {
         <li key="5">
           <button
             type="submit"
-            style={{}}
-            className="logout-btn btn waves-effect hoverable #ff5252 red accent-1"
+            className="logout-btn btn waves-effect hoverable"
             onClick={() => {
               localStorage.clear();
               dispatch({ type: "CLEAR" });
@@ -88,7 +87,7 @@ const Navbar = () => {
   };
   return (
     <>
-      <nav style={{height: "60px"}} className="nav-extended">
+      <nav style={{height: "60px", backgroundColor: "#8294C4"}} className="nav-extended">
         <div  className="nav-wrapper">
           <Link
             to={state ? "/" : "/login"}
