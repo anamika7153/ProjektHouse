@@ -83,7 +83,7 @@ function Login() {
                 onChange={(e) => setPassword(e.target.value)}
               />
               <label htmlFor="password">Password</label>
-              <Link to='/user/sendemail'>Forgot Password ?</Link>
+              {/* <Link to='/user/sendemail'>Forgot Password ?</Link> */}
               {/* <span style={{ cursor: "pointer" }} onClick={changePass}> Forgot Password ?</span> */}
             </div>
             <div className="col s12" style={{ paddingLeft: "11.250px" }}>

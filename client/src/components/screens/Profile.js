@@ -166,7 +166,7 @@ function Profile() {
             <div
               style={{
                 display: "flex",
-                justifyContent: "space-around",
+                justifyContent: "space-evenly",
               }}
             >
               <div className="profile-left">
@@ -194,6 +194,7 @@ function Profile() {
               </div>
               <div>
                 <h4 className="profile-name">{state ? state.name : ""}</h4>
+                <h5>{state ? state.email : ""}</h5>
                 <div
                   style={{
                     display: "flex",

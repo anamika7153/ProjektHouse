@@ -188,7 +188,7 @@ function UserProfile() {
           <div
             style={{
               display: "flex",
-              justifyContent: "space-around",
+              justifyContent: "space-evenly",
               alignItems: "center",
               margin: "25px 10px",
               borderBottom: "2px solid #909CBE",
