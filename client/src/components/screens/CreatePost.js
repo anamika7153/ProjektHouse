@@ -119,6 +119,7 @@ function CreatePost() {
             <h4>
               <b>Create Team</b>
             </h4>
+            <span style={{color: "#E76161"}}>Fields marked with (*) are mandatory.</span>
           </div>
           <Form onSubmit={handleOnSubmit}>
             {errorMsg && <p className="errorMsg">{errorMsg}</p>}
@@ -128,7 +129,7 @@ function CreatePost() {
                   <Form.Control
                     type="text"
                     name="title"
-                    placeholder="Enter title"
+                    placeholder="Enter title *"
                     value={state.title || ""}
                     onChange={handleInputChange}
                   />
@@ -142,7 +143,7 @@ function CreatePost() {
                     type="text"
                     name="description"
                     value={state.description || ""}
-                    placeholder="Area of Project"
+                    placeholder="Area of Project *"
                     onChange={handleInputChange}
                   />
                 </Form.Group>
@@ -153,7 +154,7 @@ function CreatePost() {
                     type="number"
                     name="members"
                     value={state.members || ""}
-                    placeholder="Total Members"
+                    placeholder="Total Members *"
                     onChange={handleInputChange}
                   />
                 </Form.Group>
@@ -166,7 +167,7 @@ function CreatePost() {
                     type="text"
                     name="member1"
                     value={state.member1 || ""}
-                    placeholder="Member1"
+                    placeholder="Member1 *"
                     onChange={handleInputChange}
                   />
                 </Form.Group>
@@ -177,7 +178,7 @@ function CreatePost() {
                     type="text"
                     name="sec1"
                     value={state.sec1 || ""}
-                    placeholder="Sec / Roll No"
+                    placeholder="Sec / Roll No *"
                     onChange={handleInputChange}
                   />
                 </Form.Group>
@@ -188,7 +189,7 @@ function CreatePost() {
                     type="number"
                     name="mobile1"
                     value={state.mobile1 || ""}
-                    placeholder="Mobile No"
+                    placeholder="Mobile No *"
                     onChange={handleInputChange}
                   />
                 </Form.Group>

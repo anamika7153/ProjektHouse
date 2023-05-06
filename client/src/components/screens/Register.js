@@ -94,7 +94,7 @@ function Register() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
-              <label htmlFor="name">Name</label>
+              <label htmlFor="name">PanelNumber_GroupNumber (Eg: P4_G5)</label>
             </div>
             <div className="input-field col s12">
               <input

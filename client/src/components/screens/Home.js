@@ -160,7 +160,7 @@ function Home() {
           marginBottom: "3.52rem",
         }}
       >
-        {creators.slice(0, 6).map((creator) => {
+        {creators.slice(0, 4).map((creator) => {
           return (
             <div
               className="creator-pic"
