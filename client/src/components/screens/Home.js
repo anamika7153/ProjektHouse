@@ -440,7 +440,7 @@ function Home() {
                     >
                       <b>Project Link</b>
                       <a
-                        style={{ width: "70%" }}
+                        style={{ width: "70%", overflow: "hidden" }}
                         href={item.projectlink}
                         target="_blank"
                         rel="noopener noreferrer"

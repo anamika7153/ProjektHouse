@@ -269,7 +269,7 @@ function SubsPosts() {
                   >
                     <b>Project Link</b>
                     <a
-                      style={{ width: "90%" }}
+                      style={{ width: "90%", overflow: "hidden" }}
                       href={item.projectlink}
                       target="_blank"
                       rel="noopener noreferrer"
