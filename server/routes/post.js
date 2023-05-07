@@ -227,11 +227,11 @@ const strg = multer.memoryStorage({
 
 const fileFilter = (req, file, cb) => {
   if (
-    !file.originalname.match(/\.(jpeg|jpg|png|pdf|doc|docx|xlsx|xls|ppt|pptx)$/)
+    !file.originalname.match(/\.(pdf|doc|docx|xlsx|xls|ppt|pptx)$/)
   ) {
     return cb(
       new Error(
-        "only upload files with jpg, jpeg, png, pdf, doc, docx, xslx, xls, ppt, pptx format."
+        "only upload files with pdf, doc, docx, xslx, xls, ppt, pptx format."
       )
     );
   }
@@ -241,7 +241,7 @@ const fileFilter = (req, file, cb) => {
 const upl = multer({
   strg,
   fileFilter,
-  limits: { fileSize: 8000000, files: 2 },
+  limits: { fileSize: 10000000, files: 2 },
 });
 
 router.put(
