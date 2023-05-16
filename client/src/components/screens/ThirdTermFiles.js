@@ -19,7 +19,7 @@ const Newupload = () => {
   const { id } = useParams();
 
   const onDrop = (files) => {
-    console.log("filesss first term",files)
+    // console.log("filesss first term",files)
     const [uploadedFile] = files;
     setFile(files);
     setTerm("third");
@@ -57,7 +57,7 @@ const Newupload = () => {
         M.toast({ html: "Files uploaded Successfully", classes: " green" });
         history.push("/");
 
-        console.log("createpost file", file)
+        // console.log("createpost file", file)
 
     } catch (error) {
         console.log(error)

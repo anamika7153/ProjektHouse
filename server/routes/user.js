@@ -61,7 +61,7 @@ router.post("/user/sendemail", async(req, res) => {
 
 router.put("/user/changepassword", async (req, res) => {
   const data = await Otp.findOne({ email: req.body.email, code: req.body.otpCode })
-  console.log("data",data)
+  // console.log("data",data)
   const setpass =async(userid,hashed) => {
     await User.findByIdAndUpdate(
       userid, 
@@ -186,7 +186,7 @@ router.post("/search-users", (req, res) => {
 
 router.get("/top-creators", (req, res) => {
   User.find()
-    .sort("-following")
+    .sort("-followers")
     .then((users) => {
       res.json({ users });
     })

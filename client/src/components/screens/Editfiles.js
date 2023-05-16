@@ -21,7 +21,7 @@ const Editfl = () => {
   const onDrop = (file) => {
     const [uploadedFile] = file;
     setFile(uploadedFile);
-    console.log("ondrop",file)
+    // console.log("ondrop",file)
 
     const fileReader = new FileReader();
     fileReader.onload = () => {
@@ -43,7 +43,7 @@ const Editfl = () => {
   const handleOnSubmit = async (event) => {
     event.preventDefault();
     try {
-      console.log("file",file)
+      // console.log("file",file)
 
           const formData = new FormData();
           formData.append("file", file);
@@ -57,7 +57,7 @@ const Editfl = () => {
           }
           )
           .then((result) => {
-            console.log("result",result)
+            // console.log("result",result)
           }).catch((err)=> {
             console.log(err)
           })

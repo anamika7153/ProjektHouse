@@ -65,7 +65,7 @@ function EditPost() {
       "https://projekt-house-backend.vercel.app/edit/" + id
     );
     setPostdata(result.data);
-    console.log("result.data", result.data);
+    // console.log("result.data", result.data);
   };
 
   const submitForm = async (e) => {

@@ -135,14 +135,14 @@ router.post(
       try {
         const savepost = await post.save();
         const postid = savepost._id;
-        console.log("req.files", req.files);
+        // console.log("req.files", req.files);
         req.files.forEach(async (file) => {
-          console.log("file", file);
+          // console.log("file", file);
           if (file.mimetype.includes("image/jpeg")) folder = "files";
           else folder = "files";
           let filename = `files/${file.originalname}`;
           let medialink = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${filename}`;
-          console.log("file.originalname", file.originalname);
+          // console.log("file.originalname", file.originalname);
           var linkk = await uploadtos3(filename, file.buffer);
           var filnam = file.originalname;
           const fil = {
@@ -272,14 +272,14 @@ router.put(
       });
     };
     try {
-      console.log("req.files", req.files);
+      // console.log("req.files", req.files);
       req.files.forEach(async (file) => {
-        console.log("file", file);
+        // console.log("file", file);
         if (file.mimetype.includes("image/jpeg")) folder = "files";
         else folder = "files";
         let filename = `files/${file.originalname}`;
         let medialink = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${filename}`;
-        console.log("file.originalname", file.originalname);
+        // console.log("file.originalname", file.originalname);
         var linkk = await uploadtos3(filename, file.buffer);
         var filnam = file.originalname;
         const fil = {
@@ -361,7 +361,7 @@ router.put(
     };
     try {
       const file = req.file;
-      console.log("file in route", file);
+      // console.log("file in route", file);
       let filename = `files/${file.originalname}`;
       const orgname = file.originalname;
       // let medialink = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${filename}`
@@ -374,10 +374,10 @@ router.put(
         "files/" +
         orgname;
       // `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${filename}`
-      console.log("file.originalname", file.originalname);
-      console.log("medialink", medialink);
+      // console.log("file.originalname", file.originalname);
+      // console.log("medialink", medialink);
       var linkk = await uploadtos3(filename, file.buffer);
-      console.log("linkk", linkk);
+      // console.log("linkk", linkk);
       await Post.updateOne(
         { "filee._id": id },
         {

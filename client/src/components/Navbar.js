@@ -65,7 +65,7 @@ const Navbar = () => {
   };
   const fetchUsers = (query) => {
     setSearch(query);
-    console.log("query", query);
+    // console.log("query", query);
     if (query.length > 0) {
       fetch(`${API_URL}/search-users`, {
         method: "post",
