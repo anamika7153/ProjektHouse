@@ -454,7 +454,7 @@ function Home() {
               ) : (
                 <></>
               )}
-              <b>
+              {/* <b>
                 <h6 style={{ fontWeight: "900" }}>Comments</h6>
               </b>
               {item.comments.map((comment) => {
@@ -489,7 +489,7 @@ function Home() {
                   style={{ color: "rgba(0,0,0,0.87)" }}
                   placeholder="Add comment here"
                 />
-              </form>
+              </form> */}
               {item.postedBy._id == state._id ? (
                 <>
                   <div
@@ -588,7 +588,7 @@ function Home() {
               ) : (
                 ""
               )}
-              <div
+              {/* <div
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
@@ -598,7 +598,7 @@ function Home() {
                   paddingLeft: "0",
                   alignItems: "center",
                 }}
-              >
+                >
                 <h6
                   style={{
                     fontWeight: "900",
@@ -886,7 +886,7 @@ function Home() {
                     </h6>
                   );
                 })}
-              </div>
+              </div> */}
             </div>
           </div>
         );

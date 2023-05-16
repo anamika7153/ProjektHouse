@@ -424,29 +424,41 @@ function UserProfile() {
                     </table>
                   </div>
                   <div className="card-content">
+                    {item.projectlink ? (
+                <>
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
+                      padding: "15px 0",
+                    }}
+                  >
                     <div
                       style={{
                         display: "flex",
                         flexDirection: "row",
                         justifyContent: "space-between",
-                        padding: "15px 0",
+                        paddingBottom: "10px",
                       }}
                     >
                       <b>Project Link</b>
                       <a
-                        style={{ width: "90%", overflow: "hidden" }}
+                        style={{ width: "70%", overflow: "hidden" }}
                         href={item.projectlink}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        <span>
-                          {item.projectlink ? <>{item.projectlink}</> : <></>}
-                        </span>
+                        <span>{item.projectlink}</span>
                       </a>
                     </div>
-                    <hr></hr>
-
-                    <b>
+                  </div>
+                  {/* <hr /> */}
+                </>
+              ) : (
+                <></>
+              )}
+                    {/* <b>
                       <h6 style={{ fontWeight: "900" }}>
                         <u>Comments</u>
                       </h6>
@@ -481,8 +493,8 @@ function UserProfile() {
                       }}
                     >
                       <input type="text" placeholder="Add comment here" />
-                    </form>
-                    <h6>
+                    </form> */}
+                    {/* <h6>
                       <span>First Term Files</span>
                     </h6>
                     {item.filee.map((f) => {
@@ -714,7 +726,7 @@ function UserProfile() {
                           )}
                         </h6>
                       );
-                    })}
+                    })} */}
                   </div>
                 </div>
               );

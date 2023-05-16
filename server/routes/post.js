@@ -196,7 +196,7 @@ router.get("/download/:id", async (req, res) => {
 });
 
 router.get("/getSubPost", requireLogin, (req, res) => {
-  Post.find({ postedBy: { $in: req.user.following } })
+  Post.find({ postedBy: { $in: req.user.followers } })
     .populate("postedBy", "_id name pic")
     .populate("comments.postedBy", "_id name")
     .sort("-createdAt")
