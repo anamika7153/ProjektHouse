@@ -547,7 +547,7 @@ function SubsPosts() {
         </>
       ) : (
         <>
-          <h1>No teams' data? Follow a team to display data.</h1>
+          {/* <h1>No teams' data? Follow a team to display data.</h1> */}
         </>
       )}
     </div>

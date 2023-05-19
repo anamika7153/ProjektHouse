@@ -92,12 +92,12 @@ const Navbar = () => {
           <Link
             to={state ? "/" : "/login"}
             className="brand-logo left"
-            style={{ padding: "0 15px" }}
+            style={{ padding: "0 20px" }}
           >
             ProjektHouse
           </Link>
           <a style={{float: "right"}} href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-          <ul style={{ padding: "0 15px", display: "flex", alignItems: "center" }} className="right hide-on-med-and-down">
+          <ul style={{ padding: "0 20px", display: "flex", alignItems: "center" }} className="right hide-on-med-and-down">
             {renderList()}
           </ul>
         </div>

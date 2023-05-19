@@ -4,6 +4,7 @@ const path = require("path");
 const { s3Uploadv2, s3Uploadv3 } = require("../middlewares/s3service.js");
 const requireLogin = require("../middlewares/requireLogin");
 const Post = mongoose.model("Post");
+const User = mongoose.model("User");
 AWS_BUCKET_NAME = process.env.AWS_BUCKET_NAME;
 const multer = require("multer");
 const multerS3 = require("multer-s3");
@@ -55,7 +56,6 @@ router.post(
   requireLogin,
   upload.array("file"),
   async (req, res) => {
-    // console.log("req.files", req.files);
     const uploadtos3 = async (filename, file) => {
       return new Promise(async (resolve, reject) => {
         const params = {
@@ -94,15 +94,12 @@ router.post(
       sec5,
       mobile5,
       projectlink,
-      // githublink,
     } = req.body;
-    // console.log("req.body",req.body)
 
     try {
       if (!title || !description) {
         return res.status(422).json({ error: "Please fill in all the fields" });
       }
-      // console.log("req.body",req.body)
       req.user.password = null;
       const post = new Post({
         title,
@@ -124,25 +121,16 @@ router.post(
         mobile5,
         sec5,
         projectlink,
-        // githublink,
         postedBy: req.user,
       });
-      // console.log("githublink",githublink)
-      // post.save()
-      //   res.status(200).json("Saved to db")
-
-      // console.log("post",post)
       try {
         const savepost = await post.save();
         const postid = savepost._id;
-        // console.log("req.files", req.files);
         req.files.forEach(async (file) => {
-          // console.log("file", file);
           if (file.mimetype.includes("image/jpeg")) folder = "files";
           else folder = "files";
           let filename = `files/${file.originalname}`;
           let medialink = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${filename}`;
-          // console.log("file.originalname", file.originalname);
           var linkk = await uploadtos3(filename, file.buffer);
           var filnam = file.originalname;
           const fil = {
@@ -183,6 +171,43 @@ router.get("/allpost", (req, res) => {
     });
 });
 
+router.get("/mypost", requireLogin, (req, res) => {
+  Post.find({ postedBy: req.user._id })
+    .populate("postedBy", "_id name")
+    .populate("comments.postedBy", "_id name")
+    .sort("-createdAt")
+    .then((myposts) => {
+      res.json({ myposts });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+router.get("/post/:id", (req, res) => {
+  Post.findOne({ _id: req.params.id })
+    .populate("postedBy", "_id name pic")
+    .populate("comments.postedBy", "_id name")
+    .sort("-createdAt") // - for descending order , createdAt for factor on whihc we need to sort
+    .then((post) => {
+      res.json({ post });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+router.get("/getfiles/:postid/:id", async (req, res) => {
+  const postid = req.params.postid;
+  const id = req.params.id;
+  try {
+    const data = await Post.findById({ "filee._id": id });
+    res.json(data);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 router.get("/download/:id", async (req, res) => {
   try {
     const file = await Post.findById(req.params.id);
@@ -207,6 +232,37 @@ router.get("/getSubPost", requireLogin, (req, res) => {
       console.log(err);
     });
 });
+
+router.get("/listFollowers", requireLogin, async(req,res) => {
+  try {
+    const userId = req.user.id;
+    const user = await User.findById(userId).populate('followers');
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    const followers = user.followers;
+    res.json({followers});
+  } catch (error) {
+    console.error('Error fetching followers:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
+})
+
+router.get("/listFollowing", requireLogin, async(req,res) => {
+  try {
+    const userId = req.user.id; 
+    const user = await User.findById(userId).populate('following');
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+    const following = user.following;
+    res.json({following});
+  } catch (error) {
+    console.error('Error fetching following:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
+})
 
 //load data to editpost route
 router.get("/edit/:id", (req, res) => {
@@ -272,14 +328,11 @@ router.put(
       });
     };
     try {
-      // console.log("req.files", req.files);
       req.files.forEach(async (file) => {
-        // console.log("file", file);
         if (file.mimetype.includes("image/jpeg")) folder = "files";
         else folder = "files";
         let filename = `files/${file.originalname}`;
         let medialink = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${filename}`;
-        // console.log("file.originalname", file.originalname);
         var linkk = await uploadtos3(filename, file.buffer);
         var filnam = file.originalname;
         const fil = {
@@ -323,17 +376,6 @@ router.put("/updatedata/:id", (req, res) => {
   );
 });
 
-router.get("/getfiles/:postid/:id", upl.array("file"), async (req, res) => {
-  const postid = req.params.postid;
-  const id = req.params.id;
-  try {
-    const data = await Post.findById({ "filee._id": id });
-    res.json(data);
-  } catch (error) {
-    console.log(error);
-  }
-});
-
 router.put(
   "/editfiles/:postid/:id",
   requireLogin,
@@ -361,7 +403,6 @@ router.put(
     };
     try {
       const file = req.file;
-      // console.log("file in route", file);
       let filename = `files/${file.originalname}`;
       const orgname = file.originalname;
       // let medialink = `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${filename}`
@@ -374,10 +415,7 @@ router.put(
         "files/" +
         orgname;
       // `https://${process.env.AWS_BUCKET_NAME}.s3.${process.env.AWS_REGION}.amazonaws.com/${filename}`
-      // console.log("file.originalname", file.originalname);
-      // console.log("medialink", medialink);
       var linkk = await uploadtos3(filename, file.buffer);
-      // console.log("linkk", linkk);
       await Post.updateOne(
         { "filee._id": id },
         {
@@ -391,19 +429,6 @@ router.put(
     }
   }
 );
-
-router.get("/mypost", requireLogin, (req, res) => {
-  Post.find({ postedBy: req.user._id })
-    .populate("postedBy", "_id name")
-    .populate("comments.postedBy", "_id name")
-    .sort("-createdAt")
-    .then((myposts) => {
-      res.json({ myposts });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
 
 router.put("/like", requireLogin, (req, res) => {
   Post.findByIdAndUpdate(
@@ -509,19 +534,6 @@ router.delete("/deletecomment/:postId/:commentId", requireLogin, (req, res) => {
       } else {
         res.json(result);
       }
-    });
-});
-
-router.get("/post/:id", (req, res) => {
-  Post.findOne({ _id: req.params.id })
-    .populate("postedBy", "_id name pic")
-    .populate("comments.postedBy", "_id name")
-    .sort("-createdAt") // - for descending order , createdAt for factor on whihc we need to sort
-    .then((post) => {
-      res.json({ post });
-    })
-    .catch((err) => {
-      console.log(err);
     });
 });
 

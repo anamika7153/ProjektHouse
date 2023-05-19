@@ -7,7 +7,6 @@ import M from "materialize-css";
 
 function CreatePost() {
   const history = useHistory();
-
   const [state, setState] = useState({
     title: "",
     description: "",
@@ -28,7 +27,6 @@ function CreatePost() {
     sec5: "",
     mobile5: "",
     projectlink: "",
-    // githublink: "",
   });
 
   const [errorMsg, setErrorMsg] = useState("");
@@ -63,10 +61,9 @@ function CreatePost() {
         sec5,
         mobile5,
         projectlink,
-        // githublink,
       } = state;
 
-      if (title && description && members && member1 && sec1) {
+      if (title && description && members && member1 && sec1 && mobile1) {
         const formData = new FormData();
         formData.append("title", title);
         formData.append("description", description);
@@ -87,7 +84,6 @@ function CreatePost() {
         formData.append("mobile5", mobile5);
         formData.append("sec5", sec5);
         formData.append("projectlink", projectlink);
-        // formData.append("githublink", githublink);
         setErrorMsg("");
         await axios.post(`${API_URL}/createteam`, formData, {
           headers: {
@@ -96,7 +92,6 @@ function CreatePost() {
           },
         });
         M.toast({ html: "Team created Successfully", classes: " green" });
-        // console.log("formdata",githublink)
         history.push("/");
       } else {
         setErrorMsg("Please enter all the field values.");
@@ -132,6 +127,7 @@ function CreatePost() {
                     placeholder="Enter title *"
                     value={state.title || ""}
                     onChange={handleInputChange}
+                    required
                   />
                 </Form.Group>
               </Col>
@@ -145,6 +141,7 @@ function CreatePost() {
                     value={state.description || ""}
                     placeholder="Area of Project *"
                     onChange={handleInputChange}
+                    required
                   />
                 </Form.Group>
               </Col>
@@ -156,6 +153,7 @@ function CreatePost() {
                     value={state.members || ""}
                     placeholder="Total Members *"
                     onChange={handleInputChange}
+                    required
                   />
                 </Form.Group>
               </Col>
@@ -169,6 +167,7 @@ function CreatePost() {
                     value={state.member1 || ""}
                     placeholder="Member1 *"
                     onChange={handleInputChange}
+                    required
                   />
                 </Form.Group>
               </div>
@@ -180,6 +179,7 @@ function CreatePost() {
                     value={state.sec1 || ""}
                     placeholder="Sec / Roll No *"
                     onChange={handleInputChange}
+                    required
                   />
                 </Form.Group>
               </div>
@@ -191,6 +191,7 @@ function CreatePost() {
                     value={state.mobile1 || ""}
                     placeholder="Mobile No *"
                     onChange={handleInputChange}
+                    required
                   />
                 </Form.Group>
               </div>

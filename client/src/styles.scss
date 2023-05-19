@@ -13,7 +13,7 @@
     text-align: center;
     font-size: 30px;
   }
-  
+
   h1,
   .main-content {
     margin-bottom: 20px;
@@ -36,7 +36,6 @@
     nav {
       display: flex;
       justify-content: flex-start;
-      background-color: #AC3B61 !important;
   
       a {
         margin: 10px;
@@ -47,6 +46,20 @@
   .post-container{
     width: 90%;
   }
+  .slick-list{height: 160px !important;}
+  .slick-dots{display: none !important;}
+  .slick-next,
+  .slick-prev {
+    z-index: 999;
+    top: 45%;
+  }
+  .slick-next{
+    right: 5px;
+  }
+  .slick-prev {
+    left: 0; 
+  }
+  .slick-prev:before, .slick-next:before {font-size: 35px; color: #6575a5;}
   .upload-section {
     display: flex;
     height: 200px;
@@ -181,9 +194,11 @@
     h4 {font-size: 1.8rem;}
     h5 {font-size: 1.3rem;}
     h6{font-size: 1.1rem;}
-    .drop-zone {
-      width: 100%;
+    .drop-zone,
+    .width-full {
+      width: 100% !important;
     }
+    .direction-column {flex-direction: column;}
     .footer-left,
     .footer-right {
       width: 50% !important;
@@ -206,6 +221,11 @@
       height: 80px !important;
       width: 80px !important;
     }
+    .profile-creator-pic {
+      height: 150px !important;
+      width: 100px !important;
+      // margin-bottom: 18px !important;
+    }
     .profile-img {
       height: 120px !important;
       width: 120px !important;
@@ -214,5 +234,8 @@
     .profile-files {
       display: flex !important;
       justify-content: space-between !important;
+    }
+    .profile-container {
+      flex-direction: column-reverse !important;
     }
   }

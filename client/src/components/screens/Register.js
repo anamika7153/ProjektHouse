@@ -21,10 +21,13 @@ function Register() {
     data.append("file", image);
     data.append("upload_preset", "projekthouse");
     data.append("cloud_name", "dpoeooxra");
-    fetch("https://res.cloudinary.com/dpoeooxra/image/upload/v1683117175/profile%20pic/default_ljqs1s.png", {
-      method: "POST",
-      body: data,
-    })
+    fetch(
+      "https://res.cloudinary.com/dpoeooxra/image/upload/v1683117175/profile%20pic/default_ljqs1s.png",
+      {
+        method: "POST",
+        body: data,
+      }
+    )
       .then((response) => response.json()) // keep it in one line else use return res.json()
       .then((data) => {
         setUrl(data.url);
@@ -71,13 +74,9 @@ function Register() {
     }
   };
   return (
-    <div style={{height: "65vh"}} className="container">
+    <div style={{ height: "65vh" }} className="container">
       <div style={{ marginTop: "4rem" }} className="row">
         <div className="col s8 offset-s2">
-          {/* <Link to="/" className="btn-flat waves-effect">
-            <i className="material-icons left">keyboard_backspace</i>
-            Back to home
-          </Link> */}
           <div className="col s12" style={{ paddingLeft: "11.250px" }}>
             <h4>
               <b>Register</b> below
@@ -114,21 +113,6 @@ function Register() {
               />
               <label htmlFor="password">Password</label>
             </div>
-            {/* <div className="input-field col s12">
-              <div className="file-field input-field">
-                <div className="btn">
-                  <span>Upload Profile Image</span>
-                  <input
-                    type="file"
-                    onChange={(e) => setImage(e.target.files[0])}
-                  />
-                </div>
-                <div className="file-path-wrapper">
-                  <input className="file-path validate" type="text" />
-                </div>
-              </div>
-            </div> */}
-
             <div className="col s12" style={{ paddingLeft: "11.250px" }}>
               <button
                 style={{

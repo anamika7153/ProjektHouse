@@ -2,6 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { API_URL } from "../../utils/constants";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../App";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 function Home() {
   const [data, setData] = useState([]);
@@ -21,23 +24,33 @@ function Home() {
   const [showthird, setShowthird] = useState(false);
   const [card, setCard] = useState("");
 
-  const ShowFirstTermFiles = (postid) => {
-    setShowsecond(false);
-    setShowthird(false);
-    setCard(postid);
-    setShowfirst(postid);
-  };
-  const ShowSecondTermFiles = (postid) => {
-    setShowfirst(false);
-    setShowthird(false);
-    setCard(postid);
-    setShowsecond(postid);
-  };
-  const ShowThirdTermFiles = (postid) => {
-    setShowfirst(false);
-    setShowsecond(false);
-    setCard(postid);
-    setShowthird(postid);
+  const settings = {
+    dots: true,
+    infinite: true,
+    slidesToShow: 5, // Number of users to display at a time
+    slidesToScroll: 1,
+    autoplay: false,
+    cssEase: "linear",
+    responsive: [
+      {
+        breakpoint: 1400,
+        settings: {
+          slidesToShow: 5,
+        },
+      },
+      {
+        breakpoint: 999,
+        settings: {
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+    ],
   };
 
   useEffect(() => {
@@ -128,31 +141,70 @@ function Home() {
       });
   };
 
-  const deleteFile = (postId, fileid) => {
-    fetch(`${API_URL}/deletefile/${postId}/${fileid}`, {
-      method: "delete",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("jwt"),
-      },
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        const newData = data.map((item) => {
-          if (result._id == item._id) return result;
-          else return item;
-        });
-        setData(newData);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   return (
     <div className="home container">
-      <h4>Top Creators</h4>
-      <div
+      {/* <h4>Top Creators</h4> */}
+      <div style={{ minHeight: "170px", marginTop: "1.52rem"}}>
+        <Slider {...settings}>
+          {creators.map((creator) => (
+            <div key={creator.id}>
+              <div
+                className="creator-pic"
+                style={{
+                  margin: "auto",
+                  height: "100px",
+                  width: "100px",
+                  paddingRight: "12px",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    backgroundSize: "contain",
+                    height: "100%",
+                  }}
+                >
+                  <Link
+                    to={
+                      creator._id !== state._id
+                        ? `/profile/` + creator._id
+                        : "/profile"
+                    }
+                  >
+                    <img
+                      style={{
+                        width: "100%",
+                        height: "60%",
+                        borderRadius: "50%",
+                        backgroundSize: "contain",
+                        border: "1px solid #8a7c81",
+                      }}
+                      src={creator.pic}
+                    />
+                    <span
+                      className="card-title"
+                      style={{
+                        textAlign: "center",
+                        display: "flex",
+                        justifyContent: "center",
+                        paddingTop: "10px",
+                        color: "black",
+                        fontSize: "14px",
+                      }}
+                    >
+                      {creator.name}
+                    </span>
+                  </Link>
+                </div>
+              </div>
+              {/* <span style={{fontSize: "14px"}}>{creator.name}</span> */}
+              {/* <p>Followers: {creator.followers}</p> */}
+            </div>
+          ))}
+        </Slider>
+      </div>
+      {/* <div
         style={{
           display: "flex",
           minHeight: "150px",
@@ -214,7 +266,7 @@ function Home() {
             </div>
           );
         })}
-      </div>
+      </div> */}
 
       <h4 style={{ marginBottom: "1.52rem" }}>Feed</h4>
       {data?.map((item) => {
@@ -296,9 +348,6 @@ function Home() {
             <hr></hr>
 
             <div style={{ padding: "25px 25px 0 25px" }}>
-              {/* <p className="project-title" style={{ fontSize: "21px" }}>
-                <b>{item.title}</b>
-              </p> */}
               <b>
                 <h6 style={{ fontWeight: "900" }}>{item.title}</h6>
               </b>
@@ -508,7 +557,6 @@ function Home() {
                     >
                       Upload Files
                     </h6>
-                    {/* <divv style={{ display: "flex" }}> */}
                     {item.postedBy._id == state._id ? (
                       <div
                         style={{
@@ -563,7 +611,6 @@ function Home() {
                           style={{
                             display: "flex",
                             alignItems: "center",
-                            // paddingRight: "22px",
                           }}
                         >
                           <i
@@ -588,305 +635,6 @@ function Home() {
               ) : (
                 ""
               )}
-              {/* <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  fontSize: "14px",
-                  fontWeight: "500",
-                  padding: "15px 0",
-                  paddingLeft: "0",
-                  alignItems: "center",
-                }}
-                >
-                <h6
-                  style={{
-                    fontWeight: "900",
-                    margin: "0",
-                    paddingRight: "30px",
-                  }}
-                >
-                  Files
-                </h6>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    marginRight: "30px",
-                  }}
-                  className="files"
-                >
-                  <span
-                    className="link-col"
-                    style={{
-                      paddingRight: "20px",
-                      cursor: "pointer",
-                      fontWeight: "normal",
-                      letterSpacing: "1px",
-                    }}
-                    onClick={(e) => ShowFirstTermFiles(item._id)}
-                  >
-                    First Term
-                  </span>
-                  <span
-                    className="link-col"
-                    style={{
-                      paddingRight: "20px",
-                      cursor: "pointer",
-                      fontWeight: "normal",
-                      letterSpacing: "1px",
-                    }}
-                    onClick={(e) => ShowSecondTermFiles(item._id)}
-                  >
-                    Second Term
-                  </span>
-                  <span
-                    className="link-col"
-                    style={{
-                      paddingRight: "20px",
-                      cursor: "pointer",
-                      fontWeight: "normal",
-                      letterSpacing: "1px",
-                    }}
-                    onClick={(e) => ShowThirdTermFiles(item._id)}
-                  >
-                    Third Term
-                  </span>
-                </div>
-              </div>
-              <div>
-                {item.filee.map((f) => {
-                  return (
-                    <h6 key={f._id} style={{ width: "95%" }}>
-                      {f.term == firstterm &&
-                      showfirst == item._id &&
-                      card == item._id ? (
-                        <div
-                          style={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            flexWrap: "wrap",
-                          }}
-                        >
-                          <a
-                            href={f.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            download
-                          >
-                            <div style={{ display: "flex" }}>
-                              <span>{f.filenamee}</span>
-                              <i
-                                className="material-icons"
-                                style={{
-                                  cursor: "pointer",
-                                  paddingLeft: "20px",
-                                }}
-                              >
-                                file_download
-                              </i>
-                            </div>
-                          </a>
-                          {item.postedBy._id == state._id ? (
-                            <div
-                              style={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                              }}
-                            >
-                              <Link to={`/editfiles/${item._id}/${f._id}`}>
-                                <i
-                                  className="material-icons"
-                                  style={{
-                                    float: "right",
-                                    cursor: "pointer",
-                                    marginRight: "10px",
-                                    paddingLeft: "20px",
-                                  }}
-                                >
-                                  edit
-                                </i>
-                              </Link>
-                              <i
-                                className="material-icons"
-                                style={{
-                                  float: "right",
-                                  cursor: "pointer",
-                                }}
-                                onClick={(e) => deleteFile(item._id, f._id)}
-                              >
-                                delete
-                              </i>
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                    </h6>
-                  );
-                })}
-                {item.filee.map((f) => {
-                  return (
-                    <h6 key={f._id}>
-                      {f.term == secondterm &&
-                      showsecond &&
-                      card == item._id ? (
-                        <div>
-                          <div
-                            style={{
-                              display: "flex",
-                              justifyContent: "space-between",
-                              flexWrap: "wrap",
-                            }}
-                          >
-                            <a
-                              href={f.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              download
-                            >
-                              <div style={{ display: "flex" }}>
-                                <span>{f.filenamee}</span>
-                                <i
-                                  className="material-icons"
-                                  style={{
-                                    cursor: "pointer",
-                                    paddingLeft: "20px",
-                                  }}
-                                >
-                                  file_download
-                                </i>
-                              </div>
-                            </a>
-                            <div>
-                              {item.postedBy._id == state._id ? (
-                                <div
-                                  style={{
-                                    display: "flex",
-                                    justifyContent: "space-between",
-                                  }}
-                                >
-                                  <Link to={`/editfiles/${item._id}/${f._id}`}>
-                                    <i
-                                      className="material-icons"
-                                      style={{
-                                        float: "right",
-                                        cursor: "pointer",
-                                        marginRight: "10px",
-                                        paddingLeft: "20px",
-                                      }}
-                                    >
-                                      edit
-                                    </i>
-                                  </Link>
-                                  <i
-                                    className="material-icons"
-                                    style={{
-                                      float: "right",
-                                      cursor: "pointer",
-                                    }}
-                                    onClick={(e) => deleteFile(item._id, f._id)}
-                                  >
-                                    delete
-                                  </i>
-                                </div>
-                              ) : (
-                                <></>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                    </h6>
-                  );
-                })}
-                {item.filee.map((f) => {
-                  return (
-                    <h6 key={f._id}>
-                      {f.term == thirdterm && showthird && card == item._id ? (
-                        <>
-                          <div>
-                            <div
-                              style={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                                flexWrap: "wrap",
-                              }}
-                            >
-                              <a
-                                href={f.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                download
-                              >
-                                <div style={{ display: "flex" }}>
-                                  <span>{f.filenamee}</span>
-                                  <i
-                                    className="material-icons"
-                                    style={{
-                                      cursor: "pointer",
-                                      paddingLeft: "20px",
-                                    }}
-                                  >
-                                    file_download
-                                  </i>
-                                </div>
-                              </a>
-                              <div>
-                                {item.postedBy._id == state._id ? (
-                                  <div
-                                    style={{
-                                      display: "flex",
-                                      justifyContent: "space-between",
-                                    }}
-                                  >
-                                    <Link
-                                      to={`/editfiles/${item._id}/${f._id}`}
-                                    >
-                                      <i
-                                        className="material-icons"
-                                        style={{
-                                          float: "right",
-                                          cursor: "pointer",
-                                          marginRight: "10px",
-                                          paddingLeft: "20px",
-                                        }}
-                                      >
-                                        edit
-                                      </i>
-                                    </Link>
-                                    <i
-                                      className="material-icons"
-                                      style={{
-                                        float: "right",
-                                        cursor: "pointer",
-                                      }}
-                                      onClick={(e) =>
-                                        deleteFile(item._id, f._id)
-                                      }
-                                    >
-                                      delete
-                                    </i>
-                                  </div>
-                                ) : (
-                                  <></>
-                                )}
-                              </div>
-                            </div>
-                          </div>
-                        </>
-                      ) : (
-                        <></>
-                      )}
-                    </h6>
-                  );
-                })}
-              </div> */}
             </div>
           </div>
         );
