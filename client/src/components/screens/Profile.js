@@ -198,7 +198,7 @@ function Profile() {
         <div className="container" style={{ maxWidth: "1280px" }}>
           <div
             style={{
-              margin: "25px 10px",
+              // margin: "25px 10px",
               borderBottom: "2px solid #909CBE",
             }}
           >
@@ -226,12 +226,12 @@ function Profile() {
                       onChange={(e) => updatePhoto(e.target.files[0])}
                     />
                   </div>
-                  <div className="file-path-wrapper" style={{ width: "0" }}>
+                  <div className="file-path-wrapper" style={{ width: "0", overflow: "unset" }}>
                     <input className="file-path validate" type="text" />
                   </div>
                 </div>
               </div>
-              <div>
+              <div style={{display: "flex", flexDirection: "column", paddingLeft: "18px"}}>
                 <h4 className="profile-name">{state ? state.name : ""}</h4>
                 <h5>{state ? state.email : ""}</h5>
                 <div
@@ -239,13 +239,14 @@ function Profile() {
                     display: "flex",
                     justifyContent: "space-between",
                     width: "95%",
+                    flexWrap: "wrap",
                   }}
                 >
                   <h6>{data.length} Posts</h6>
                   <span
                     className="link-col"
                     style={{
-                      paddingRight: "20px",
+                      paddingRight: "12px",
                       cursor: "pointer",
                       fontWeight: "normal",
                       letterSpacing: "1px",
@@ -257,7 +258,6 @@ function Profile() {
                   <span
                     className="link-col"
                     style={{
-                      paddingRight: "20px",
                       cursor: "pointer",
                       fontWeight: "normal",
                       letterSpacing: "1px",
