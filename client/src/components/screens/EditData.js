@@ -62,7 +62,7 @@ function EditPost() {
 
   const loaddata = async () => {
     const result = await axios.get(
-      "http://localhost:5000/edit/" + id
+      "https://projekt-house-backend.vercel.app/edit/" + id
     );
     setPostdata(result.data);
     // console.log("result.data", result.data);
