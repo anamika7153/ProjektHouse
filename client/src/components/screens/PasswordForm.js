@@ -63,7 +63,7 @@ function PasswordForm(props) {
       Object.assign(inputField, props);
       // console.log('props',inputField,props)
       try {
-        let url = "https://projekt-house-backend.vercel.app/user/changepassword";
+        let url = "http://localhost:5000/user/changepassword";
         let options = {
           method: "PUT",
           url: url,

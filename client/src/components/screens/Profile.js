@@ -198,7 +198,7 @@ function Profile() {
         <div className="container" style={{ maxWidth: "1280px" }}>
           <div
             style={{
-              // margin: "25px 10px",
+              margin: "25px auto",
               borderBottom: "2px solid #909CBE",
             }}
           >
@@ -231,7 +231,7 @@ function Profile() {
                   </div>
                 </div>
               </div>
-              <div style={{display: "flex", flexDirection: "column", paddingLeft: "18px"}}>
+              <div className="profile-right" style={{paddingLeft: "18px"}}>
                 <h4 className="profile-name">{state ? state.name : ""}</h4>
                 <h5>{state ? state.email : ""}</h5>
                 <div
