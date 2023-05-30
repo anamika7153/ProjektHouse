@@ -226,12 +226,15 @@ function Profile() {
                       onChange={(e) => updatePhoto(e.target.files[0])}
                     />
                   </div>
-                  <div className="file-path-wrapper" style={{ width: "0", overflow: "unset" }}>
+                  <div
+                    className="file-path-wrapper"
+                    style={{ width: "0", overflow: "unset" }}
+                  >
                     <input className="file-path validate" type="text" />
                   </div>
                 </div>
               </div>
-              <div className="profile-right" style={{paddingLeft: "18px"}}>
+              <div className="profile-right" style={{ paddingLeft: "18px" }}>
                 <h4 className="profile-name">{state ? state.name : ""}</h4>
                 <h5>{state ? state.email : ""}</h5>
                 <div
@@ -283,8 +286,8 @@ function Profile() {
               flexDirection: "row",
               justifyContent: "space-between",
             }}
-            >
-            <div className="width-full" style={{width: "70%",}}>
+          >
+            <div className="width-full" style={{ width: "70%" }}>
               {data?.map((item) => {
                 return (
                   <div
@@ -295,7 +298,14 @@ function Profile() {
                     className="card home-card"
                     key={item._id}
                   >
-                    <h5 style={{ padding: "10px 15px" }}>
+                    <h5
+                      style={{
+                        padding: "18px 15px",
+                        alignItems: "center",
+                        display: "flex",
+                        justifyContent: "space-between",
+                      }}
+                    >
                       <Link
                         to={
                           item.postedBy._id !== state._id
@@ -321,13 +331,38 @@ function Profile() {
                         {item.postedBy.name}
                       </Link>{" "}
                       {item.postedBy._id == state._id ? (
-                        <i
-                          className="material-icons"
-                          style={{ float: "right", cursor: "pointer" }}
-                          onClick={(e) => deletePost(item._id)}
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                          }}
                         >
-                          delete
-                        </i>
+                          <i
+                            className="material-icons"
+                            style={{
+                              float: "right",
+                              cursor: "pointer",
+                              marginRight: "10px",
+                            }}
+                            onClick={(e) => deletePost(item._id)}
+                          >
+                            delete
+                          </i>
+                          <div>
+                            <Link to={`/editdata/${item._id}`}>
+                              <i
+                                className="material-icons"
+                                style={{
+                                  float: "right",
+                                  cursor: "pointer",
+                                  marginRight: "10px",
+                                }}
+                              >
+                                edit
+                              </i>
+                            </Link>
+                          </div>
+                        </div>
                       ) : (
                         ""
                       )}
@@ -457,27 +492,40 @@ function Profile() {
                       </table>
                     </div>
                     <div className="card-content">
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "row",
-                          justifyContent: "space-between",
-                          padding: "15px 0",
-                        }}
-                      >
-                        <b>Project Link</b>
-                        <a
-                          style={{ width: "90%", overflow: "hidden" }}
-                          href={item.projectlink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <span>
-                            {item.projectlink ? <>{item.projectlink}</> : <></>}
-                          </span>
-                        </a>
-                      </div>
-                      <hr />
+                      {item.projectlink ? (
+                        <>
+                          <div
+                            style={{
+                              display: "flex",
+                              flexDirection: "column",
+                              justifyContent: "space-between",
+                              padding: "15px 0",
+                            }}
+                          >
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "row",
+                                justifyContent: "space-between",
+                                paddingBottom: "10px",
+                              }}
+                            >
+                              <b>Project Link</b>
+                              <a
+                                style={{ width: "70%", overflow: "hidden" }}
+                                href={item.projectlink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                <span>{item.projectlink}</span>
+                              </a>
+                            </div>
+                          </div>
+                          <hr />
+                        </>
+                      ) : (
+                        <></>
+                      )}
                       <b>
                         <h6 style={{ fontWeight: "900" }}>Comments</h6>
                       </b>
@@ -540,7 +588,7 @@ function Profile() {
                             className="upload-files"
                           >
                             <Link
-                            className="direction-column"
+                              className="direction-column"
                               to={`/firstterm/${item._id}`}
                               style={{
                                 display: "flex",
@@ -561,7 +609,7 @@ function Profile() {
                               <span>First Term</span>
                             </Link>
                             <Link
-                            className="direction-column"
+                              className="direction-column"
                               to={`/secondterm/${item._id}`}
                               style={{
                                 display: "flex",
@@ -582,7 +630,7 @@ function Profile() {
                               <span>Second Term</span>
                             </Link>
                             <Link
-                            className="direction-column"
+                              className="direction-column"
                               to={`/thirdterm/${item._id}`}
                               style={{
                                 display: "flex",
